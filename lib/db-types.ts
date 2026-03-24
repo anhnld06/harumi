@@ -41,6 +41,8 @@ export type Vocabulary = {
   level: string;
   createdAt: Date;
   updatedAt: Date;
+  /** Set server-side from Mimikara N2 static MP3s when word+reading match JSON */
+  n2AudioSrc?: string;
 };
 
 export type ReadingPassage = {

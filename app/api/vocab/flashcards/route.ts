@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { getVocabularyForFlashcards, getVocabularyList } from '@/server/services/vocabulary.service';
+import { attachN2VocabAudio } from '@/lib/n2-static-audio';
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -11,7 +12,7 @@ export async function GET(request: NextRequest) {
   const search = searchParams.get('search') ?? '';
 
   try {
-    const items =
+    const rawItems =
       page > 1 || search
         ? (
             await getVocabularyList({
@@ -26,6 +27,7 @@ export async function GET(request: NextRequest) {
             level: 'N2',
             limit: 50,
           });
+    const items = attachN2VocabAudio(rawItems);
     return NextResponse.json({ items });
   } catch (error) {
     console.error('Flashcards error:', error);

@@ -15,6 +15,8 @@ interface VocabItem {
   meaningVi: string | null;
   exampleJp: string | null;
   exampleEn: string | null;
+  n2AudioSrc?: string;
+  audioUrl?: string | null;
 }
 
 interface VocabFlashcardProps {
@@ -107,6 +109,7 @@ export function VocabFlashcard({ userId, page = 1, search }: VocabFlashcardProps
           <SpeakButton
               text={current.reading ?? ''}
               fallback={current.word}
+              audioSrc={current.audioUrl ?? current.n2AudioSrc}
               stopPropagation={true}
               className='mt-2'
             />

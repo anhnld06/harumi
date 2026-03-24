@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SpeakButton } from '@/components/speak-button';
+import { getN2GrammarExampleAudioSrc } from '@/lib/n2-static-audio';
 
 export default async function GrammarDetailPage({
   params,
@@ -25,6 +26,10 @@ export default async function GrammarDetailPage({
 
   if (!grammar) notFound();
 
+  const exampleLines = grammar.exampleJp
+    ? grammar.exampleJp.split('\n').map((s) => s.trim()).filter(Boolean)
+    : [];
+
   return (
     <div className="space-y-6">
       <Link href={backHref}>
@@ -33,9 +38,9 @@ export default async function GrammarDetailPage({
           Back
         </Button>
       </Link>
-      <Card className="border-0 bg-[#eff6ff] rounded-2xl py-8 px-6 text-center">
+      <Card className="border-0 rounded-2xl bg-blue-50 py-8 px-6 text-center dark:bg-primary/15">
         <CardContent className="p-0">
-          <h1 className="text-3xl font-bold">{grammar.title}</h1>
+          <h1 className="text-3xl font-bold text-foreground">{grammar.title}</h1>
           <p className="mt-2 font-mono text-lg text-primary">{grammar.structure}</p>
         </CardContent>
       </Card>
@@ -49,20 +54,24 @@ export default async function GrammarDetailPage({
         </CardContent>
       </Card>
 
-      {(grammar.exampleJp || grammar.exampleEn) && (
+      {(exampleLines.length > 0 || grammar.exampleEn) && (
         <Card>
           <CardHeader>
-            <CardTitle>Example</CardTitle>
+            <CardTitle>{exampleLines.length > 1 ? 'Examples' : 'Example'}</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
-            {grammar.exampleJp && (
-              <div className="flex items-center gap-2">
-                <p className="text-lg flex-1">{grammar.exampleJp}</p>
-                <SpeakButton text={grammar.exampleJp} />
+          <CardContent className="space-y-3">
+            {exampleLines.map((line, idx) => (
+              <div key={idx} className="flex items-start gap-2">
+                <p className="flex-1 text-lg whitespace-pre-wrap">{line}</p>
+                <SpeakButton
+                  text={line}
+                  audioSrc={getN2GrammarExampleAudioSrc(grammar.title, line)}
+                  className="shrink-0"
+                />
               </div>
-            )}
+            ))}
             {grammar.exampleEn && (
-              <p className="text-muted-foreground">{grammar.exampleEn}</p>
+              <p className="text-muted-foreground whitespace-pre-wrap">{grammar.exampleEn}</p>
             )}
           </CardContent>
         </Card>

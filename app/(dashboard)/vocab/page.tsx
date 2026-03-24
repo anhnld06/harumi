@@ -6,6 +6,7 @@ import {
   getVocabularyList,
   getBookmarkIdsForVocab,
 } from '@/server/services/vocabulary.service';
+import { attachN2VocabAudio } from '@/lib/n2-static-audio';
 import { VocabularyList } from '@/features/vocab/vocabulary-list';
 import { VocabFlashcard } from '@/features/vocab/vocab-flashcard';
 import { Button } from '@/components/ui/button';
@@ -54,11 +55,13 @@ export default async function VocabPage({
     limit: 20,
   });
 
+  const itemsWithAudio = attachN2VocabAudio(items);
+
   const bookmarkIds =
-    session?.user?.id && items.length > 0
+    session?.user?.id && itemsWithAudio.length > 0
       ? await getBookmarkIdsForVocab(
           session.user.id,
-          items.map((i) => i.id)
+          itemsWithAudio.map((i) => i.id)
         )
       : [];
 
@@ -66,7 +69,7 @@ export default async function VocabPage({
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">Vocabulary</h1>
       <VocabularyList
-        items={items}
+        items={itemsWithAudio}
         total={total}
         page={page}
         totalPages={totalPages}

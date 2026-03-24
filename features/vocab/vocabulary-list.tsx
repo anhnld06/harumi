@@ -178,6 +178,7 @@ function VocabRow({
         <SpeakButton
           text={item.reading ?? ''}
           fallback={item.word}
+          audioSrc={item.audioUrl ?? item.n2AudioSrc}
           variant="ghost"
           size="icon"
         />

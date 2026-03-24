@@ -63,23 +63,50 @@ async function main() {
     const grammarJson = JSON.parse(fs.readFileSync(grammarPath, 'utf-8'));
     const patterns = grammarJson.patterns ?? [];
     let created = 0;
+    let updated = 0;
     for (const g of patterns) {
       const title = Array.isArray(g.mau_ngu_phap) ? g.mau_ngu_phap[0] : g.mau_ngu_phap;
+      const structure = Array.isArray(g.cach_dung) ? g.cach_dung[0] : g.cach_dung ?? '';
+      const explanation = Array.isArray(g.y_nghia)
+        ? g.y_nghia.join('\n')
+        : String(g.y_nghia ?? '');
+      const exampleJp = Array.isArray(g.vi_du)
+        ? g.vi_du.length > 0
+          ? g.vi_du.join('\n')
+          : null
+        : g.vi_du != null && String(g.vi_du).trim()
+          ? String(g.vi_du)
+          : null;
+
       const exists = await prisma.grammar.findFirst({ where: { title } });
       if (!exists) {
         await prisma.grammar.create({
           data: {
             title,
-            structure: Array.isArray(g.cach_dung) ? g.cach_dung[0] : g.cach_dung ?? '',
-            explanation: Array.isArray(g.y_nghia) ? g.y_nghia.join('\n') : String(g.y_nghia ?? ''),
-            exampleJp: Array.isArray(g.vi_du) ? g.vi_du[0] : g.vi_du ?? null,
+            structure,
+            explanation,
+            exampleJp,
             level: 'N2',
           },
         });
         created++;
+      } else {
+        await prisma.grammar.update({
+          where: { id: exists.id },
+          data: { structure, explanation, exampleJp },
+        });
+        updated++;
       }
     }
-    console.log('Grammar:', created, 'new /', patterns.length, 'total');
+    console.log(
+      'Grammar:',
+      created,
+      'new,',
+      updated,
+      'updated /',
+      patterns.length,
+      'total',
+    );
   }
 
   // 4. Kanji from kanji-n2.json (enriched with kanji.js: strokeCount, onyomi, kunyomi)
