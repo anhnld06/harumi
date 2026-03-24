@@ -1,0 +1,398 @@
+// JLPT N2 Smart Trainer - Production Database Schema
+// PostgreSQL with Prisma ORM
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============ AUTH & USER ============
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  password      String?   // hashed with bcrypt (null for OAuth users)
+  image         String?
+
+  accounts     Account[]
+  sessions     Session[]
+
+  // Learning data
+  bookmarks       Bookmark[]
+  userProgress    UserProgress[]
+  vocabularyProgress VocabularyProgress[]
+  testAttempts   TestAttempt[]
+  srsReviews     SRSReview[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============ VOCABULARY ============
+
+model Vocabulary {
+  id          String   @id @default(cuid())
+  word        String
+  reading     String?  // furigana / hiragana reading
+  onyomiVi    String?  // âm Hán Việt (am_han_viet)
+  meaningEn   String
+  meaningVi   String?
+  exampleEn   String?
+  exampleJp   String?
+  audioUrl    String?
+  level       String   @default("N2") // N5, N4, N3, N2, N1
+
+  bookmarks          Bookmark[]
+  vocabularyProgress VocabularyProgress[]
+  quizQuestions      Question[] @relation("VocabularyQuestions")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([word])
+  @@index([level])
+  @@index([word, level])
+}
+
+model Bookmark {
+  id           String   @id @default(cuid())
+  userId       String
+  vocabularyId String?
+  kanjiId      String?
+  grammarId    String?
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vocabulary Vocabulary? @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+  kanji       Kanji?     @relation(fields: [kanjiId], references: [id], onDelete: Cascade)
+  grammar     Grammar?   @relation(fields: [grammarId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, vocabularyId])
+  @@unique([userId, kanjiId])
+  @@unique([userId, grammarId])
+  @@index([userId])
+  @@index([vocabularyId])
+}
+
+model VocabularyProgress {
+  id           String   @id @default(cuid())
+  userId       String
+  vocabularyId String
+  learnedAt    DateTime @default(now())
+  lastReviewAt DateTime?
+  nextReviewAt DateTime?
+  correctCount Int      @default(0)
+  wrongCount   Int      @default(0)
+  streak       Int      @default(0)
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  vocabulary Vocabulary @relation(fields: [vocabularyId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, vocabularyId])
+  @@index([userId])
+  @@index([nextReviewAt])
+  @@index([vocabularyId])
+}
+
+// ============ KANJI ============
+
+model Kanji {
+  id          String   @id @default(cuid())
+  character   String   @unique
+  meaning     String
+  onyomi      String?  // 音読み (Chinese reading)
+  kunyomi     String?  // 訓読み (Japanese reading)
+  strokeCount Int
+  jlptLevel   String   @default("N2")
+  grade       Int?     // Japanese school grade
+
+  bookmarks   Bookmark[]
+  quizQuestions Question[] @relation("KanjiQuestions")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([character])
+  @@index([jlptLevel])
+}
+
+// ============ GRAMMAR ============
+
+model Grammar {
+  id          String   @id @default(cuid())
+  title       String
+  structure   String   // e.g. "〜つもりだ"
+  explanation String   @db.Text
+  exampleJp   String?
+  exampleEn   String?
+  level       String   @default("N2")
+
+  bookmarks   Bookmark[]
+  quizQuestions Question[] @relation("GrammarQuestions")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([title])
+  @@index([level])
+}
+
+// ============ READING ============
+
+model ReadingPassage {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text
+  level     String   @default("N2")
+  wordCount Int?
+
+  questions Question[] @relation("ReadingQuestions")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([level])
+}
+
+// ============ LISTENING ============
+
+model ListeningPassage {
+  id          String   @id @default(cuid())
+  title       String
+  audioUrl    String
+  transcript  String?  @db.Text
+  duration    Int?     // seconds
+  level       String   @default("N2")
+
+  questions Question[] @relation("ListeningQuestions")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([level])
+}
+
+// ============ QUESTION (Unified) ============
+
+enum QuestionType {
+  VOCAB_MEANING
+  VOCAB_FILL_BLANK
+  KANJI_MEANING
+  KANJI_READING
+  GRAMMAR_MULTIPLE
+  GRAMMAR_ORDER
+  READING
+  LISTENING
+}
+
+model Question {
+  id        String       @id @default(cuid())
+  type      QuestionType
+  content   String       @db.Text
+  options   Json?        // { "A": "...", "B": "...", "C": "...", "D": "..." }
+  correctAnswer String   // "A" or JSON for ordering
+  explanation   String?  @db.Text
+
+  // Polymorphic relations - one will be set based on type
+  vocabularyId String?
+  kanjiId      String?
+  grammarId    String?
+  readingPassageId String?
+  listeningPassageId String?
+
+  vocabulary      Vocabulary?      @relation("VocabularyQuestions", fields: [vocabularyId], references: [id], onDelete: Cascade)
+  kanji           Kanji?           @relation("KanjiQuestions", fields: [kanjiId], references: [id], onDelete: Cascade)
+  grammar         Grammar?         @relation("GrammarQuestions", fields: [grammarId], references: [id], onDelete: Cascade)
+  readingPassage  ReadingPassage?  @relation("ReadingQuestions", fields: [readingPassageId], references: [id], onDelete: Cascade)
+  listeningPassage ListeningPassage? @relation("ListeningQuestions", fields: [listeningPassageId], references: [id], onDelete: Cascade)
+
+  testAttemptAnswers TestAttemptAnswer[]
+  mockTestQuestions  MockTestQuestion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([vocabularyId])
+  @@index([kanjiId])
+  @@index([grammarId])
+  @@index([readingPassageId])
+  @@index([listeningPassageId])
+}
+
+// ============ MOCK TEST ============
+
+model MockTest {
+  id        String   @id @default(cuid())
+  title     String
+  duration  Int      // total minutes
+  passScore Int      @default(90) // 90/180 or similar
+
+  sections  MockTestSection[]
+  attempts  TestAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([title])
+}
+
+model MockTestSection {
+  id         String   @id @default(cuid())
+  mockTestId String
+  name       String   // "Vocabulary", "Grammar", "Reading", "Listening"
+  order      Int
+  duration   Int      // section minutes
+  questionCount Int
+
+  mockTest MockTest @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
+  questions MockTestQuestion[]
+
+  @@index([mockTestId])
+}
+
+model MockTestQuestion {
+  id         String   @id @default(cuid())
+  sectionId  String
+  questionId String
+  order      Int
+
+  section  MockTestSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  question Question        @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([sectionId, questionId])
+  @@index([sectionId])
+  @@index([questionId])
+}
+
+// ============ TEST ATTEMPTS ============
+
+model TestAttempt {
+  id         String   @id @default(cuid())
+  userId     String
+  mockTestId String
+  score      Int?
+  totalScore Int?
+  passed     Boolean?
+  startedAt  DateTime @default(now())
+  completedAt DateTime?
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mockTest MockTest @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
+  answers  TestAttemptAnswer[]
+
+  @@index([userId])
+  @@index([mockTestId])
+  @@index([userId, mockTestId])
+  @@index([completedAt])
+}
+
+model TestAttemptAnswer {
+  id           String   @id @default(cuid())
+  attemptId    String
+  questionId   String
+  userAnswer   String   // "A" or JSON
+  isCorrect    Boolean
+  timeSpent    Int?     // seconds
+
+  attempt  TestAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question Question    @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, questionId])
+  @@index([attemptId])
+  @@index([questionId])
+}
+
+// ============ USER PROGRESS (Dashboard stats) ============
+
+model UserProgress {
+  id              String   @id @default(cuid())
+  userId          String
+  date            DateTime @db.Date
+
+  // Daily stats
+  wordsLearned    Int      @default(0)
+  kanjiLearned   Int      @default(0)
+  quizzesTaken   Int      @default(0)
+  correctAnswers Int      @default(0)
+  totalAnswers   Int      @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+  @@index([userId, date])
+}
+
+// ============ SRS (Spaced Repetition) ============
+
+model SRSReview {
+  id           String   @id @default(cuid())
+  userId       String
+  itemType     String   // "vocabulary" | "kanji" | "grammar"
+  itemId       String
+
+  nextReviewAt DateTime
+  interval     Int      @default(1) // days
+  easeFactor   Float    @default(2.5)
+  repetitions  Int      @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, itemType, itemId])
+  @@index([userId])
+  @@index([nextReviewAt])
+  @@index([userId, nextReviewAt])
+}

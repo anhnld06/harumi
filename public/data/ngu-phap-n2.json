@@ -1,0 +1,837 @@
+{
+    "title": "TỔNG HỢP 110 MẪU NGỮ PHÁP N2",
+    "total_patterns": 110,
+    "patterns": [
+      {
+        "stt": 1,
+        "mau_ngu_phap": ["~ことだ"],
+        "cach_dung": ["V辞書形、ない形"],
+        "y_nghia": ["- Lời khuyên, mệnh lệnh nhe nhàng"],
+        "vi_du": ["日本語が上手になりたかったら、毎日話すことだ。"]
+      },
+      {
+        "stt": 2,
+        "mau_ngu_phap": ["~ことだから"],
+        "cach_dung": ["Nの"],
+        "y_nghia": ["- Chính vì. Vì đặc điểm, tính cách nào đó quá quen thuộc của ai đó mà đưa ra phán đoán"],
+        "vi_du": ["朝寝坊の彼のことだから、今日も遅れてくるだろう"]
+      },
+      {
+        "stt": 3,
+        "mau_ngu_phap": ["~ことに"],
+        "cach_dung": ["Vた、Aい、Aな"],
+        "y_nghia": ["Rất... Bộc lộ cảm xúc của người nói về việc xảy ra ở phía sau"],
+        "vi_du": ["悔しいことに、1点差で試合に負けてしまった。"]
+      },
+      {
+        "stt": 4,
+        "mau_ngu_phap": ["~ことなく"],
+        "cach_dung": ["V辞書形"],
+        "y_nghia": ["Không làm hành động A mà làm B"],
+        "vi_du": ["同僚は同期にも相談することなく会社を辞めてしまった。"]
+      },
+      {
+        "stt": 5,
+        "mau_ngu_phap": ["~ものの"],
+        "cach_dung": ["V、Aい、Aな"],
+        "y_nghia": ["Mặc dù... tuy nhiên. Khi muốn nói mặc dù biết A thì đương nhiên phải làm B nhưng thực tế thì không có B."],
+        "vi_du": ["東京大学を卒業したものの、就職難で仕事が見つからない。"]
+      },
+      {
+        "stt": 6,
+        "mau_ngu_phap": ["~ものだ/ものではない", "~ものだ", "~ものだ"],
+        "cach_dung": ["V、Aい、Aな", "(V、A)た形", "V、A"],
+        "y_nghia": [
+          "Mệnh lệnh nhẹ nhàng... Khi muốn nói làm điều gì đó là đương nhiên với quy tắc, lối sống...",
+          "Khi nhớ về những việc thường xảy ra trong quá khứ của bản thân người nói",
+          "Biểu hiện cảm xúc sâu sắc bất ngờ khi trải qua 1 khoảng thời gian không để ý tới thì..."
+        ],
+        "vi_du": [
+          "悪いことをしたら謝るもんだ。",
+          "若いころはよく親に反抗したことだ。",
+          "にほんへ来てもう1年になる、時が立つのは本当に早いものだ。"
+        ]
+      },
+      {
+        "stt": 7,
+        "mau_ngu_phap": ["~ないものか/だろうか"],
+        "cach_dung": ["Vない"],
+        "y_nghia": ["Mong muốn, nguyện vọng vào những điều không thể xảy ra..."],
+        "vi_du": ["世界中が平和になる日が来ないものだろうか。"]
+      },
+      {
+        "stt": 8,
+        "mau_ngu_phap": ["~ばかりか"],
+        "cach_dung": ["N、V、A"],
+        "y_nghia": ["Không chỉ mà còn... Vế B còn hơn cả vế A"],
+        "vi_du": ["その人は親切に道を教えてくれたばかりか、そこまで案内してくれた。"]
+      },
+      {
+        "stt": 9,
+        "mau_ngu_phap": ["~ばかりだ"],
+        "cach_dung": ["V辞書形"],
+        "y_nghia": ["Càng ngày càng... biến đổi xấu"],
+        "vi_du": ["年をとると、記憶力は衰えるばかりだ。"]
+      },
+      {
+        "stt": 10,
+        "mau_ngu_phap": ["~上に"],
+        "cach_dung": ["Nの、V、A"],
+        "y_nghia": ["Không chỉ mà còn, thêm vào đó"],
+        "vi_du": ["彼の妹は美人の上に性格もよい。"]
+      },
+      {
+        "stt": 11,
+        "mau_ngu_phap": ["～以上は/上は"],
+        "cach_dung": ["V 普通形"],
+        "y_nghia": ["Vi, một khi đã... thì là đương nhiên, phải làm"],
+        "vi_du": ["留学すると決心した上は、必ず成果を出して見せる。"]
+      },
+      {
+        "stt": 12,
+        "mau_ngu_phap": ["～上で", "～上で"],
+        "cach_dung": ["V た/N の", "V 辞書形"],
+        "y_nghia": [
+          "Sau khi làm A thì làm B (A là điều kiện)",
+          "Trong trường hợp, quá trình A thì có B"
+        ],
+        "vi_du": [
+          "進学先は親と話し合った上で、決めます。",
+          "結婚している女性が働く上で、夫や子供の協力は欠かせない。"
+        ]
+      },
+      {
+        "stt": 13,
+        "mau_ngu_phap": ["～まで"],
+        "cach_dung": ["V て"],
+        "y_nghia": ["Cho dù là đến mức đó cũng không làm..."],
+        "vi_du": ["新しいテレビがほしいが、借金してまで買おうとは思わない。"]
+      },
+      {
+        "stt": 14,
+        "mau_ngu_phap": ["～でも"],
+        "cach_dung": ["V て"],
+        "y_nghia": ["Cho dù thế nào cũng phải quyết tâm làm cho bằng được"],
+        "vi_du": ["どうしてもこの絵がほしい。借金してでも買いたい。"]
+      },
+      {
+        "stt": 15,
+        "mau_ngu_phap": ["～ながら"],
+        "cach_dung": ["V ます、A、V ない"],
+        "y_nghia": ["Mặc dù, tuy nhiên... Khi muốn nói B khác với những gì dự đoán..."],
+        "vi_du": ["子供たちは文句を言いながらも、後片付けを手伝ってくれた。"]
+      },
+      {
+        "stt": 16,
+        "mau_ngu_phap": ["～さえ…ば/たら"],
+        "cach_dung": ["N さえ、N でさえ、A くさえ、A でさえ、V てさえ"],
+        "y_nghia": ["Chỉ cần A thì B sẽ được thành lập"],
+        "vi_du": ["後は肉さえ焼けば、夕食の準備は終わりだ。"]
+      },
+      {
+        "stt": 17,
+        "mau_ngu_phap": ["～を～として"],
+        "cach_dung": ["N 1 を N2 として"],
+        "y_nghia": ["Lấy N1 làm N2"],
+        "vi_du": ["今年1年、大学合格を目標としてがんばるつもりだ。"]
+      },
+      {
+        "stt": 18,
+        "mau_ngu_phap": ["～に応じて"],
+        "cach_dung": ["N"],
+        "y_nghia": ["A thay đổi thì B thay đổi để phù hợp với A"],
+        "vi_du": ["日本語のレベルに応じて、クラスを分けます。"]
+      },
+      {
+        "stt": 19,
+        "mau_ngu_phap": ["～に沿って"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Dựa theo tiêu chuẩn, kì vọng của đối phương làm B mà không thể tách rời những tiêu chuẩn, kì vọng đó"],
+        "vi_du": ["私は学校のシラバスに沿って、日本語を教えています。"]
+      },
+      {
+        "stt": 20,
+        "mau_ngu_phap": ["～をめぐって"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Xoay quanh vấn đề nào đó mà có nhiều ý kiến trái chiều, tranh cãi được đưa ra"],
+        "vi_du": ["このドラマは1人の女性をめぐって、4人の男性が争うストーリーです。"]
+      },
+      {
+        "stt": 21,
+        "mau_ngu_phap": ["～といった"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Đưa ra những ví dụ bổ sung, làm rõ ý kiến B"],
+        "vi_du": ["この学校には、ベトナムや中国といった学生が多い。"]
+      },
+      {
+        "stt": 22,
+        "mau_ngu_phap": ["～てしようがない", "～てしかたがない"],
+        "cach_dung": ["V て、A て"],
+        "y_nghia": ["Rất... không còn cách nào khác, không chịu đựng nổi"],
+        "vi_du": ["大学受験の結果が気になってしかたがない。"]
+      },
+      {
+        "stt": 23,
+        "mau_ngu_phap": ["～ぬき/ぬきにして"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Bỏ qua A làm B"],
+        "vi_du": ["冗談は抜きにして、そろそろ本題に入りましょう。"]
+      },
+      {
+        "stt": 24,
+        "mau_ngu_phap": ["～に相違ない"],
+        "cach_dung": ["N、V、A 普通形"],
+        "y_nghia": ["Chắc chắn.. thể hiện ý kiến của người nói dựa trên những lý do khách quan"],
+        "vi_du": ["僕らの秘密を漏らしたのはキムさんに相違ない。"]
+      },
+      {
+        "stt": 25,
+        "mau_ngu_phap": ["～得る/うる", "～やむをえない"],
+        "cach_dung": ["V ます", ""],
+        "y_nghia": [
+          "Có khả năng làm gì đó",
+          "Không còn cách nào khác là phải làm A"
+        ],
+        "vi_du": [
+          "日頃から気をつけていても、事故は起こり得るものだ。",
+          "熱が39度もあるのでは、欠席もやむをえない。"
+        ]
+      },
+      {
+        "stt": 26,
+        "mau_ngu_phap": ["～がたい"],
+        "cach_dung": ["V ます"],
+        "y_nghia": ["Khó... khó có thể làm điều gì đó có cố gắng cũng khó có thể làm được."],
+        "vi_du": ["彼はいつも嘘ばかりつくので、今回の話も本当かどうか信じがたい。"]
+      },
+      {
+        "stt": 27,
+        "mau_ngu_phap": ["～一方で"],
+        "cach_dung": ["NのV辞書形"],
+        "y_nghia": ["Đồng thời với A thì cũng có mặt khác. So sánh"],
+        "vi_du": ["田舎暮らしに憧れる男性がいる一方で、都会の方がいいという男性もいる。"]
+      },
+      {
+        "stt": 28,
+        "mau_ngu_phap": ["～につき", "～につき"],
+        "cach_dung": ["N", "N 数字"],
+        "y_nghia": ["Ví lý do... sử dụng trong các trường hợp thông báo", "Tỷ lệ"],
+        "vi_du": [
+          "出入り口につき、駐車禁止。",
+          "手数料は書類1通につき300円です。"
+        ]
+      },
+      {
+        "stt": 29,
+        "mau_ngu_phap": ["～やら～やら"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Nào là..nào là... thể hiện những việc xấu... lấy đặc trưng trong những cái đó"],
+        "vi_du": ["最近、勉強やらバイトやらで毎日忙しい。"]
+      },
+      {
+        "stt": 30,
+        "mau_ngu_phap": ["～の/ものやら"],
+        "cach_dung": ["V 普通形 A い普通形 N、A} な"],
+        "y_nghia": ["Không biết là...Thể hiện cảm xúc của người nói, nghi vấn về điều gì đó"],
+        "vi_du": ["全く、もうすぐ受験だというのに、うちの息子は何を考えているのやら。落ちても知らないよ。"]
+      },
+      {
+        "stt": 31,
+        "mau_ngu_phap": ["～だの～だの"],
+        "cach_dung": ["N V 普通形 A 普通形"],
+        "y_nghia": ["Nào là..nào là... thể hiện sự bất mãn về điều gì đó. Sử dụng liệt kê những ví dụ đặc trưng"],
+        "vi_du": ["母はもっと勉強しろだの、遊びすぎだのうるさい。"]
+      },
+      {
+        "stt": 32,
+        "mau_ngu_phap": ["～にこたえて"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Đáp ứng lại yêu cầu nguyện vọng từ đối phương"],
+        "vi_du": ["お客様の意見にお応えして、セール期間を1週間延長することいたしました。"]
+      },
+      {
+        "stt": 33,
+        "mau_ngu_phap": ["～にしては"],
+        "cach_dung": ["N V 普通形"],
+        "y_nghia": ["Mặc dù... khi muốn nói B khác so với những gì dự đoán thông thường"],
+        "vi_du": ["彼は新入社員にしては、電話応対が上手だ。"]
+      },
+      {
+        "stt": 34,
+        "mau_ngu_phap": ["～のもとで/に"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Dưới sự chỉ đạo, điều kiện, chi phối của A mà làm B"],
+        "vi_du": ["日本語を勉強するなら英語が話せる先生のもとで勉強したいです。"]
+      },
+      {
+        "stt": 35,
+        "mau_ngu_phap": ["〜は/ならともかく"],
+        "cach_dung": ["N"],
+        "y_nghia": ["A cũng cần thiết nhưng đặc biệt chú ý tới B"],
+        "vi_du": ["彼女の料理は見た目はともかく、味は美味しい。"]
+      },
+      {
+        "stt": 36,
+        "mau_ngu_phap": ["〜も･･･ば･･･も"],
+        "cach_dung": ["Nも V、A ば Nも"],
+        "y_nghia": ["Cũng có A và cũng có B"],
+        "vi_du": ["本を読むのが好きな人もいれば、嫌いな人もいます。"]
+      },
+      {
+        "stt": 37,
+        "mau_ngu_phap": ["〜っぱない"],
+        "cach_dung": ["V ます"],
+        "y_nghia": ["Một việc gì đó xảy ra mãi. Làm gì đó là để nguyên..."],
+        "vi_du": ["クーラーをつけっぱなしで寝てしまい、母にさんざん怒られた。"]
+      },
+      {
+        "stt": 38,
+        "mau_ngu_phap": ["〜こない"],
+        "cach_dung": ["V ます"],
+        "y_nghia": ["Phủ định lại khả năng làm 1 việc gì đó 1 cách mạnh mẽ"],
+        "vi_du": ["彼はまだ日本語の勉強を始めて、1年未満だし、JLPT N1 に受かりっこないよ。"]
+      },
+      {
+        "stt": 39,
+        "mau_ngu_phap": ["〜きり"],
+        "cach_dung": ["V た これ、あれ、それ"],
+        "y_nghia": ["Chỉ... sau khi làm A thì mãi như thế..."],
+        "vi_du": ["息子は今日、出かけたきり、夜になっても帰ってこないのでとても心配です。"]
+      },
+      {
+        "stt": 40,
+        "mau_ngu_phap": ["〜げ"],
+        "cach_dung": ["A い A な"],
+        "y_nghia": ["Có vẻ như là..."],
+        "vi_du": ["彼女は寂しげに、一人で公園のベンチで座っていた。"]
+      },
+      {
+        "stt": 41,
+        "mau_ngu_phap": ["〜なんて/とは"],
+        "cach_dung": ["N V、A} 普通形"],
+        "y_nghia": ["Bộc lộ cảm xúc bất ngờ, ngoài suy nghĩ về 1 chuyện gì đó."],
+        "vi_du": ["この量で1,200円だなんて、信じられない。"]
+      },
+      {
+        "stt": 42,
+        "mau_ngu_phap": ["〜にすぎない"],
+        "cach_dung": ["N V 普通形"],
+        "y_nghia": ["Chỉ... Chỉ mức độ rất nhỏ"],
+        "vi_du": ["今日お配りした資料は全体のほんの一部にすぎません。"]
+      },
+      {
+        "stt": 43,
+        "mau_ngu_phap": ["〜あげく"],
+        "cach_dung": ["Nの V た"],
+        "y_nghia": ["Sau khi làm rất nhiều thứ thì cuối cùng... kết quả xấu"],
+        "vi_du": ["人気のラーメン店に2時間も並んだあげく、売り切れで食べられなかった。"]
+      },
+      {
+        "stt": 44,
+        "mau_ngu_phap": ["〜べき"],
+        "cach_dung": ["V 辞書形"],
+        "y_nghia": ["Phải làm... là điều đương nhiên, đúng"],
+        "vi_du": ["学生は遊んでないで、もっと勉強すべきだ。"]
+      },
+      {
+        "stt": 45,
+        "mau_ngu_phap": ["〜というより"],
+        "cach_dung": ["N V、A} 普通形"],
+        "y_nghia": ["B thích hợp hơn là A"],
+        "vi_du": ["今日は涼しいというよりも寒いぐらいだ。"]
+      },
+      {
+        "stt": 46,
+        "mau_ngu_phap": ["〜にかかわらず かかわりなく"],
+        "cach_dung": ["N V 辞書形 V ない"],
+        "y_nghia": ["Không quan tâm đến A, không chú ý đến A"],
+        "vi_du": ["値段にかかわりなく、新しいiPhone が発売したら買うつもりだ。"]
+      },
+      {
+        "stt": 47,
+        "mau_ngu_phap": ["〜にもかかわらず"],
+        "cach_dung": ["N V、A い} 普通形 A な+である"],
+        "y_nghia": ["Mặc dù...nhưng Thể hiện sự bất ngờ, bất mãn của người nói"],
+        "vi_du": ["一生懸命勉強したにも関わらず、行きたかった大学の試験に落ちてしまった。"]
+      },
+      {
+        "stt": 48,
+        "mau_ngu_phap": ["～あまり"],
+        "cach_dung": ["Nの、V辞書形、Vた"],
+        "y_nghia": ["Quá... dẫn đến kết quả xấu."],
+        "vi_du": ["緊張のあまり、上手にプレゼンテーションができなかった。"]
+      },
+      {
+        "stt": 49,
+        "mau_ngu_phap": ["～にあたって/あたり"],
+        "cach_dung": ["N V辞書形"],
+        "y_nghia": ["Trước khi làm A thì làm, chuẩn bị B. Dùng trong các trường hợp đặc biệt"],
+        "vi_du": ["皆さん、JLPTを受けるにあたって、大切なことを伝えておきます。"]
+      },
+      {
+        "stt": 50,
+        "mau_ngu_phap": ["～に際して/際し"],
+        "cach_dung": ["N V辞書形"],
+        "y_nghia": ["Khi bắt đầu làm A thì làm B. Dùng trong các trường hợp đặc biệt"],
+        "vi_du": ["面接に際して、しっかりと練習しておいた方がいいですよ。"]
+      },
+      {
+        "stt": 51,
+        "mau_ngu_phap": ["～末に"],
+        "cach_dung": ["Nの Vた"],
+        "y_nghia": ["Sau khi làm A thì cuối cùng dẫn đến kết quả tốt"],
+        "vi_du": ["さんざん検討した末に出した結論ですので、後悔はありません。"]
+      },
+      {
+        "stt": 52,
+        "mau_ngu_phap": ["～を契機に (して)"],
+        "cach_dung": ["N"],
+        "y_nghia": ["A là khởi điểm, B sau đó mới diễn ra. Nguyên cớ dẫn đến B"],
+        "vi_du": ["サッカーの親善試合を契機に、二国間の交流が進んだ。"]
+      },
+      {
+        "stt": 53,
+        "mau_ngu_phap": ["～問わず"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Không quan tâm đến A mà làm B. 経験、年齢、性別、学歴..."],
+        "vi_du": ["明日のパーティーは年齢を問わず、どなたでもご参加いただけます。"]
+      },
+      {
+        "stt": 54,
+        "mau_ngu_phap": ["～かのようだ"],
+        "cach_dung": ["V"],
+        "y_nghia": ["So sánh... có thể thấy như là, cảm nhận như là..."],
+        "vi_du": ["3月なのでまた、寒くなりましたね。まるで真冬に戻ったかのようですね。"]
+      },
+      {
+        "stt": 55,
+        "mau_ngu_phap": ["～からいうと/いえば/いって ～からすると/すれば/して ～から見ると/見れば/見て"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Xét từ lập trường nào đó thì. Dựa ra ý kiến dựa trên 1 mặt, 1 phương diện nào đó. Căn cứ phán đoán..."],
+        "vi_du": ["ネイティブの日本人からすると、トムさんの日本語はまだまだです。模擬試験の結果からいうと、ジョンさんはN1に合格できるだろう。"]
+      },
+      {
+        "stt": 56,
+        "mau_ngu_phap": ["～もかまわず"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Không chú ý xung quanh như thế nào mà vẫn làm B"],
+        "vi_du": ["あの男は人目もかまわず、電車の中で弁当を食べている。"]
+      },
+      {
+        "stt": 57,
+        "mau_ngu_phap": ["～ぬく"],
+        "cach_dung": ["Vます"],
+        "y_nghia": ["Làm đến cùng, làm đến hoàn thành."],
+        "vi_du": ["彼は途中で足を負傷しながらも、42.195kmを走りぬいた。"]
+      },
+      {
+        "stt": 58,
+        "mau_ngu_phap": ["～ばかりに"],
+        "cach_dung": ["Vた Aい、Aな"],
+        "y_nghia": ["Chỉ vì... dẫn đến kết quả xấu. Thể hiện cảm giác hối tiếc và hối hận của người nói"],
+        "vi_du": ["手を洗わず、ハンバーガーを食べたばかりに、お腹を壊してしまった。"]
+      },
+      {
+        "stt": 59,
+        "mau_ngu_phap": ["〜ところを"],
+        "cach_dung": ["Nの、V、A い、Aな"],
+        "y_nghia": ["Mặc dù.... dùng khi cảm ơn hay xin lỗi, nhờ vả"],
+        "vi_du": ["先生、お忙しいところすみません。ちょっと教えていただきたいことがあるんですが。"]
+      },
+      {
+        "stt": 60,
+        "mau_ngu_phap": ["〜たところで"],
+        "cach_dung": ["Vた"],
+        "y_nghia": ["Dù...thì cũng. Đưa ra phán đoán, dự đoán tiêu cực."],
+        "vi_du": ["後悔したところで、もう遅いよ"]
+      },
+      {
+        "stt": 61,
+        "mau_ngu_phap": ["〜ことから"],
+        "cach_dung": ["V Aい、Aな"],
+        "y_nghia": ["Bằng lý do đó đưa ra ý kiến, phán đoán"],
+        "vi_du": ["日本語能力試験のN4に合格していないことから、彼は日本に行くことができない。"]
+      },
+      {
+        "stt": 62,
+        "mau_ngu_phap": ["〜ことにする"],
+        "cach_dung": ["Vた 〜という"],
+        "y_nghia": ["Thực tế không phải vậy mà dùng như là thực."],
+        "vi_du": ["友達に書いてもらった作文を自分が書いたことにして提出した。"]
+      },
+      {
+        "stt": 63,
+        "mau_ngu_phap": ["〜ことか/だろう"],
+        "cach_dung": ["Vた Aい、Aな"],
+        "y_nghia": ["Thể hiện cảm xúc mạnh về cảm thán, ngưỡng mộ"],
+        "vi_du": ["この参考書を何年使ってきたことだろう。本当に役に立った。"]
+      },
+      {
+        "stt": 64,
+        "mau_ngu_phap": ["〜ないことには"],
+        "cach_dung": ["Vない"],
+        "y_nghia": ["Nếu không làm A thì B cũng không xảy ra"],
+        "vi_du": ["彼が来ないことには、会議を始めることができない。"]
+      },
+      {
+        "stt": 65,
+        "mau_ngu_phap": ["〜というものだ"],
+        "cach_dung": ["N V、A} 普通形"],
+        "y_nghia": ["Hoàn toàn là... Đưa ra kết luận của người nói"],
+        "vi_du": ["部下が失敗をしたら、責任を負うのが上司の責任というものだ。"]
+      },
+      {
+        "stt": 66,
+        "mau_ngu_phap": ["〜ものなら", "〜ものなら"],
+        "cach_dung": ["V可能形", "V意志形 Aい+かろう"],
+        "y_nghia": [
+          "Nếu có thể A thì muốn làm B. (A là không có khả năng xảy ra.)",
+          "Nếu làm A thì sẽ dẫn đến B (kết quả không tốt)"
+        ],
+        "vi_du": [
+          "やれるものならやってみろよ",
+          "彼女との記念日を忘れようものなら、1週間は口を利いてもらえないだろう。"
+        ]
+      },
+      {
+        "stt": 67,
+        "mau_ngu_phap": ["〜どこか"],
+        "cach_dung": ["N V、A} 普通形"],
+        "y_nghia": ["Nhấn mạnh B còn không làm được nói chi là A B còn hơn là A"],
+        "vi_du": ["医者に出された薬を飲んでいるのに、よくなるどこか、症状はひどくなる一方だよ。"]
+      },
+      {
+        "stt": 68,
+        "mau_ngu_phap": ["〜どころではない"],
+        "cach_dung": ["N V普通形"],
+        "y_nghia": ["Vì lý do nào đó mà bây giờ không phải là lúc... không thể.."],
+        "vi_du": ["高熱が出てしまい、旅行どこではありません。"]
+      },
+      {
+        "stt": 69,
+        "mau_ngu_phap": ["〜だけに"],
+        "cach_dung": ["N V Aい、Aな"],
+        "y_nghia": ["Chính vì... là điều đương nhiên."],
+        "vi_du": ["山下さんは日本語を20年教えているだけに、教え方がとても上手だ。"]
+      },
+      {
+        "stt": 70,
+        "mau_ngu_phap": ["～だけあって", "～だけのことはある"],
+        "cach_dung": ["N V、A"],
+        "y_nghia": ["Chính vì(vị trí xã hội, năng lực nên...là đương nhiên"],
+        "vi_du": ["この場所は有名なだけあって、たくさんの観光客が人がいる。"]
+      },
+      {
+        "stt": 71,
+        "mau_ngu_phap": ["～上"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Bằng phương diện nào đó, mặt nào đó...."],
+        "vi_du": ["あのアニメは教育上よくない"]
+      },
+      {
+        "stt": 72,
+        "mau_ngu_phap": ["～上で"],
+        "cach_dung": ["Nの"],
+        "y_nghia": ["Trong phương diện nào đó, phạm vi nào đó thì..."],
+        "vi_du": ["彼とは仕事の上での付き合いしかない"]
+      },
+      {
+        "stt": 73,
+        "mau_ngu_phap": ["～まい"],
+        "cach_dung": ["V辞書形"],
+        "y_nghia": ["Thể hiện ý chí phủ định lại. Không làm V"],
+        "vi_du": ["信用していた親友が僕の秘密をもらした。絶対に許すまい。"]
+      },
+      {
+        "stt": 74,
+        "mau_ngu_phap": ["～ないではいられない"],
+        "cach_dung": ["Vない"],
+        "y_nghia": ["Không thể không làm V Thể hiện cảm xúc không thể chịu đựng nổi.."],
+        "vi_du": ["友達がいじめられているところを見たので、何か言わずにはいられなかった。"]
+      },
+      {
+        "stt": 75,
+        "mau_ngu_phap": ["～に限る", "～にかぎる"],
+        "cach_dung": ["N", "N V辞書形"],
+        "y_nghia": [
+          "Chỉ trong 1 giới hạn nào đó...",
+          "Nêu ý kiến chủ quan của người nói về 1 cái gì đó là nhất..."
+        ],
+        "vi_du": [
+          "65歳以上の方に限り無料だ。",
+          "寒い日はやっぱり鍋に限るよね。"
+        ]
+      },
+      {
+        "stt": 76,
+        "mau_ngu_phap": ["～に限らず"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Không chỉ mà còn"],
+        "vi_du": ["この映画は子供に限らず、大人も楽しめます。"]
+      },
+      {
+        "stt": 77,
+        "mau_ngu_phap": ["～か～ないかのうちに"],
+        "cach_dung": ["V辞書形 Vた…Vない"],
+        "y_nghia": ["Vừa mới còn chưa nhận ra là đã làm hay chưa thì B đã xảy ra rồi"],
+        "vi_du": ["お店が開店するか開店しないかのうちに、ケーキは全部売れてしまった"]
+      },
+      {
+        "stt": 78,
+        "mau_ngu_phap": ["～かと思ったら/思うと"],
+        "cach_dung": ["Vた"],
+        "y_nghia": ["Vừa mới làm A xong thì B xảy ra 2 hành động A và B cùng đối tượng"],
+        "vi_du": ["空がピカッと光ったかと思うと、大きな雷の音が鳴った。"]
+      },
+      {
+        "stt": 79,
+        "mau_ngu_phap": ["～に先立って/先立ち"],
+        "cach_dung": ["N V辞書形"],
+        "y_nghia": ["Trước khi làm A thì tiến hành làm B. Sử dụng trong các trường hợp đặc biệt"],
+        "vi_du": ["アメリカ留学に先立ち、現地で購入できないような参考書や辞書は先に送っておいた。"]
+      },
+      {
+        "stt": 80,
+        "mau_ngu_phap": ["～ずにすむ"],
+        "cach_dung": ["Vない"],
+        "y_nghia": ["Những điều cần thiết phải làm nhưng không cần làm nên cảm thấy thật may."],
+        "vi_du": ["遅刻してしまったが、きちんと理由を説明したら怒られずに済んだ。"]
+      },
+      {
+        "stt": 81,
+        "mau_ngu_phap": ["にしたら/すればしても"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Nếu nói từ lập trường, dù nói từ lập trường của ai đó thì có cách nghĩ, cảm xúc..."],
+        "vi_du": ["日本人にすれば簡単な漢字でも、外国人にしてみたらとても難しいことかもしれない"]
+      },
+      {
+        "stt": 82,
+        "mau_ngu_phap": ["～かねる"],
+        "cach_dung": ["Vます"],
+        "y_nghia": ["Một việc nào đó không thể xảy ra. Không dùng để nói về khả năng của con người"],
+        "vi_du": ["私は責任者ではございませんので、その質問にはお答えしかねます。"]
+      },
+      {
+        "stt": 83,
+        "mau_ngu_phap": ["～かねない"],
+        "cach_dung": ["Vます"],
+        "y_nghia": ["Một việc(-) nào đó có thể xảy ra nên cảm thấy lo lắng"],
+        "vi_du": ["この状況が続くようであれば、会社は倒産しかねませんよ。"]
+      },
+      {
+        "stt": 84,
+        "mau_ngu_phap": ["～しだい"],
+        "cach_dung": ["Vます"],
+        "y_nghia": ["Sau khi làm A thì ngay lập tức làm B"],
+        "vi_du": ["無効に着き次第、電話してください。"]
+      },
+      {
+        "stt": 85,
+        "mau_ngu_phap": ["～しだいで/だだでは"],
+        "cach_dung": ["N"],
+        "y_nghia": ["=によって、によっては"],
+        "vi_du": ["JLPT に受かるかどうかは、君たちの努力次第だ。"]
+      },
+      {
+        "stt": 86,
+        "mau_ngu_phap": ["～次第だ"],
+        "cach_dung": ["V"],
+        "y_nghia": ["Lý do..."],
+        "vi_du": ["御社の理念に共感し、応募した次第です。"]
+      },
+      {
+        "stt": 87,
+        "mau_ngu_phap": ["～限り", "～限り", "～限り"],
+        "cach_dung": ["V、A} 普通形", "V辞書形 Vた", "Nの V辞書形"],
+        "y_nghia": [
+          "Nếu...thì... Trường hợp giả định, điều kiện",
+          "Trọng phạm vi nào đó thì... Dựa ra phán đoán",
+          "Đến mức giới hạn..."
+        ],
+        "vi_du": [
+          "学生である限り、校則は守らなければならない",
+          "田舎に住んでいる限り、できる仕事はあまり多くない。",
+          "命ある限り君を愛し続けることを誓う。"
+        ]
+      },
+      {
+        "stt": 88,
+        "mau_ngu_phap": ["～に限って", "～に限って"],
+        "cach_dung": ["N", "N"],
+        "y_nghia": [
+          "Chỉ khi trường hợp A thì B 不思議",
+          "Chỉ trường hợp A thì tuyệt đối không..."
+        ],
+        "vi_du": [
+          "予定がある日に限って、なぜか仕事が多いんだよね。",
+          "うちの子に限って、そんなことをするはずはない。"
+        ]
+      },
+      {
+        "stt": 89,
+        "mau_ngu_phap": ["～見えて"],
+        "cach_dung": ["V、A} 普通形+と"],
+        "y_nghia": ["Hình như là... có thể thấy là..."],
+        "vi_du": ["ジェームスさんはJLPT N1に受かったとみえて、とても嬉しそうだ。"]
+      },
+      {
+        "stt": 90,
+        "mau_ngu_phap": ["～というといえばいいったら"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Nếu nói về A thì nghĩ ngay đến B Nếu nói về A thì B( giải thích lý do)"],
+        "vi_du": ["和食といえばお寿司ね 恋人と別れたときの寂しさといったら、なきたいぐらいだった。"]
+      },
+      {
+        "stt": 91,
+        "mau_ngu_phap": ["～といっても"],
+        "cach_dung": ["N V、A} 普通形"],
+        "y_nghia": ["Dù là chính xác là như vậy nhưng mức độ không được đến như vậy."],
+        "vi_du": ["日本語ができるといっても、読んだり、書いたりできない。"]
+      },
+      {
+        "stt": 92,
+        "mau_ngu_phap": ["～にかけて"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Xét về mặt nào đó đưa ra đánh giá tích cực Nói về 1 lĩnh vực nào đó thì ưu tú hơn người khác"],
+        "vi_du": ["Iphone は高いですが、性能にかけては他社のスマホよりも優れています。"]
+      },
+      {
+        "stt": 93,
+        "mau_ngu_phap": ["〜か"],
+        "cach_dung": [""],
+        "y_nghia": ["Phản ngôn, phản biện, đưa ra ý kiến"],
+        "vi_du": ["誰があなたの言うことなんか 信じますか"]
+      },
+      {
+        "stt": 94,
+        "mau_ngu_phap": ["〜にしろ/せよ/しても", "〜にしいろ/せよ/しても〜にしろ/せよ/しても"],
+        "cach_dung": ["N V,A} 普通 形", "N V,A} 普通 形"],
+        "y_nghia": [
+          "Dù có như là, giả định là thì cũng.... Về sau đưa ra ý kiến, đánh giá, phán đoán",
+          "Cũng có chỗ này chỗ kia, Cũng có trường hợp này trường hợp kia. Đưa ra 2 đối tượng"
+        ],
+        "vi_du": [
+          "いくら大好物にせよ、食べ過ぎると飽きる。",
+          "続けるにせよ辞めるにせよ、決めるのは早いほうがいい。"
+        ]
+      },
+      {
+        "stt": 95,
+        "mau_ngu_phap": ["〜のみ"],
+        "cach_dung": ["N V、A い} 普通形"],
+        "y_nghia": ["Chỉ.... Dùng trong văn viết"],
+        "vi_du": ["明日は楽しみにしていた遠足なので、雨が降らないことを祈るのみです。"]
+      },
+      {
+        "stt": 96,
+        "mau_ngu_phap": ["〜のみならず"],
+        "cach_dung": ["N V、A い} 普通形 A な+である"],
+        "y_nghia": ["Không chỉ có A mà cái khác cũng... Dùng trong văn viết"],
+        "vi_du": ["健康のためには、食事のみならず、生活リズムも重要になってくる。"]
+      },
+      {
+        "stt": 97,
+        "mau_ngu_phap": ["〜にほかならない"],
+        "cach_dung": ["N ため、から"],
+        "y_nghia": ["Chắc chắn là như thế, không có gì khác..."],
+        "vi_du": ["彼が試験に落ちたのは、単に勉強不足にほかならない。"]
+      },
+      {
+        "stt": 98,
+        "mau_ngu_phap": ["〜ざるをえない"],
+        "cach_dung": ["V ない する→せ"],
+        "y_nghia": ["Dù thế nào cũng phải làm. Không thích cũng phải làm. Dùng trong văn viết"],
+        "vi_du": ["他に代わりの先生がいないので、今日は私が教えざるを得ない。"]
+      },
+      {
+        "stt": 99,
+        "mau_ngu_phap": ["〜ては〜ては"],
+        "cach_dung": ["V て"],
+        "y_nghia": ["Hành vi, trạng thái nào đó lập đi lập lại nhiều lần"],
+        "vi_du": ["雨が降ってはやみ、降ってはやみしている。"]
+      },
+      {
+        "stt": 100,
+        "mau_ngu_phap": ["〜矢先に/の", "〜矢先に/の"],
+        "cach_dung": ["V た", "V ようとした"],
+        "y_nghia": [
+          "Ngay sau khi làm A thì...",
+          "Ngay khi dự định làm gì đó thì..."
+        ],
+        "vi_du": [
+          "日本へ来た矢先にバッグを置き忘れ、パスポートをなくしてしまった。",
+          "電話をかけようとした矢先に向こうからかかってきた。"
+        ]
+      },
+      {
+        "stt": 101,
+        "mau_ngu_phap": ["〜にとどまらず"],
+        "cach_dung": ["N V辞書形 だけ"],
+        "y_nghia": ["Không chỉ mà còn mở rộng hơn nữa..."],
+        "vi_du": ["アニメや漫画は日本にとどまらず、海外でも多くのファンを増やしている。"]
+      },
+      {
+        "stt": 102,
+        "mau_ngu_phap": ["〜(に)は…がけど", "〜ことは…がけど"],
+        "cach_dung": ["V、A 辞書 形 V、A 普通 形"],
+        "y_nghia": ["Thực tế là...nhưng mà có chút vấn đề..."],
+        "vi_du": ["この道具は便利は便利だが、高すぎて売れないだろう。"]
+      },
+      {
+        "stt": 103,
+        "mau_ngu_phap": ["〜からして"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Đưa ra 1 ví dụ, chính vì ví dụ đó mà đưa ra phản"],
+        "vi_du": ["この本はタイトルからしてつまらなさそうだ。"]
+      },
+      {
+        "stt": 104,
+        "mau_ngu_phap": ["〜というか〜というか"],
+        "cach_dung": ["N V、A} 普通形"],
+        "y_nghia": ["Đánh giá về người hay sự việc nào đó. Liệt kê các phán đoán, ấn tượng đối với đối tượng đó."],
+        "vi_du": ["たくさんお祝いをしていただき、嬉しいというか感謝というか、言葉になりません。"]
+      },
+      {
+        "stt": 105,
+        "mau_ngu_phap": ["〜にこしたことはない"],
+        "cach_dung": ["N V、A} 辞書形"],
+        "y_nghia": ["Thông thường thì là có cái đó là hơn, là an toàn hơn"],
+        "vi_du": ["お金持ちになりたいというわけではないが、お金はあるに越したことはない。"]
+      },
+      {
+        "stt": 106,
+        "mau_ngu_phap": ["〜ようにも〜ない"],
+        "cach_dung": ["V 意志形"],
+        "y_nghia": ["Dù muốn làm cũng không thể làm được"],
+        "vi_du": ["大学の友達に連絡をとりたいんだけど、電話番号もFacebook も知らないので、連絡を取ろうにも取れない。"]
+      },
+      {
+        "stt": 107,
+        "mau_ngu_phap": ["〜を踏まえて"],
+        "cach_dung": ["N"],
+        "y_nghia": ["Từ những tiền đề, căn cứ đưa ra suy nghĩ, viết thành.."],
+        "vi_du": ["アンケートの結果を踏まえて、商品のデザインを見直します。"]
+      },
+      {
+        "stt": 108,
+        "mau_ngu_phap": ["〜は〜にかかっている"],
+        "cach_dung": ["N/かどうか N/疑問詞"],
+        "y_nghia": ["A có được hay không thì tùy thuộc vào B"],
+        "vi_du": ["合格できるかどうかは、これから1ヶ月のがんばりにかかっている。"]
+      },
+      {
+        "stt": 109,
+        "mau_ngu_phap": ["〜ようとする/している"],
+        "cach_dung": ["V 意志形"],
+        "y_nghia": ["Trước khi, vừa đúng lúc Sử dụng trong văn học"],
+        "vi_du": ["病院では、生まれようとする命と消えようとする命の交代が、日々繰り返されている"]
+      },
+      {
+        "stt": 110,
+        "mau_ngu_phap": ["〜ようではないか"],
+        "cach_dung": ["V 意志形"],
+        "y_nghia": ["Rủ rê... cùng nhau làm V"],
+        "vi_du": ["この問題について、みなで考えようではありませんか"]
+      }
+    ]
+  }

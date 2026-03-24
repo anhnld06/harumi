@@ -1,0 +1,2272 @@
+{
+    "title": "TỔNG HỢP KANJI N2",
+    "total": 200,
+    "kanji": [
+      {
+        "stt": 1,
+        "kanji": "禁",
+        "am_han_viet": "CÁM",
+        "readings": [
+          "禁止 きんし cấm",
+          "禁じる きんじる cấm chỉ, nghiêm cấm",
+          "禁酒 きんしゅ cấm uống rượu",
+          "禁輸品 きんゆひん hàng cấm xuất nhập khẩu"
+        ],
+        "nghia": "cấm"
+      },
+      {
+        "stt": 2,
+        "kanji": "煙",
+        "am_han_viet": "YÊN",
+        "readings": [
+          "煙 けむり khói",
+          "禁煙 きんえん cấm hút thuốc",
+          "煙い けむい ngạt khói, mù mịt",
+          "煙突 えんとつ ống khói"
+        ],
+        "nghia": "khói"
+      },
+      {
+        "stt": 3,
+        "kanji": "静",
+        "am_han_viet": "TĨNH",
+        "readings": [
+          "静か (な) しずか yên tĩnh",
+          "静まる しずまる ngót, lắng xuống, trở nên yên tĩnh",
+          "安静 (な) あんせい nghỉ ngơi",
+          "静養 せいよう tĩnh dưỡng"
+        ],
+        "nghia": "yên tĩnh"
+      },
+      {
+        "stt": 4,
+        "kanji": "危",
+        "am_han_viet": "NGUY",
+        "readings": [
+          "危ない あぶない nguy hiểm",
+          "危うい あやうい nguy, nguy hiểm",
+          "危機 きき khủng hoảng"
+        ],
+        "nghia": "nguy hiểm"
+      },
+      {
+        "stt": 5,
+        "kanji": "険",
+        "am_han_viet": "HIỂM",
+        "readings": [
+          "険しい けわしい dốc đứng, dốc / nghiêm khắc, khắt khe",
+          "危険 きけん nguy hiểm",
+          "冒険 ぼうけん liều, mạo hiểm"
+        ],
+        "nghia": "hiểm trở, nguy hiểm"
+      },
+      {
+        "stt": 6,
+        "kanji": "関",
+        "am_han_viet": "QUAN",
+        "readings": [
+          "関わる かかわる liên quan đến",
+          "(に) 関する かんする liên quan đến..."
+        ],
+        "nghia": "liên quan"
+      },
+      {
+        "stt": 7,
+        "kanji": "係",
+        "am_han_viet": "HỆ",
+        "readings": [
+          "関心 かんしん quan tâm",
+          "関税 かんぜい thuế quan",
+          "係 かかり chịu trách nhiệm",
+          "係員 かかりいん người chịu trách nhiệm",
+          "関係 かんけい quan hệ"
+        ],
+        "nghia": "quan hệ, hệ"
+      },
+      {
+        "stt": 8,
+        "kanji": "落",
+        "am_han_viet": "LAC",
+        "readings": [
+          "落ちる おちる rơi",
+          "落とす おとす đánh rơi",
+          "落第 らくだい thi trượt",
+          "転落 てんらく rớt xuống, giáng chức",
+          "落ち着く おちつく bình tĩnh, yên ổn",
+          "落書き らくがき viết bậy"
+        ],
+        "nghia": "rơi, rơi rụng"
+      },
+      {
+        "stt": 9,
+        "kanji": "石",
+        "am_han_viet": "THẠCH",
+        "readings": [
+          "石 いし hòn đá",
+          "落石 らくせき đá rơi",
+          "磁石 じしゃく nam châm",
+          "石油 せきゆ dầu lửa",
+          "石炭 せきたん than đá"
+        ],
+        "nghia": "đá"
+      },
+      {
+        "stt": 10,
+        "kanji": "飛",
+        "am_han_viet": "PHI",
+        "readings": [
+          "飛ぶ とぶ bay",
+          "飛び出す とびだす bay ra, lao ra / xuất hiện / từ chức",
+          "飛ばす とばす bắn, phóng"
+        ],
+        "nghia": "bay"
+      },
+      {
+        "stt": 11,
+        "kanji": "駐",
+        "am_han_viet": "TRÚ",
+        "readings": [
+          "駐車 ちゅうしゃ đỗ xe",
+          "駐車場 ちゅうしゃじょう bãi đỗ xe",
+          "駐車違反 ちゅうしゃいはん vi phạm đỗ xe"
+        ],
+        "nghia": "đỗ, trú"
+      },
+      {
+        "stt": 12,
+        "kanji": "捨",
+        "am_han_viet": "XẢ",
+        "readings": [
+          "捨てる すてる vứt, ném",
+          "四捨五入 ししゃごにゅう làm tròn số",
+          "捨て子 すてご đứa trẻ bị bỏ rơi"
+        ],
+        "nghia": "vứt bỏ"
+      },
+      {
+        "stt": 13,
+        "kanji": "遊",
+        "am_han_viet": "DU",
+        "readings": [
+          "遊ぶ あそぶ chơi",
+          "遊泳 ゆうえい bơi lội",
+          "遊園地 ゆうえんち khu vui chơi"
+        ],
+        "nghia": "chơi, du"
+      },
+      {
+        "stt": 14,
+        "kanji": "泳",
+        "am_han_viet": "VỊNH",
+        "readings": [
+          "泳ぐ およぐ bơi",
+          "水泳 すいえい bơi",
+          "泳ぎ およぎ sự bơi"
+        ],
+        "nghia": "bơi"
+      },
+      {
+        "stt": 15,
+        "kanji": "喫",
+        "am_han_viet": "NGẬT",
+        "readings": [
+          "喫茶店 きっさてん quán nước",
+          "喫煙所 きつえんじょ nơi hút thuốc"
+        ],
+        "nghia": "uống, hút"
+      },
+      {
+        "stt": 16,
+        "kanji": "非",
+        "am_han_viet": "PHI",
+        "readings": [
+          "非常に ひじょうに rất, cực kỳ",
+          "非常口 ひじょうぐち cửa thoát hiểm",
+          "非常時 ひじょうじ lúc khẩn cấp"
+        ],
+        "nghia": "không, phi"
+      },
+      {
+        "stt": 17,
+        "kanji": "御",
+        "am_han_viet": "NGỰ",
+        "readings": [
+          "御～ お～／ご～ từ lịch sự",
+          "御手洗い おてあらい nhà vệ sinh",
+          "御中 おんちゅう kính thưa"
+        ],
+        "nghia": "ngự, kính"
+      },
+      {
+        "stt": 18,
+        "kanji": "常",
+        "am_han_viet": "THƯỜNG",
+        "readings": [
+          "常に つねに luôn",
+          "日常 にちじょう ngày thường",
+          "常識 じょうしき thường thức"
+        ],
+        "nghia": "thường"
+      },
+      {
+        "stt": 19,
+        "kanji": "受",
+        "am_han_viet": "THỤ",
+        "readings": [
+          "受ける うける nhận, chịu",
+          "受かる うかる thi đỗ",
+          "受賞 じゅしょう nhận thưởng",
+          "受験 じゅけん dự thi"
+        ],
+        "nghia": "nhận, chịu"
+      },
+      {
+        "stt": 20,
+        "kanji": "付",
+        "am_han_viet": "PHÓ",
+        "readings": [
+          "付近 ふきん lân cận",
+          "受付 うけつけ tiếp tân",
+          "日付 ひづけ ngày tháng",
+          "～付き ～つき đính kèm"
+        ],
+        "nghia": "gắn, phụ"
+      },
+      {
+        "stt": 21,
+        "kanji": "案",
+        "am_han_viet": "ÁN",
+        "readings": [
+          "案 あん dự thảo",
+          "案内 あんない hướng dẫn",
+          "案外 あんがい ngoài dự tính"
+        ],
+        "nghia": "dự án"
+      },
+      {
+        "stt": 22,
+        "kanji": "内",
+        "am_han_viet": "NỘI",
+        "readings": [
+          "内 うち bên trong",
+          "以内 いない trong khoảng",
+          "社内 しゃない trong công ty",
+          "内科 ないか khoa nội"
+        ],
+        "nghia": "bên trong"
+      },
+      {
+        "stt": 23,
+        "kanji": "議",
+        "am_han_viet": "NGHỊ",
+        "readings": [
+          "議論 ぎろん thảo luận",
+          "議員 ぎいん nghị sĩ",
+          "不思議（な）ふしぎ kỳ lạ",
+          "議決権 ぎけつけん quyền biểu quyết"
+        ],
+        "nghia": "bàn bạc"
+      },
+      {
+        "stt": 24,
+        "kanji": "化",
+        "am_han_viet": "HÓA",
+        "readings": [
+          "文化 ぶんか văn hóa",
+          "化学 かがく hóa học",
+          "化粧室 けしょうしつ phòng trang điểm",
+          "化粧品 けしょうひん mỹ phẩm"
+        ],
+        "nghia": "hóa"
+      },
+      {
+        "stt": 25,
+        "kanji": "階",
+        "am_han_viet": "GIAI",
+        "readings": [
+          "階段 かいだん cầu thang",
+          "段階 だんかい giai đoạn",
+          "～階 ～かい tầng ~",
+          "一段と いちだんと hơn hẳn"
+        ],
+        "nghia": "tầng, bậc"
+      },
+      {
+        "stt": 26,
+        "kanji": "段",
+        "am_han_viet": "ĐOẠN",
+        "readings": [
+          "段 だん bậc, đoạn",
+          "石段 いしだん cầu thang đá",
+          "手段 しゅだん phương pháp"
+        ],
+        "nghia": "đoạn, bậc"
+      },
+      {
+        "stt": 27,
+        "kanji": "営",
+        "am_han_viet": "DOANH",
+        "readings": [
+          "営業 えいぎょう kinh doanh",
+          "営む いとなむ điều khiển"
+        ],
+        "nghia": "kinh doanh"
+      },
+      {
+        "stt": 28,
+        "kanji": "放",
+        "am_han_viet": "PHÓNG",
+        "readings": [
+          "放す はなす thả",
+          "放送 ほうそう phát thanh",
+          "開放 かいほう mở cửa"
+        ],
+        "nghia": "thả, phóng"
+      },
+      {
+        "stt": 29,
+        "kanji": "押",
+        "am_han_viet": "ÁP",
+        "readings": [
+          "押す おす ấn, đẩy",
+          "押入れ おしいれ tủ tường",
+          "押さえる おさえる giữ"
+        ],
+        "nghia": "ấn, đẩy"
+      },
+      {
+        "stt": 30,
+        "kanji": "準",
+        "am_han_viet": "CHUẨN",
+        "readings": [
+          "準備 じゅんび chuẩn bị",
+          "水準 すいじゅん mức, tiêu chuẩn",
+          "準急 じゅんきゅう tàu tốc hành thường"
+        ],
+        "nghia": "chuẩn"
+      },
+      {
+        "stt": 31,
+        "kanji": "備",
+        "am_han_viet": "BỊ",
+        "readings": [
+          "備える そなえる chuẩn bị",
+          "備品 びひん thiết bị sẵn",
+          "準備 じゅんび chuẩn bị"
+        ],
+        "nghia": "chuẩn bị"
+      },
+      {
+        "stt": 32,
+        "kanji": "定",
+        "am_han_viet": "ĐỊNH",
+        "readings": [
+          "定員 ていいん sức chứa",
+          "定休日 ていきゅうび ngày nghỉ định kỳ",
+          "定食 ていしょく suất ăn",
+          "定期券 ていきけん vé tháng"
+        ],
+        "nghia": "định"
+      },
+      {
+        "stt": 33,
+        "kanji": "流",
+        "am_han_viet": "LƯU",
+        "readings": [
+          "流れる ながれる chảy",
+          "流す ながす làm chảy",
+          "交流 こうりゅう giao lưu",
+          "流行 りゅうこう thịnh hành"
+        ],
+        "nghia": "chảy"
+      },
+      {
+        "stt": 34,
+        "kanji": "清",
+        "am_han_viet": "THANH",
+        "readings": [
+          "清い きよい trong trẻo",
+          "清書 せいしょ bản hoàn chỉnh",
+          "清流 せいりゅう dòng nước trong"
+        ],
+        "nghia": "trong sạch"
+      },
+      {
+        "stt": 35,
+        "kanji": "掃",
+        "am_han_viet": "TẢO",
+        "readings": [
+          "掃く はく quét",
+          "清掃 せいそう quét dọn sạch",
+          "掃除 そうじ dọn dẹp"
+        ],
+        "nghia": "quét"
+      },
+      {
+        "stt": 36,
+        "kanji": "閉",
+        "am_han_viet": "BẾ",
+        "readings": [
+          "閉める しめる đóng",
+          "閉まる しまる đóng",
+          "閉じる とじる đóng, gập",
+          "閉会 へいかい bế mạc"
+        ],
+        "nghia": "đóng"
+      },
+      {
+        "stt": 37,
+        "kanji": "点",
+        "am_han_viet": "ĐIỂM",
+        "readings": [
+          "点 てん điểm",
+          "欠点 けってん khuyết điểm",
+          "点ける つける bật"
+        ],
+        "nghia": "điểm"
+      },
+      {
+        "stt": 38,
+        "kanji": "検",
+        "am_han_viet": "KIỂM",
+        "readings": [
+          "点検 てんけん kiểm tra chi tiết",
+          "検問 けんもん tra xét",
+          "検査 けんさ kiểm tra"
+        ],
+        "nghia": "kiểm tra"
+      },
+      {
+        "stt": 39,
+        "kanji": "鉄",
+        "am_han_viet": "THIẾT",
+        "readings": [
+          "地下鉄 ちかてつ tàu điện ngầm",
+          "私鉄 してつ đường sắt tư nhân",
+          "鉄分 てつぶん chất sắt"
+        ],
+        "nghia": "sắt"
+      },
+      {
+        "stt": 40,
+        "kanji": "窓",
+        "am_han_viet": "SONG",
+        "readings": [
+          "窓 まど cửa sổ",
+          "同窓会 どうそうかい hội cùng học",
+          "窓口 まどぐち quầy giao dịch"
+        ],
+        "nghia": "cửa sổ"
+      },
+      {
+        "stt": 41,
+        "kanji": "符",
+        "am_han_viet": "PHÙ",
+        "readings": [
+          "切符 きっぷ vé",
+          "符号 ふごう dấu hiệu",
+          "符合 ふごう phù hợp"
+        ],
+        "nghia": "ký hiệu"
+      },
+      {
+        "stt": 42,
+        "kanji": "精",
+        "am_han_viet": "TÍNH",
+        "readings": [
+          "精神 せいしん tinh thần",
+          "精算 せいさん quyết toán",
+          "精一杯 せいいっぱい nỗ lực hết sức"
+        ],
+        "nghia": "tinh, tinh thần"
+      },
+      {
+        "stt": 43,
+        "kanji": "算",
+        "am_han_viet": "TOÁN",
+        "readings": [
+          "計算 けいさん tính toán",
+          "引き算 ひきざん phép trừ",
+          "足し算 たしざん phép cộng"
+        ],
+        "nghia": "tính toán"
+      },
+      {
+        "stt": 44,
+        "kanji": "改",
+        "am_han_viet": "CẢI",
+        "readings": [
+          "改める あらためる thay đổi",
+          "改正 かいせい sửa đổi",
+          "改革 かいかく cải cách",
+          "改札口 かいさつぐち cửa soát vé"
+        ],
+        "nghia": "sửa, cải"
+      },
+      {
+        "stt": 45,
+        "kanji": "札",
+        "am_han_viet": "TRÁT",
+        "readings": [
+          "札 ふだ thẻ",
+          "一万円札 いちまんえんさつ đồng 1 vạn yên",
+          "名札 なふだ thẻ tên"
+        ],
+        "nghia": "thẻ"
+      },
+      {
+        "stt": 46,
+        "kanji": "線",
+        "am_han_viet": "TUYẾN",
+        "readings": [
+          "下線 かせん gạch chân",
+          "新幹線 しんかんせん shinkansen",
+          "線路 せんろ đường sắt"
+        ],
+        "nghia": "đường, tuyến"
+      },
+      {
+        "stt": 47,
+        "kanji": "刻",
+        "am_han_viet": "KHẮC",
+        "readings": [
+          "刻む きざむ thái nhỏ / khắc",
+          "彫刻 ちょうこく điêu khắc",
+          "時刻 じこく thời gian",
+          "遅刻 ちこく muộn"
+        ],
+        "nghia": "khắc"
+      },
+      {
+        "stt": 48,
+        "kanji": "番",
+        "am_han_viet": "PHIÊN",
+        "readings": [
+          "交番 こうばん đồn cảnh sát",
+          "～番線 ～ばんせん tuyến số ~",
+          "留守番電話 るすばんでんわ hộp thư thoại"
+        ],
+        "nghia": "phiên, số"
+      },
+      {
+        "stt": 49,
+        "kanji": "号",
+        "am_han_viet": "HIỆU",
+        "readings": [
+          "信号 しんごう đèn giao thông",
+          "～号車 ～ごうしゃ xe số ~",
+          "番号 ばんごう số"
+        ],
+        "nghia": "hiệu, số"
+      },
+      {
+        "stt": 50,
+        "kanji": "快",
+        "am_han_viet": "KHOÁI",
+        "readings": [
+          "快い こころよい dễ chịu",
+          "快晴 かいせい trời nắng đẹp",
+          "快速 かいそく nhanh"
+        ],
+        "nghia": "thoải mái"
+      },
+      {
+        "stt": 51,
+        "kanji": "速",
+        "am_han_viet": "TỐC",
+        "readings": [
+          "速い はやい nhanh",
+          "速める はやめる đẩy nhanh",
+          "時速 じそく vận tốc",
+          "早速 さっそく ngay lập tức"
+        ],
+        "nghia": "nhanh"
+      },
+      {
+        "stt": 52,
+        "kanji": "路",
+        "am_han_viet": "LỘ",
+        "readings": [
+          "通路 つうろ lối đi",
+          "道路 どうろ con đường",
+          "路線 ろせん tuyến đường"
+        ],
+        "nghia": "đường"
+      },
+      {
+        "stt": 53,
+        "kanji": "港",
+        "am_han_viet": "CẢNG",
+        "readings": [
+          "港 みなと cảng",
+          "空港 くうこう sân bay",
+          "港口 こうこう cửa cảng"
+        ],
+        "nghia": "cảng"
+      },
+      {
+        "stt": 54,
+        "kanji": "由",
+        "am_han_viet": "DO",
+        "readings": [
+          "理由 りゆう lý do",
+          "不自由 ふじゆう không tự do",
+          "経由 けいゆ đi qua"
+        ],
+        "nghia": "do, vì"
+      },
+      {
+        "stt": 55,
+        "kanji": "深",
+        "am_han_viet": "THÂM",
+        "readings": [
+          "深い ふかい sâu",
+          "深夜 しんや đêm khuya",
+          "深刻（な）しんこく nghiêm trọng",
+          "深呼吸 しんこきゅう thở sâu"
+        ],
+        "nghia": "sâu"
+      },
+      {
+        "stt": 56,
+        "kanji": "降",
+        "am_han_viet": "GIÁNG",
+        "readings": [
+          "降りる おりる xuống xe",
+          "降ろす おろす dỡ xuống",
+          "降る ふる (mưa) rơi",
+          "降車口 こうしゃぐち cửa xuống tàu"
+        ],
+        "nghia": "xuống, rơi"
+      },
+      {
+        "stt": 57,
+        "kanji": "両",
+        "am_han_viet": "LƯỠNG",
+        "readings": [
+          "両～ りょう～ hai-",
+          "両親 りょうしん bố mẹ",
+          "両方 りょうほう hai bên"
+        ],
+        "nghia": "hai"
+      },
+      {
+        "stt": 58,
+        "kanji": "替",
+        "am_han_viet": "THẾ",
+        "readings": [
+          "交替 こうたい thay phiên",
+          "両替 りょうがえ đổi tiền",
+          "着替える きがえる thay quần áo"
+        ],
+        "nghia": "thay"
+      },
+      {
+        "stt": 59,
+        "kanji": "賃",
+        "am_han_viet": "NHÂN",
+        "readings": [
+          "家賃 やちん tiền thuê nhà",
+          "運賃 うんちん phí vận chuyển",
+          "賃貸 ちんたい cho thuê"
+        ],
+        "nghia": "tiền thuê"
+      },
+      {
+        "stt": 60,
+        "kanji": "割",
+        "am_han_viet": "CÁT",
+        "readings": [
+          "分割 ぶんかつ chia nhỏ",
+          "～割 ～わり phần mười",
+          "割引 わりびき giảm giá",
+          "割れる われる bị vỡ"
+        ],
+        "nghia": "chia, cắt"
+      },
+      {
+        "stt": 61,
+        "kanji": "増",
+        "am_han_viet": "TĂNG",
+        "readings": [
+          "増える ふえる tăng",
+          "増やす ふやす làm tăng",
+          "増す ます tăng lên",
+          "割増 わりまし phụ phí"
+        ],
+        "nghia": "tăng"
+      },
+      {
+        "stt": 62,
+        "kanji": "優",
+        "am_han_viet": "UU",
+        "readings": [
+          "優しい やさしい hiền lành",
+          "優れる すぐれる ưu việt",
+          "優待 ゆうたい ưu đãi",
+          "優先 ゆうせん ưu tiên"
+        ],
+        "nghia": "ưu, tốt"
+      },
+      {
+        "stt": 63,
+        "kanji": "席",
+        "am_han_viet": "TỊCH",
+        "readings": [
+          "席 せき chỗ ngồi",
+          "欠席 けっせき vắng mặt",
+          "出席 しゅっせき có mặt",
+          "指定席 していせき chỗ ngồi chỉ định"
+        ],
+        "nghia": "chỗ ngồi"
+      },
+      {
+        "stt": 64,
+        "kanji": "側",
+        "am_han_viet": "TRÁC",
+        "readings": [
+          "側面 そくめん một mặt",
+          "両側 りょうがわ cả hai phía",
+          "～側 ～がわ phía ~"
+        ],
+        "nghia": "bên"
+      },
+      {
+        "stt": 65,
+        "kanji": "座",
+        "am_han_viet": "TỌA",
+        "readings": [
+          "座る すわる ngồi",
+          "座席 ざせき chỗ ngồi",
+          "座禅 ざぜん ngồi thiền",
+          "銀行口座 ぎんこうこうざ tài khoản ngân hàng"
+        ],
+        "nghia": "ngồi"
+      },
+      {
+        "stt": 66,
+        "kanji": "寄",
+        "am_han_viet": "KÍ",
+        "readings": [
+          "寄る よる ghé qua",
+          "寄せる よせる dồn lại",
+          "立ち寄る たちよる tạt qua",
+          "取り寄せる とりよせる gọi đến"
+        ],
+        "nghia": "ghé, gửi"
+      },
+      {
+        "stt": 67,
+        "kanji": "郵",
+        "am_han_viet": "BUU",
+        "readings": [
+          "郵便 ゆうびん bưu điện",
+          "郵便局 ゆうびんきょく bưu cục",
+          "郵政省 ゆうせいしょう bộ bưu chính"
+        ],
+        "nghia": "bưu"
+      },
+      {
+        "stt": 68,
+        "kanji": "局",
+        "am_han_viet": "CỤC",
+        "readings": [
+          "郵政局 ゆうせいきょく cục bưu chính",
+          "放送局 ほうそうきょく đài truyền hình",
+          "薬局 やっきょく hiệu thuốc"
+        ],
+        "nghia": "cục"
+      },
+      {
+        "stt": 69,
+        "kanji": "貯",
+        "am_han_viet": "TRỮ",
+        "readings": [
+          "貯める ためる tích trữ",
+          "貯金 ちょきん tiền tiết kiệm",
+          "貯水 ちょすい trữ nước"
+        ],
+        "nghia": "trữ"
+      },
+      {
+        "stt": 70,
+        "kanji": "包",
+        "am_han_viet": "BAO",
+        "readings": [
+          "包む つつむ gói",
+          "小包 こづつみ bưu kiện",
+          "包丁 ほうちょう dao nấu ăn",
+          "包装 ほうそう bao bì"
+        ],
+        "nghia": "gói"
+      },
+      {
+        "stt": 71,
+        "kanji": "達",
+        "am_han_viet": "ĐẠT",
+        "readings": [
+          "達する たっする đạt được",
+          "達成 たっせい đạt được",
+          "友達 ともだち bạn bè"
+        ],
+        "nghia": "đạt"
+      },
+      {
+        "stt": 72,
+        "kanji": "際",
+        "am_han_viet": "TẾ",
+        "readings": [
+          "際 さい lúc",
+          "国際 こくさい quốc tế",
+          "実際 じっさい thực tế"
+        ],
+        "nghia": "lúc, giới hạn"
+      },
+      {
+        "stt": 73,
+        "kanji": "初",
+        "am_han_viet": "XUẤT",
+        "readings": [
+          "初め はじめ đầu",
+          "初めて はじめて lần đầu",
+          "初雪 はつゆき tuyết đầu mùa"
+        ],
+        "nghia": "đầu tiên"
+      },
+      {
+        "stt": 74,
+        "kanji": "再",
+        "am_han_viet": "TÁI",
+        "readings": [
+          "再び ふたたび lần nữa",
+          "再生 さいせい tái sinh",
+          "再来年 さらいねん sang năm nữa"
+        ],
+        "nghia": "lại, tái"
+      },
+      {
+        "stt": 75,
+        "kanji": "療",
+        "am_han_viet": "LIỆU",
+        "readings": [
+          "治療 ちりょう chữa trị",
+          "医療 いりょう y tế"
+        ],
+        "nghia": "chữa"
+      },
+      {
+        "stt": 76,
+        "kanji": "科",
+        "am_han_viet": "KHOA",
+        "readings": [
+          "科学 かがく khoa học",
+          "内科 ないか khoa nội",
+          "外科 げか khoa ngoại"
+        ],
+        "nghia": "khoa"
+      },
+      {
+        "stt": 77,
+        "kanji": "婦",
+        "am_han_viet": "PHỤ",
+        "readings": [
+          "産婦人科 さんふじんか khoa sản phụ khoa",
+          "主婦 しゅふ bà nội trợ"
+        ],
+        "nghia": "phụ nữ"
+      },
+      {
+        "stt": 78,
+        "kanji": "皮",
+        "am_han_viet": "BÌ",
+        "readings": [
+          "皮膚 ひふ da",
+          "皮膚病 ひふびょう bệnh ngoài da"
+        ],
+        "nghia": "da"
+      },
+      {
+        "stt": 79,
+        "kanji": "膚",
+        "am_han_viet": "PHU",
+        "readings": [
+          "皮膚 ひふ da",
+          "膚 はだ da"
+        ],
+        "nghia": "da"
+      },
+      {
+        "stt": 80,
+        "kanji": "救",
+        "am_han_viet": "CỨU",
+        "readings": [
+          "救う すくう cứu",
+          "救急 きゅうきゅう cấp cứu",
+          "救済基金 きゅうさいききん quỹ cứu trợ"
+        ],
+        "nghia": "cứu"
+      },
+      {
+        "stt": 81,
+        "kanji": "看",
+        "am_han_viet": "KHÁN",
+        "readings": [
+          "看板 かんばん biển hiệu",
+          "看病 かんびょう chăm sóc bệnh nhân",
+          "看護師 かんごし y tá"
+        ],
+        "nghia": "xem, chăm"
+      },
+      {
+        "stt": 82,
+        "kanji": "板",
+        "am_han_viet": "BẢN",
+        "readings": [
+          "板 いた tấm ván",
+          "黒板 こくばん bảng viết",
+          "案内板 あんないばん bảng hướng dẫn"
+        ],
+        "nghia": "bảng, ván"
+      },
+      {
+        "stt": 83,
+        "kanji": "羽",
+        "am_han_viet": "VŨ",
+        "readings": [
+          "羽 はね lông chim",
+          "羽根 はね quả cầu lông",
+          "羽毛 うもう lông vũ"
+        ],
+        "nghia": "lông vũ"
+      },
+      {
+        "stt": 84,
+        "kanji": "成",
+        "am_han_viet": "THÀNH",
+        "readings": [
+          "成る なる trở thành",
+          "成分 せいぶん thành phần",
+          "成長 せいちょう trưởng thành",
+          "成人式 せいじんしき lễ thành nhân"
+        ],
+        "nghia": "thành"
+      },
+      {
+        "stt": 85,
+        "kanji": "第",
+        "am_han_viet": "ĐỆ",
+        "readings": [
+          "第～ だい～ thứ ~",
+          "第一 だいいち thứ nhất",
+          "第一印象 だいいちいんしょう ấn tượng đầu tiên"
+        ],
+        "nghia": "thứ"
+      },
+      {
+        "stt": 86,
+        "kanji": "総",
+        "am_han_viet": "TỔNG",
+        "readings": [
+          "総計 そうけい tổng số",
+          "総合病院 そうごうびょういん bệnh viện đa khoa",
+          "総選挙 そうせんきょ tổng tuyển cử"
+        ],
+        "nghia": "tổng"
+      },
+      {
+        "stt": 87,
+        "kanji": "普",
+        "am_han_viet": "PHỔ",
+        "readings": [
+          "普通 ふつう thường",
+          "普段 ふだん thường xuyên",
+          "普及 ふきゅう phổ cập"
+        ],
+        "nghia": "phổ"
+      },
+      {
+        "stt": 88,
+        "kanji": "券",
+        "am_han_viet": "KHOÁN",
+        "readings": [
+          "回数券 かいすうけん tập vé",
+          "旅券 りょけん hộ chiếu",
+          "乗車券 じょうしゃけん vé xe",
+          "発券 はっけん phát hành vé"
+        ],
+        "nghia": "vé"
+      },
+      {
+        "stt": 89,
+        "kanji": "数",
+        "am_han_viet": "SỐ",
+        "readings": [
+          "数 かず số",
+          "数字 すうじ chữ số",
+          "数学 すうがく toán học",
+          "点数 てんすう điểm số"
+        ],
+        "nghia": "số"
+      },
+      {
+        "stt": 90,
+        "kanji": "機",
+        "am_han_viet": "CƠ",
+        "readings": [
+          "飛行機 ひこうき máy bay",
+          "自動券売機 じどうけんばいき máy bán vé tự động",
+          "交通機関 こうつうきかん phương tiện giao thông"
+        ],
+        "nghia": "máy"
+      },
+      {
+        "stt": 91,
+        "kanji": "復",
+        "am_han_viet": "PHỤC",
+        "readings": [
+          "復習 ふくしゅう ôn tập",
+          "回復 かいふく hồi phục",
+          "往復 おうふく khứ hồi"
+        ],
+        "nghia": "phục"
+      },
+      {
+        "stt": 92,
+        "kanji": "片",
+        "am_han_viet": "PHIẾN",
+        "readings": [
+          "片～ かた～ một ~",
+          "片付ける かたづける dọn dẹp",
+          "片道切符 かたみちきっぷ vé một chiều"
+        ],
+        "nghia": "một bên"
+      },
+      {
+        "stt": 93,
+        "kanji": "枚",
+        "am_han_viet": "MAI",
+        "readings": [
+          "～枚 ～まい đếm vật mỏng",
+          "枚数 まいすう số tờ"
+        ],
+        "nghia": "tờ"
+      },
+      {
+        "stt": 94,
+        "kanji": "期",
+        "am_han_viet": "KÌ",
+        "readings": [
+          "期間 きかん kỳ hạn",
+          "定期 ていき định kỳ",
+          "定期券 ていきけん vé tháng"
+        ],
+        "nghia": "kỳ"
+      },
+      {
+        "stt": 95,
+        "kanji": "販",
+        "am_han_viet": "PHÁN",
+        "readings": [
+          "販売 はんばい bán",
+          "自動販売機 じどうはんばいき máy bán hàng tự động"
+        ],
+        "nghia": "bán"
+      },
+      {
+        "stt": 96,
+        "kanji": "指",
+        "am_han_viet": "CHỈ",
+        "readings": [
+          "指 ゆび ngón tay",
+          "指す さす chỉ",
+          "指導 しどう hướng dẫn",
+          "指定席 していせき chỗ ngồi chỉ định"
+        ],
+        "nghia": "chỉ"
+      },
+      {
+        "stt": 97,
+        "kanji": "調",
+        "am_han_viet": "ĐIỀU",
+        "readings": [
+          "調べる しらべる điều tra",
+          "調査 ちょうさ điều tra",
+          "調整 ちょうせい điều chỉnh",
+          "調子 ちょうし tình trạng"
+        ],
+        "nghia": "điều"
+      },
+      {
+        "stt": 98,
+        "kanji": "整",
+        "am_han_viet": "CHỈNH",
+        "readings": [
+          "整う ととのう gọn gàng",
+          "整備 せいび bảo trì",
+          "整形外科 せいけいげか khoa chỉnh hình",
+          "整理券 せいりけん vé số thứ tự"
+        ],
+        "nghia": "chỉnh"
+      },
+      {
+        "stt": 99,
+        "kanji": "表",
+        "am_han_viet": "BIỂU",
+        "readings": [
+          "表 おもて mặt trước",
+          "表す あらわす biểu hiện",
+          "発表 はっぴょう phát biểu",
+          "時刻表 じこくひょう thời gian biểu"
+        ],
+        "nghia": "biểu hiện"
+      },
+      {
+        "stt": 100,
+        "kanji": "示",
+        "am_han_viet": "THỊ",
+        "readings": [
+          "示す しめす biểu hiện",
+          "表示 ひょうじ biểu thị",
+          "掲示板 けいじばん bảng thông báo",
+          "指示 しじ chỉ thị"
+        ],
+        "nghia": "chỉ ra"
+      },
+      {
+        "stt": 101,
+        "kanji": "現",
+        "am_han_viet": "HIỆN",
+        "readings": [
+          "現す あらわす bộc lộ",
+          "現れる あらわれる xuất hiện",
+          "現在 げんざい hiện tại",
+          "現金 げんきん tiền mặt"
+        ],
+        "nghia": "hiện"
+      },
+      {
+        "stt": 102,
+        "kanji": "支",
+        "am_han_viet": "CHI",
+        "readings": [
+          "支える ささえる duy trì",
+          "支給 しきゅう chi trả",
+          "支店 してん chi nhánh",
+          "支持 しじ ủng hộ"
+        ],
+        "nghia": "chi, hỗ trợ"
+      },
+      {
+        "stt": 103,
+        "kanji": "払",
+        "am_han_viet": "PHÁT",
+        "readings": [
+          "払う はらう trả tiền",
+          "支払う しはらう thanh toán",
+          "支払機 しはらいき máy thanh toán"
+        ],
+        "nghia": "trả"
+      },
+      {
+        "stt": 104,
+        "kanji": "預",
+        "am_han_viet": "DỰ",
+        "readings": [
+          "預ける あずける gửi",
+          "預かる あずかる trông nom",
+          "預金 よきん tiền gửi"
+        ],
+        "nghia": "gửi"
+      },
+      {
+        "stt": 105,
+        "kanji": "戻",
+        "am_han_viet": "LỆ",
+        "readings": [
+          "戻す もどす trả lại",
+          "戻る もどる quay lại",
+          "払い戻し はらいもどし hoàn trả"
+        ],
+        "nghia": "trả lại"
+      },
+      {
+        "stt": 106,
+        "kanji": "残",
+        "am_han_viet": "TÁN",
+        "readings": [
+          "残す のこす để lại",
+          "残る のこる còn lại",
+          "残高照会 ざんだかしょうかい kiểm tra số dư",
+          "残念 ざんねん tiếc"
+        ],
+        "nghia": "còn lại"
+      },
+      {
+        "stt": 107,
+        "kanji": "照",
+        "am_han_viet": "CHIẾU",
+        "readings": [
+          "照る てる chiếu sáng",
+          "照らす てらす soi",
+          "照明 しょうめい đèn",
+          "対照的 たいしょうてき đối chiếu"
+        ],
+        "nghia": "chiếu"
+      },
+      {
+        "stt": 108,
+        "kanji": "硬",
+        "am_han_viet": "NGẠCH",
+        "readings": [
+          "硬い かたい cứng",
+          "硬貨 こうか tiền xu",
+          "硬度 こうど độ cứng"
+        ],
+        "nghia": "cứng"
+      },
+      {
+        "stt": 109,
+        "kanji": "貨",
+        "am_han_viet": "HÓA",
+        "readings": [
+          "貨物 かもつ hàng hóa",
+          "通貨 つうか tiền tệ",
+          "貨幣 かへい tiền tệ"
+        ],
+        "nghia": "hàng"
+      },
+      {
+        "stt": 110,
+        "kanji": "確",
+        "am_han_viet": "XÁC",
+        "readings": [
+          "確か たしか chắc chắn",
+          "確かめる たしかめる xác nhận",
+          "明確（な）めいかく rõ ràng",
+          "確定 かくてい xác định"
+        ],
+        "nghia": "chắc chắn"
+      },
+      {
+        "stt": 111,
+        "kanji": "認",
+        "am_han_viet": "NHẬN",
+        "readings": [
+          "認める みとめる thừa nhận",
+          "確認 かくにん xác nhận",
+          "認識 にんしき nhận thức"
+        ],
+        "nghia": "nhận"
+      },
+      {
+        "stt": 112,
+        "kanji": "違",
+        "am_han_viet": "VI",
+        "readings": [
+          "違い ちがい khác nhau",
+          "間違い まちがい nhầm lẫn",
+          "間違える まちがえる sai",
+          "違法 いほう vi phạm pháp luật"
+        ],
+        "nghia": "khác"
+      },
+      {
+        "stt": 113,
+        "kanji": "取",
+        "am_han_viet": "THỦ",
+        "readings": [
+          "取る とる lấy",
+          "聞き取り ききとり nghe hiểu",
+          "取り消し とりけし hủy bỏ",
+          "取材 しゅざい thu thập dữ liệu"
+        ],
+        "nghia": "lấy"
+      },
+      {
+        "stt": 114,
+        "kanji": "消",
+        "am_han_viet": "TIÊU",
+        "readings": [
+          "消す けす tắt",
+          "消える きえる biến mất",
+          "消費者 しょうひしゃ người tiêu dùng"
+        ],
+        "nghia": "xóa, tắt"
+      },
+      {
+        "stt": 115,
+        "kanji": "温",
+        "am_han_viet": "ÔN",
+        "readings": [
+          "温かい あたたかい ấm",
+          "温まる あたたまる ấm lên",
+          "温度 おんど nhiệt độ",
+          "温室 おんしつ nhà kính"
+        ],
+        "nghia": "ấm"
+      },
+      {
+        "stt": 116,
+        "kanji": "冷",
+        "am_han_viet": "LÃNH",
+        "readings": [
+          "冷たい つめたい lạnh",
+          "冷える ひえる cảm thấy lạnh",
+          "冷やす ひやす làm lạnh",
+          "冷静（な）れいせい bình tĩnh"
+        ],
+        "nghia": "lạnh"
+      },
+      {
+        "stt": 117,
+        "kanji": "緑",
+        "am_han_viet": "LỤC",
+        "readings": [
+          "緑 みどり màu xanh lá",
+          "緑茶 りょくちゃ trà xanh",
+          "新緑 しんりょく màu xanh non"
+        ],
+        "nghia": "xanh lá"
+      },
+      {
+        "stt": 118,
+        "kanji": "紅",
+        "am_han_viet": "HỒNG",
+        "readings": [
+          "口紅 くちべに son môi",
+          "紅茶 こうちゃ trà đen",
+          "紅葉 こうよう lá đỏ"
+        ],
+        "nghia": "đỏ"
+      },
+      {
+        "stt": 119,
+        "kanji": "玉",
+        "am_han_viet": "NGỌC",
+        "readings": [
+          "玉 たま đồng xu",
+          "水玉 みずたま chấm tròn",
+          "十円玉 じゅうえんだま đồng 10 yên"
+        ],
+        "nghia": "ngọc"
+      },
+      {
+        "stt": 120,
+        "kanji": "返",
+        "am_han_viet": "PHẢN",
+        "readings": [
+          "返す かえす trả lại",
+          "返る かえる quay lại",
+          "返事 へんじ trả lời",
+          "返金 へんきん trả tiền"
+        ],
+        "nghia": "trả lại"
+      },
+      {
+        "stt": 121,
+        "kanji": "団",
+        "am_han_viet": "ĐOÀN",
+        "readings": [
+          "団体 だんたい đoàn thể",
+          "団地 だんち khu chung cư",
+          "集団 しゅうだん tập thể"
+        ],
+        "nghia": "đoàn"
+      },
+      {
+        "stt": 122,
+        "kanji": "般",
+        "am_han_viet": "BÀN",
+        "readings": [
+          "一般 いっぱん thông thường",
+          "全般 ぜんぱん tổng quát",
+          "～般 ～はん loại ~"
+        ],
+        "nghia": "loại"
+      },
+      {
+        "stt": 123,
+        "kanji": "幼",
+        "am_han_viet": "ẤU",
+        "readings": [
+          "幼い おさない thơ ấu",
+          "幼児 ようじ trẻ con",
+          "幼稚園 ようちえん mẫu giáo"
+        ],
+        "nghia": "ấu"
+      },
+      {
+        "stt": 124,
+        "kanji": "児",
+        "am_han_viet": "NHI",
+        "readings": [
+          "小児科 しょうにか khoa nhi",
+          "児童 じどう thiếu nhi"
+        ],
+        "nghia": "con trẻ"
+      },
+      {
+        "stt": 125,
+        "kanji": "歳",
+        "am_han_viet": "TUẾ",
+        "readings": [
+          "～歳 ～さい tuổi",
+          "二十歳 はたち 20 tuổi",
+          "万歳 ばんざい vạn tuế"
+        ],
+        "nghia": "tuổi"
+      },
+      {
+        "stt": 126,
+        "kanji": "未",
+        "am_han_viet": "VỊ",
+        "readings": [
+          "未定 みてい chưa quyết định",
+          "未知 みち chưa biết",
+          "未来 みらい tương lai",
+          "未満 みまん chưa đủ"
+        ],
+        "nghia": "chưa"
+      },
+      {
+        "stt": 127,
+        "kanji": "満",
+        "am_han_viet": "MÃN",
+        "readings": [
+          "満たす みたす làm đầy",
+          "満ちる みちる đầy tràn",
+          "満員 まんいん chật ních",
+          "満足 まんぞく thỏa mãn"
+        ],
+        "nghia": "đầy"
+      },
+      {
+        "stt": 128,
+        "kanji": "老",
+        "am_han_viet": "LÃO",
+        "readings": [
+          "老いる おいる già",
+          "年老いた としおいた tuổi cao",
+          "老人 ろうじん người già"
+        ],
+        "nghia": "già"
+      },
+      {
+        "stt": 129,
+        "kanji": "設",
+        "am_han_viet": "THIẾT",
+        "readings": [
+          "設定 せってい thiết lập",
+          "設計 せっけい thiết kế",
+          "設備 せつび thiết bị"
+        ],
+        "nghia": "thiết lập"
+      },
+      {
+        "stt": 130,
+        "kanji": "換",
+        "am_han_viet": "HOÁN",
+        "readings": [
+          "換える かえる đổi",
+          "換わる かわる trao đổi",
+          "換気 かんき thông gió",
+          "乗り換え のりかえ chuyển xe"
+        ],
+        "nghia": "đổi"
+      },
+      {
+        "stt": 131,
+        "kanji": "向",
+        "am_han_viet": "HƯỚNG",
+        "readings": [
+          "向く むく quay về phía",
+          "向ける むける chĩa về phía",
+          "向かう むかう tiến đến",
+          "向こう むこう bên kia"
+        ],
+        "nghia": "hướng"
+      },
+      {
+        "stt": 132,
+        "kanji": "停",
+        "am_han_viet": "ĐÌNH",
+        "readings": [
+          "停電 ていでん mất điện",
+          "停車 ていしゃ dừng tàu",
+          "停止 ていし tạm dừng"
+        ],
+        "nghia": "dừng"
+      },
+      {
+        "stt": 133,
+        "kanji": "暖",
+        "am_han_viet": "NOÃN",
+        "readings": [
+          "暖かい あたたかい ấm áp",
+          "暖める あたためる làm ấm",
+          "暖房 だんぼう sưởi",
+          "温暖 おんだん ấm áp"
+        ],
+        "nghia": "ấm"
+      },
+      {
+        "stt": 134,
+        "kanji": "除",
+        "am_han_viet": "TRỪ",
+        "readings": [
+          "除く のぞく ngoại trừ",
+          "除湿 じょしつ hút ẩm",
+          "掃除 そうじ quét dọn"
+        ],
+        "nghia": "trừ"
+      },
+      {
+        "stt": 135,
+        "kanji": "湿",
+        "am_han_viet": "THÁP",
+        "readings": [
+          "湿る しめる ẩm ướt",
+          "湿気 しつけ độ ẩm",
+          "湿度 しつど độ ẩm"
+        ],
+        "nghia": "ẩm"
+      },
+      {
+        "stt": 136,
+        "kanji": "標",
+        "am_han_viet": "PHIẾU",
+        "readings": [
+          "標準 ひょうじゅん tiêu chuẩn",
+          "目標 もくひょう mục tiêu",
+          "標本 ひょうほん vật mẫu"
+        ],
+        "nghia": "tiêu chuẩn"
+      },
+      {
+        "stt": 137,
+        "kanji": "倍",
+        "am_han_viet": "BỐI",
+        "readings": [
+          "倍 ばい lần",
+          "～倍 ～ばい lần"
+        ],
+        "nghia": "lần"
+      },
+      {
+        "stt": 138,
+        "kanji": "巻",
+        "am_han_viet": "QUYỂN",
+        "readings": [
+          "巻く まく quấn",
+          "巻き戻し まきもどし tua lại",
+          "～巻 ～かん tập ~"
+        ],
+        "nghia": "quấn"
+      },
+      {
+        "stt": 139,
+        "kanji": "録",
+        "am_han_viet": "LỤC",
+        "readings": [
+          "録画 ろくが ghi hình",
+          "録音 ろくおん ghi âm",
+          "記録 きろく ghi chép"
+        ],
+        "nghia": "ghi"
+      },
+      {
+        "stt": 140,
+        "kanji": "量",
+        "am_han_viet": "LƯỢNG",
+        "readings": [
+          "量る はかる đo",
+          "分量 ぶんりょう lượng",
+          "数量 すうりょう số lượng",
+          "音量 おんりょう âm lượng"
+        ],
+        "nghia": "lượng"
+      },
+      {
+        "stt": 141,
+        "kanji": "予",
+        "am_han_viet": "DỰ",
+        "readings": [
+          "予定 よてい dự định",
+          "予習 よしゅう chuẩn bị bài",
+          "予備 よび dự bị",
+          "予算 よさん ngân sách"
+        ],
+        "nghia": "dự"
+      },
+      {
+        "stt": 142,
+        "kanji": "約",
+        "am_han_viet": "ƯỚC",
+        "readings": [
+          "予約 よやく đặt trước",
+          "約～ やく～ khoảng ~",
+          "約束 やくそく hứa",
+          "婚約 こんやく đính hôn"
+        ],
+        "nghia": "ước"
+      },
+      {
+        "stt": 143,
+        "kanji": "帯",
+        "am_han_viet": "ĐỐI",
+        "readings": [
+          "地帯 ちたい vùng",
+          "温帯 おんたい ôn đới",
+          "熱帯 ねったい nhiệt đới",
+          "携帯電話 けいたいでんわ điện thoại di động"
+        ],
+        "nghia": "đới"
+      },
+      {
+        "stt": 144,
+        "kanji": "保",
+        "am_han_viet": "BẢO",
+        "readings": [
+          "保つ たもつ giữ",
+          "保温 ほおん giữ nhiệt",
+          "保険 ほけん bảo hiểm",
+          "保証書 ほしょうしょ giấy bảo hành"
+        ],
+        "nghia": "bảo"
+      },
+      {
+        "stt": 145,
+        "kanji": "留",
+        "am_han_viet": "LƯU",
+        "readings": [
+          "留める とめる lưu",
+          "保留 ほりゅう bảo lưu",
+          "留学 りゅうがく du học",
+          "書留 かきとめ gửi bảo đảm"
+        ],
+        "nghia": "giữ"
+      },
+      {
+        "stt": 146,
+        "kanji": "守",
+        "am_han_viet": "THỦ",
+        "readings": [
+          "守る まもる bảo vệ",
+          "お守り おまもり bùa",
+          "保守的 ほしゅてき bảo thủ",
+          "留守 るす vắng nhà"
+        ],
+        "nghia": "giữ"
+      },
+      {
+        "stt": 147,
+        "kanji": "伝",
+        "am_han_viet": "TRUYỀN",
+        "readings": [
+          "伝える つたえる truyền đạt",
+          "伝わる つたわる được truyền",
+          "手伝う てつだう giúp đỡ",
+          "伝言 でんごん lời nhắn"
+        ],
+        "nghia": "truyền"
+      },
+      {
+        "stt": 148,
+        "kanji": "済",
+        "am_han_viet": "TẾ",
+        "readings": [
+          "済む すむ xong",
+          "済ます すます làm xong",
+          "返済 へんさい thanh toán hết"
+        ],
+        "nghia": "xong"
+      },
+      {
+        "stt": 149,
+        "kanji": "件",
+        "am_han_viet": "KIỆN",
+        "readings": [
+          "用件 ようけん việc",
+          "件名 けんめい tên vụ việc",
+          "事件 じけん sự kiện"
+        ],
+        "nghia": "việc"
+      },
+      {
+        "stt": 150,
+        "kanji": "信",
+        "am_han_viet": "TÍN",
+        "readings": [
+          "通信 つうしん thông tin",
+          "自信 じしん tự tin",
+          "信頼 しんらい tin cậy",
+          "信用 しんよう tin tưởng"
+        ],
+        "nghia": "tin"
+      },
+      {
+        "stt": 151,
+        "kanji": "歴",
+        "am_han_viet": "LỊCH",
+        "readings": [
+          "着信履歴 ちゃくしんりれき lịch gọi đến",
+          "履歴書 りれきしょ sơ yếu lý lịch",
+          "歴史 れきし lịch sử"
+        ],
+        "nghia": "lịch"
+      },
+      {
+        "stt": 152,
+        "kanji": "箱",
+        "am_han_viet": "TƯỜNG",
+        "readings": [
+          "受信箱 じゅしんばこ hộp thư đến",
+          "ゴミ箱 ごみばこ thùng rác",
+          "送信箱 そうしんばこ hộp thư đi"
+        ],
+        "nghia": "hộp"
+      },
+      {
+        "stt": 153,
+        "kanji": "規",
+        "am_han_viet": "QUY",
+        "readings": [
+          "新規 しんき mới",
+          "規定 きてい quy định",
+          "規則 きそく quy tắc",
+          "規模 きぼ quy mô"
+        ],
+        "nghia": "quy"
+      },
+      {
+        "stt": 154,
+        "kanji": "変",
+        "am_han_viet": "BIẾN",
+        "readings": [
+          "変える かえる đổi",
+          "変わる かわる thay đổi",
+          "変換 へんかん biến đổi",
+          "大変 たいへん vất vả"
+        ],
+        "nghia": "biến"
+      },
+      {
+        "stt": 155,
+        "kanji": "選",
+        "am_han_viet": "TUYỂN",
+        "readings": [
+          "選ぶ えらぶ chọn",
+          "選択 せんたく lựa chọn",
+          "選手 せんしゅ tuyển thủ",
+          "選挙 せんきょ bầu cử"
+        ],
+        "nghia": "chọn"
+      },
+      {
+        "stt": 156,
+        "kanji": "決",
+        "am_han_viet": "QUYẾT",
+        "readings": [
+          "決まる きまる được quyết định",
+          "決める きめる quyết định",
+          "決定 けってい quyết định",
+          "決心 けっしん quyết tâm"
+        ],
+        "nghia": "quyết"
+      },
+      {
+        "stt": 157,
+        "kanji": "登",
+        "am_han_viet": "ĐĂNG",
+        "readings": [
+          "登る のぼる leo",
+          "山登り やまのぼり leo núi",
+          "登録 とうろく đăng ký",
+          "登場 とうじょう xuất hiện"
+        ],
+        "nghia": "leo, đăng"
+      },
+      {
+        "stt": 158,
+        "kanji": "編",
+        "am_han_viet": "BIÊN",
+        "readings": [
+          "編む あむ đan",
+          "編み物 あみもの đồ đan",
+          "編集 へんしゅう biên tập",
+          "短編 たんぺん truyện ngắn"
+        ],
+        "nghia": "biên"
+      },
+      {
+        "stt": 159,
+        "kanji": "能",
+        "am_han_viet": "NĂNG",
+        "readings": [
+          "機能 きのう chức năng",
+          "能力 のうりょく năng lực",
+          "可能 かのう khả năng",
+          "能率 のうりつ năng suất"
+        ],
+        "nghia": "năng"
+      },
+      {
+        "stt": 160,
+        "kanji": "修",
+        "am_han_viet": "TU",
+        "readings": [
+          "修正 しゅうせい sửa chữa",
+          "修理 しゅうり sửa chữa",
+          "修士 しゅうし thạc sĩ",
+          "修了 しゅうりょう kết thúc khóa học"
+        ],
+        "nghia": "sửa"
+      },
+      {
+        "stt": 161,
+        "kanji": "完",
+        "am_han_viet": "HOÀN",
+        "readings": [
+          "完了 かんりょう hoàn thành",
+          "完備 かんび trang bị đầy đủ",
+          "完成 かんせい hoàn thành"
+        ],
+        "nghia": "hoàn"
+      },
+      {
+        "stt": 162,
+        "kanji": "了",
+        "am_han_viet": "LIỄU",
+        "readings": [
+          "終了 しゅうりょう kết thúc",
+          "修了 しゅうりょう kết thúc khóa học",
+          "了解 りょうかい hiểu rõ"
+        ],
+        "nghia": "xong"
+      },
+      {
+        "stt": 163,
+        "kanji": "像",
+        "am_han_viet": "TƯỢNG",
+        "readings": [
+          "画像 がぞう hình ảnh",
+          "現像 げんぞう rửa ảnh",
+          "映像 えいぞう hình ảnh"
+        ],
+        "nghia": "hình"
+      },
+      {
+        "stt": 164,
+        "kanji": "類",
+        "am_han_viet": "LOẠI",
+        "readings": [
+          "書類 しょるい tài liệu",
+          "分類 ぶんるい phân loại",
+          "人類 じんるい nhân loại",
+          "種類 しゅるい chủng loại"
+        ],
+        "nghia": "loại"
+      },
+      {
+        "stt": 165,
+        "kanji": "式",
+        "am_han_viet": "THỨC",
+        "readings": [
+          "書式 しょしき cách viết",
+          "日本式 にほんしき kiểu Nhật",
+          "入学式 にゅうがくしき lễ nhập học",
+          "結婚式 けっこんしき lễ cưới"
+        ],
+        "nghia": "kiểu"
+      },
+      {
+        "stt": 166,
+        "kanji": "央",
+        "am_han_viet": "UÔNG",
+        "readings": [
+          "中央 ちゅうおう trung ương",
+          "中央部 ちゅうおうぶ khu trung tâm"
+        ],
+        "nghia": "trung"
+      },
+      {
+        "stt": 167,
+        "kanji": "存",
+        "am_han_viet": "TÔN",
+        "readings": [
+          "保存 ほぞん lưu",
+          "生存 せいぞん sinh tồn",
+          "ご存知 ごぞんじ biết",
+          "存在 そんざい tồn tại"
+        ],
+        "nghia": "tồn"
+      },
+      {
+        "stt": 168,
+        "kanji": "印",
+        "am_han_viet": "ÁN",
+        "readings": [
+          "印 しるし dấu",
+          "認め印 みとめいん con dấu",
+          "目印 めじるし dấu hiệu",
+          "印象 いんしょう ấn tượng"
+        ],
+        "nghia": "dấu"
+      },
+      {
+        "stt": 169,
+        "kanji": "刷",
+        "am_han_viet": "LOÁT",
+        "readings": [
+          "刷る する in",
+          "印刷 いんさつ in ấn"
+        ],
+        "nghia": "in"
+      },
+      {
+        "stt": 170,
+        "kanji": "拡",
+        "am_han_viet": "KHUẾCH",
+        "readings": [
+          "拡大 かくだい phóng to",
+          "拡充 かくじゅう mở rộng",
+          "拡張 かくちょう khuếch trương"
+        ],
+        "nghia": "mở rộng"
+      },
+      {
+        "stt": 171,
+        "kanji": "若",
+        "am_han_viet": "NHƯỢC",
+        "readings": [
+          "若い わかい trẻ",
+          "若者 わかもの thanh niên",
+          "若干 じゃっかん một chút"
+        ],
+        "nghia": "trẻ"
+      },
+      {
+        "stt": 172,
+        "kanji": "反",
+        "am_han_viet": "PHẢN",
+        "readings": [
+          "反対 はんたい phản đối",
+          "反映 はんえい phản ánh",
+          "反省 はんせい phản tỉnh"
+        ],
+        "nghia": "phản"
+      },
+      {
+        "stt": 173,
+        "kanji": "賛",
+        "am_han_viet": "TÁN",
+        "readings": [
+          "賛成 さんせい tán thành",
+          "賛否 さんぴ tán thành và phản đối"
+        ],
+        "nghia": "tán"
+      },
+      {
+        "stt": 174,
+        "kanji": "拾",
+        "am_han_viet": "THẬP",
+        "readings": [
+          "拾う ひろう nhặt",
+          "拾得 しゅうとく nhặt được"
+        ],
+        "nghia": "nhặt"
+      },
+      {
+        "stt": 175,
+        "kanji": "鋭",
+        "am_han_viet": "NHUỆ",
+        "readings": [
+          "鋭い するどい sắc",
+          "鋭角 えいかく góc nhọn",
+          "鋭気 えいき chí khí"
+        ],
+        "nghia": "sắc"
+      },
+      {
+        "stt": 176,
+        "kanji": "鈍",
+        "am_han_viet": "ĐỘN",
+        "readings": [
+          "鈍い にぶい cùn",
+          "鈍感 どんかん dần độn",
+          "鈍角 どんかく góc tù"
+        ],
+        "nghia": "cùn"
+      },
+      {
+        "stt": 177,
+        "kanji": "肯",
+        "am_han_viet": "KHẲNG",
+        "readings": [
+          "肯定 こうてい khẳng định"
+        ],
+        "nghia": "khẳng định"
+      },
+      {
+        "stt": 178,
+        "kanji": "否",
+        "am_han_viet": "PHỦ",
+        "readings": [
+          "否 いや không",
+          "否定 ひてい phủ định",
+          "拒否 きょひ từ chối"
+        ],
+        "nghia": "phủ"
+      },
+      {
+        "stt": 179,
+        "kanji": "浮",
+        "am_han_viet": "PHÙ",
+        "readings": [
+          "浮かぶ うかぶ trôi nổi",
+          "浮かべる うかべる thả trôi",
+          "浮気 うわき không chung thủy"
+        ],
+        "nghia": "nổi"
+      },
+      {
+        "stt": 180,
+        "kanji": "沈",
+        "am_han_viet": "TRÀM",
+        "readings": [
+          "沈む しずむ chìm",
+          "沈黙 ちんもく yên lặng"
+        ],
+        "nghia": "chìm"
+      },
+      {
+        "stt": 181,
+        "kanji": "様",
+        "am_han_viet": "DẠNG",
+        "readings": [
+          "様 さま ngài",
+          "様子 ようす dáng vẻ",
+          "同様 どうよう tương tự",
+          "様々な さまざまな đa dạng"
+        ],
+        "nghia": "dạng"
+      },
+      {
+        "stt": 182,
+        "kanji": "要",
+        "am_han_viet": "YÊU",
+        "readings": [
+          "要る いる cần",
+          "重要 じゅうよう quan trọng",
+          "要約 ようやく tóm tắt",
+          "要点 ようてん điểm trọng yếu"
+        ],
+        "nghia": "cần"
+      },
+      {
+        "stt": 183,
+        "kanji": "利",
+        "am_han_viet": "LỢI",
+        "readings": [
+          "利用 りよう sử dụng",
+          "金利 きんり lãi suất",
+          "便利 べんり tiện lợi",
+          "有利 ゆうり có lợi"
+        ],
+        "nghia": "lợi"
+      },
+      {
+        "stt": 184,
+        "kanji": "細",
+        "am_han_viet": "TẾ",
+        "readings": [
+          "細い ほそい mảnh",
+          "細かい こまかい chi li",
+          "明細 めいさい chi tiết",
+          "心細い こころぼそい cô độc"
+        ],
+        "nghia": "mảnh"
+      },
+      {
+        "stt": 185,
+        "kanji": "在",
+        "am_han_viet": "TẠI",
+        "readings": [
+          "在中 ざいちゅう gồm",
+          "現在 げんざい hiện tại",
+          "在学 ざいがく đang học",
+          "不在 ふざい vắng mặt"
+        ],
+        "nghia": "tại"
+      },
+      {
+        "stt": 186,
+        "kanji": "客",
+        "am_han_viet": "KHÁCH",
+        "readings": [
+          "客席 きゃくせき ghế khách",
+          "お客様 おきゃくさま khách",
+          "乗客 じょうきゃく hành khách"
+        ],
+        "nghia": "khách"
+      },
+      {
+        "stt": 187,
+        "kanji": "額",
+        "am_han_viet": "NGẠCH",
+        "readings": [
+          "額 ひたい trán",
+          "額 がく số tiền",
+          "金額 きんがく số tiền"
+        ],
+        "nghia": "số tiền"
+      },
+      {
+        "stt": 188,
+        "kanji": "込",
+        "am_han_viet": "DẪN",
+        "readings": [
+          "込む こむ đông đúc",
+          "込める こめる bao gồm",
+          "払い込む はらいこむ nộp tiền",
+          "申し込む もうしこむ xin phép"
+        ],
+        "nghia": "chen, dồn"
+      },
+      {
+        "stt": 189,
+        "kanji": "領",
+        "am_han_viet": "LĨNH",
+        "readings": [
+          "領収書 りょうしゅうしょ biên lai",
+          "領事館 りょうじかん lãnh sự quán",
+          "大統領 だいとうりょう tổng thống"
+        ],
+        "nghia": "lãnh"
+      },
+      {
+        "stt": 190,
+        "kanji": "収",
+        "am_han_viet": "THU",
+        "readings": [
+          "収める おさめる thu được",
+          "収入 しゅうにゅう thu nhập",
+          "回収 かいしゅう thu hồi",
+          "収集 しゅうしゅう thu thập"
+        ],
+        "nghia": "thu"
+      },
+      {
+        "stt": 191,
+        "kanji": "械",
+        "am_han_viet": "GIỚI",
+        "readings": [
+          "機械 きかい máy móc",
+          "器械体操 きかいたいそう thể dục dụng cụ"
+        ],
+        "nghia": "máy"
+      },
+      {
+        "stt": 192,
+        "kanji": "曲",
+        "am_han_viet": "KHÚC",
+        "readings": [
+          "曲げる まげる bẻ cong",
+          "曲がる まがる cong",
+          "曲 きょく khúc nhạc",
+          "曲線 きょくせん đường cong"
+        ],
+        "nghia": "cong"
+      },
+      {
+        "stt": 193,
+        "kanji": "汚",
+        "am_han_viet": "Ô",
+        "readings": [
+          "汚い きたない bẩn",
+          "汚す よごす làm bẩn",
+          "汚染 おせん ô nhiễm"
+        ],
+        "nghia": "bẩn"
+      },
+      {
+        "stt": 194,
+        "kanji": "殿",
+        "am_han_viet": "ĐIỆN",
+        "readings": [
+          "～殿 ～どの ngài",
+          "殿様 とのさま ngài",
+          "殿下 でんか điện hạ"
+        ],
+        "nghia": "ngài"
+      },
+      {
+        "stt": 195,
+        "kanji": "連",
+        "am_han_viet": "LIÊN",
+        "readings": [
+          "連れる つれる dẫn",
+          "関連 かんれん liên quan",
+          "連休 れんきゅう kỳ nghỉ",
+          "連続 れんぞく liên tục"
+        ],
+        "nghia": "liên"
+      },
+      {
+        "stt": 196,
+        "kanji": "絡",
+        "am_han_viet": "LẠC",
+        "readings": [
+          "絡む からむ cải cọ",
+          "連絡 れんらく liên lạc"
+        ],
+        "nghia": "liên lạc"
+      },
+      {
+        "stt": 197,
+        "kanji": "荷",
+        "am_han_viet": "HÀ",
+        "readings": [
+          "荷物 にもつ hành lý",
+          "入荷 にゅうか nhập hàng",
+          "出荷 しゅっか xuất hàng"
+        ],
+        "nghia": "hàng"
+      },
+      {
+        "stt": 198,
+        "kanji": "届",
+        "am_han_viet": "GIỎI",
+        "readings": [
+          "届く とどく đến",
+          "届ける とどける gửi đến",
+          "届け出 とどけで báo cáo"
+        ],
+        "nghia": "đến"
+      },
+      {
+        "stt": 199,
+        "kanji": "参",
+        "am_han_viet": "THAM",
+        "readings": [
+          "参考書 さんこうしょ sách tham khảo",
+          "持参 じさん mang theo",
+          "参る まいる đi",
+          "お参り おまいり đi lễ"
+        ],
+        "nghia": "tham"
+      },
+      {
+        "stt": 200,
+        "kanji": "衣",
+        "am_han_viet": "Y",
+        "readings": [
+          "衣類 いるい quần áo",
+          "衣服 いふく y phục",
+          "衣料品 いりょうひん vải vóc",
+          "衣食住 いしょくじゅう ăn mặc ở"
+        ],
+        "nghia": "quần áo"
+      }
+    ]
+  }
