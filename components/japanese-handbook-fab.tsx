@@ -1,13 +1,32 @@
 'use client';
 
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n/language-context';
 
 const HANDBOOK_URL = process.env.NEXT_PUBLIC_JAPANESE_HANDBOOK_URL?.trim() ?? '';
 
+/** Home + auth screens — no FAB */
+const FAB_HIDDEN_PATH_PREFIXES = [
+  '/',
+  '/login',
+  '/register',
+  '/forgot-password',
+  '/reset-password',
+  '/verify-email',
+] as const;
+
+function isFabHiddenPath(pathname: string | null): boolean {
+  if (!pathname) return false;
+  return FAB_HIDDEN_PATH_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
+}
+
 export function JapaneseHandbookFab() {
+  const pathname = usePathname();
   const { t } = useLanguage();
   const [labelVisible, setLabelVisible] = useState(true);
 
@@ -18,7 +37,7 @@ export function JapaneseHandbookFab() {
     return () => window.clearInterval(id);
   }, []);
 
-  if (!HANDBOOK_URL) {
+  if (!HANDBOOK_URL || isFabHiddenPath(pathname)) {
     return null;
   }
 
