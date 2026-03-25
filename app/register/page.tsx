@@ -10,7 +10,6 @@ import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/components/auth/auth-layout';
 import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
-import { SiFacebook } from 'react-icons/si';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -48,8 +47,11 @@ export default function RegisterPage() {
         return;
       }
 
-      await signIn('credentials', { email, password, redirect: false });
-      router.push('/dashboard');
+      const q = new URLSearchParams({ email: data.user.email });
+      if (data.verificationSent === false) {
+        q.set('warn', 'email');
+      }
+      router.push(`/verify-email?${q.toString()}`);
       router.refresh();
     } catch {
       setError('Something went wrong');
@@ -60,14 +62,30 @@ export default function RegisterPage() {
   return (
     <AuthLayout type="signup">
       <div className="space-y-8">
-        <div>
+        <div className="text-center">
           <h1 className="font-orbitron text-3xl font-bold tracking-wide text-white md:text-4xl">
             CREATE ACCOUNT
           </h1>
           <p className="mt-2 text-sm text-white/70">Start your JLPT N2 journey</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <Button
+          type="button"
+          variant="outline"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+          onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+        >
+          <FcGoogle className="h-5 w-5 shrink-0" />
+          Continue with Google
+        </Button>
+
+        <div className="flex items-center gap-3 py-1">
+          <div className="flex-1 border-t border-white/30" />
+          <span className="text-sm text-white/70">OR</span>
+          <div className="flex-1 border-t border-white/30" />
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <div className="rounded-full border border-red-400/50 bg-red-500/10 px-4 py-3 text-sm text-red-300">
               {error}
@@ -145,33 +163,6 @@ export default function RegisterPage() {
               I agree to the Terms & Conditions
             </span>
           </label>
-
-          <div className="flex items-center gap-4 py-4">
-            <div className="flex-1 border-t border-white/30" />
-            <span className="text-sm text-white/70">OR</span>
-            <div className="flex-1 border-t border-white/30" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-              onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
-            >
-              <FcGoogle className="mr-2 h-5 w-5" />
-              Google
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-              onClick={() => signIn('facebook', { callbackUrl: '/dashboard' })}
-            >
-              <SiFacebook className="mr-2 h-5 w-5 text-[#1877F2]" />
-              Facebook
-            </Button>
-          </div>
 
           <div className="grid grid-cols-2 gap-3 pt-4">
             <Button

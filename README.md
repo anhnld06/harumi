@@ -1,4 +1,4 @@
-# JLPT N2 Smart Trainer
+# Harumi JLPT N2 Smart Trainer
 
 Production-ready Japanese learning platform focused on helping users pass the JLPT N2 exam.
 

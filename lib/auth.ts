@@ -47,7 +47,7 @@ export const authOptions: NextAuthOptions = {
 
         const isCorrect = await bcrypt.compare(credentials.password, user.password);
         if (!isCorrect) {
-          throw new Error('Invalid credentials');
+          throw new Error('Email or password is incorrect!');
         }
 
         return {
@@ -73,14 +73,31 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async signIn({ user, account }) {
-      // Ensure OAuth users get correct DB user id in JWT (fixes FK violation for Bookmark)
+      if (account?.provider === 'credentials' && user?.email) {
+        const credUser = await prisma.user.findUnique({
+          where: { email: user.email },
+          select: { emailVerified: true },
+        });
+        if (credUser && !credUser.emailVerified) {
+          const base =
+            process.env.NEXTAUTH_URL?.replace(/\/$/, '') ?? 'http://localhost:3000';
+          return `${base}/verify-email?email=${encodeURIComponent(user.email)}&needsCode=1`;
+        }
+      }
+
       if (account?.provider && account.provider !== 'credentials' && user?.email) {
         const dbUser = await prisma.user.findUnique({
           where: { email: user.email },
-          select: { id: true },
+          select: { id: true, emailVerified: true },
         });
         if (dbUser && user) {
           (user as { id?: string }).id = dbUser.id;
+        }
+        if (dbUser && !dbUser.emailVerified) {
+          await prisma.user.update({
+            where: { id: dbUser.id },
+            data: { emailVerified: new Date() },
+          });
         }
       }
       return true;

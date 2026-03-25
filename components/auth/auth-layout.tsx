@@ -51,7 +51,7 @@ export function AuthLayout({ children, type }: AuthLayoutProps) {
 
       {/* Right: Form - Logo trên các text */}
       <div className="relative z-10 flex w-full flex-col items-center justify-center px-6 py-10 lg:w-1/2">
-        <Logo href="/" height={44} width={140} className="mb-6 drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]" />
+        <Logo href="/" height={44} width={140} className="mb-2 drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]" />
         <div className="w-full max-w-md">{children}</div>
       </div>
     </div>

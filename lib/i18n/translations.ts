@@ -72,6 +72,7 @@ export const translations: Record<
     'ai.upgradeCta': 'Upgrade to PRO',
     'ai.trialNote': 'Start a 14-day free trial to unlock all features',
     'common.comingSoon': 'This feature will be developed later',
+    'handbook.fabLabel': 'Japanese handbook',
   },
   ja: {
     'account.management': 'アカウント管理',
@@ -135,6 +136,7 @@ export const translations: Record<
     'ai.upgradeCta': 'PROにアップグレード',
     'ai.trialNote': '14日間の無料トライアルで全機能をアンロック',
     'common.comingSoon': 'この機能は後日開発予定です',
+    'handbook.fabLabel': '日本語ハンドブック',
   },
   vi: {
     'account.management': 'Quản lý tài khoản',
@@ -198,5 +200,6 @@ export const translations: Record<
     'ai.upgradeCta': 'Nâng cấp lên PRO',
     'ai.trialNote': 'Bắt đầu dùng thử miễn phí 14 ngày để mở khóa tất cả tính năng',
     'common.comingSoon': 'Tính năng này sẽ phát triển sau',
+    'handbook.fabLabel': 'Sổ tay tiếng Nhật',
   },
 };

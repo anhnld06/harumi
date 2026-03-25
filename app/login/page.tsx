@@ -10,12 +10,13 @@ import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/components/auth/auth-layout';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
-import { SiFacebook } from 'react-icons/si';
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') ?? '/dashboard';
+  const passwordResetOk = searchParams.get('reset') === 'success';
+  const emailVerifiedOk = searchParams.get('verified') === '1';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,6 +36,13 @@ function LoginForm() {
         redirect: false,
       });
 
+      if (res?.url) {
+        router.push(res.url);
+        router.refresh();
+        setLoading(false);
+        return;
+      }
+
       if (res?.error) {
         setError(res.error === 'CredentialsSignin' ? 'Invalid email or password' : res.error);
         setLoading(false);
@@ -52,11 +60,39 @@ function LoginForm() {
   return (
     <AuthLayout type="login">
       <div className="space-y-8">
-        <div>
+        <div className="text-center">
           <h1 className="font-orbitron text-3xl font-bold tracking-wide text-white md:text-4xl">
             WELCOME BACK!
           </h1>
           <p className="mt-2 text-sm text-white/70">Login to your account</p>
+        </div>
+
+        {passwordResetOk && (
+          <div className="rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-3 text-sm text-cyan-100">
+            Your password was updated. You can sign in with your new password.
+          </div>
+        )}
+
+        {emailVerifiedOk && (
+          <div className="rounded-full border border-cyan-400/40 bg-cyan-500/10 px-4 py-3 text-sm text-cyan-100">
+            Your email is verified. You can sign in now.
+          </div>
+        )}
+
+        <Button
+          type="button"
+          variant="outline"
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white"
+          onClick={() => signIn('google', { callbackUrl })}
+        >
+          <FcGoogle className="h-5 w-5 shrink-0" />
+          Continue with Google
+        </Button>
+
+        <div className="flex items-center gap-4 py-1">
+          <div className="flex-1 border-t border-white/30" />
+          <span className="text-sm text-white/70">OR</span>
+          <div className="flex-1 border-t border-white/30" />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
@@ -115,33 +151,6 @@ function LoginForm() {
           >
             Forgot Password?
           </Link>
-
-          <div className="flex items-center gap-4 py-4">
-            <div className="flex-1 border-t border-white/30" />
-            <span className="text-sm text-white/70">OR</span>
-            <div className="flex-1 border-t border-white/30" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-              onClick={() => signIn('google', { callbackUrl })}
-            >
-              <FcGoogle className="mr-2 h-5 w-5" />
-              Google
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              className="h-12 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-              onClick={() => signIn('facebook', { callbackUrl })}
-            >
-              <SiFacebook className="mr-2 h-5 w-5 text-[#1877F2]" />
-              Facebook
-            </Button>
-          </div>
 
           <div className="grid grid-cols-2 gap-3 pt-4">
             <Button

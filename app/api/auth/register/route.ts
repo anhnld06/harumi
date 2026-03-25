@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
 import { prisma } from '@/lib/db';
+import { issueAndSendEmailVerification } from '@/server/services/email-verification.service';
 
 const registerSchema = z.object({
   email: z.string().email('Invalid email'),
@@ -49,7 +50,9 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ user });
+    const verificationSent = (await issueAndSendEmailVerification(email)) === 'sent';
+
+    return NextResponse.json({ user, verificationSent });
   } catch (error) {
     console.error('Register error:', error);
     return NextResponse.json(

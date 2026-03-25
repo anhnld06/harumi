@@ -29,6 +29,7 @@ model User {
   vocabularyProgress VocabularyProgress[]
   testAttempts   TestAttempt[]
   srsReviews     SRSReview[]
+  feedbacks      Feedback[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -73,6 +74,23 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// User-submitted bug reports / feedback (optional screenshot as data URL)
+model Feedback {
+  id                String   @id @default(cuid())
+  userId            String?
+  name              String
+  email             String
+  message           String   @db.Text
+  screenshotDataUrl String?  @db.Text
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
 }
 
 // ============ VOCABULARY ============
