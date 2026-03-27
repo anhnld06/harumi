@@ -212,6 +212,11 @@ model ReadingPassage {
   level     String   @default("N2")
   wordCount Int?
 
+  contentVi        String? @db.Text
+  footnotes        Json?
+  grammarInPassage Json?
+  vocabulary       Json?
+
   questions Question[] @relation("ReadingQuestions")
 
   createdAt DateTime @default(now())
@@ -258,6 +263,11 @@ model Question {
   options   Json?        // { "A": "...", "B": "...", "C": "...", "D": "..." }
   correctAnswer String   // "A" or JSON for ordering
   explanation   String?  @db.Text
+
+  sortOrder      Int      @default(0)
+  contentVi      String?  @db.Text
+  optionsVi      Json?
+  explanationVi  String?  @db.Text
 
   // Polymorphic relations - one will be set based on type
   vocabularyId String?

@@ -51,6 +51,10 @@ export type ReadingPassage = {
   content: string;
   level: string;
   wordCount: number | null;
+  contentVi: string | null;
+  footnotes: unknown | null;
+  grammarInPassage: unknown | null;
+  vocabulary: unknown | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -62,6 +66,10 @@ export type Question = {
   options: unknown; // Prisma JsonValue - use as Record<string, string> when needed
   correctAnswer: string;
   explanation: string | null;
+  sortOrder: number;
+  contentVi: string | null;
+  optionsVi: unknown | null;
+  explanationVi: string | null;
   vocabularyId: string | null;
   kanjiId: string | null;
   grammarId: string | null;

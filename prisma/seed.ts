@@ -155,6 +155,84 @@ async function main() {
     console.log('Kanji:', created, 'new /', updated, 'updated /', kanjiList.length, 'total');
   }
 
+  // 5. Reading passages from reading-n2.json (passage + footnotes + grammar + vocab + JP/VI questions)
+  const readingPath = path.join(DATA_DIR, 'reading-n2.json');
+  if (!fs.existsSync(readingPath)) {
+    console.warn('Skipping reading: reading-n2.json not found');
+  } else {
+    const raw = JSON.parse(fs.readFileSync(readingPath, 'utf-8')) as unknown;
+    const items = Array.isArray(raw) ? raw : [];
+    let created = 0;
+    let skipped = 0;
+
+    type JsonQuestion = {
+      order?: number;
+      content?: string;
+      options?: Record<string, string>;
+      correctAnswer?: string;
+      explanationJp?: string;
+      explanationVi?: string;
+    };
+
+    for (const item of items) {
+      if (!item || typeof item !== 'object') continue;
+      const row = item as Record<string, unknown>;
+      const p = row.passage as Record<string, unknown> | undefined;
+      if (!p || typeof p.title !== 'string' || typeof p.contentJp !== 'string') continue;
+
+      const exists = await prisma.readingPassage.findFirst({
+        where: { title: p.title },
+      });
+      if (exists) {
+        skipped++;
+        continue;
+      }
+
+      const questionsJp = (row.questionsJp as JsonQuestion[]) ?? [];
+      const questionsVi = (row.questionsVi as JsonQuestion[]) ?? [];
+      const viByOrder = new Map<number, JsonQuestion>();
+      for (const qv of questionsVi) {
+        if (qv && typeof qv.order === 'number') viByOrder.set(qv.order, qv);
+      }
+
+      const footnotes = row.footnotes;
+      const grammarInPassage = row.grammarInPassage;
+      const vocabulary = row.vocabulary;
+
+      await prisma.readingPassage.create({
+        data: {
+          title: p.title,
+          content: p.contentJp,
+          contentVi: typeof p.contentVi === 'string' ? p.contentVi : null,
+          level: typeof p.level === 'string' ? p.level : 'N2',
+          wordCount: typeof p.wordCount === 'number' ? p.wordCount : null,
+          ...(Array.isArray(footnotes) ? { footnotes } : {}),
+          ...(Array.isArray(grammarInPassage) ? { grammarInPassage } : {}),
+          ...(Array.isArray(vocabulary) ? { vocabulary } : {}),
+          questions: {
+            create: questionsJp.map((q, idx) => {
+              const order = typeof q?.order === 'number' ? q.order : idx + 1;
+              const qv = viByOrder.get(order);
+              return {
+                type: 'READING' as const,
+                content: String(q?.content ?? ''),
+                options: q?.options ?? undefined,
+                correctAnswer: String(q?.correctAnswer ?? ''),
+                sortOrder: order,
+                contentVi: qv?.content != null ? String(qv.content) : null,
+                optionsVi: qv?.options ?? undefined,
+                explanation: q?.explanationJp != null ? String(q.explanationJp) : null,
+                explanationVi: qv?.explanationVi != null ? String(qv.explanationVi) : null,
+              };
+            }),
+          },
+        },
+      });
+      created++;
+    }
+    console.log('Reading:', created, 'created,', skipped, 'skipped (title exists)');
+  }
+
   console.log('Seed completed!');
 }
 

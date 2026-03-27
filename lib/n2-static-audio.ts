@@ -14,6 +14,10 @@ let grammarPatterns: Array<{
   mau_ngu_phap: unknown;
   vi_du: string[];
 }> | null = null;
+let readingItems: Array<{
+  passage?: { title?: string };
+  vocabulary?: Array<{ word?: string }>;
+}> | null = null;
 
 function vocabKey(word: string, reading: string) {
   return `${word.trim()}\0${reading.trim()}`;
@@ -53,6 +57,18 @@ function loadGrammarPatterns() {
   return grammarPatterns;
 }
 
+function loadReadingItems() {
+  if (readingItems) return readingItems;
+  const raw = JSON.parse(
+    fs.readFileSync(path.join(DATA_DIR, 'reading-n2.json'), 'utf8'),
+  ) as Array<{
+    passage?: { title?: string };
+    vocabulary?: Array<{ word?: string }>;
+  }>;
+  readingItems = Array.isArray(raw) ? raw : [];
+  return readingItems;
+}
+
 /** Hiragana reading MP3 from Mimikara N2 JSON (matches seed: word=kanji, reading=hiragana). */
 export function getN2VocabAudioSrc(
   word: string,
@@ -83,4 +99,20 @@ export function attachN2VocabAudio<T extends { word: string; reading: string | n
     const n2AudioSrc = getN2VocabAudioSrc(item.word, item.reading);
     return n2AudioSrc ? { ...item, n2AudioSrc } : { ...item };
   });
+}
+
+/** Reading vocab word MP3 by passage title + row index in vocabulary table. */
+export function getReadingVocabAudioSrc(
+  passageTitle: string,
+  vocabIndex: number,
+): string | undefined {
+  if (!passageTitle.trim() || vocabIndex < 0) return undefined;
+  const items = loadReadingItems();
+  const passageIdx = items.findIndex(
+    (item) => (item.passage?.title ?? '').trim() === passageTitle.trim(),
+  );
+  if (passageIdx < 0) return undefined;
+  const rows = items[passageIdx]?.vocabulary ?? [];
+  if (vocabIndex >= rows.length) return undefined;
+  return `/audio/reading-n2/rd-${String(passageIdx + 1).padStart(3, '0')}-${String(vocabIndex).padStart(3, '0')}.mp3`;
 }

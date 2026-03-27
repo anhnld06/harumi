@@ -1,10 +1,18 @@
 /**
  * Generate MP3 via Microsoft Edge online TTS (node-edge-tts).
- * Sources: public/data/ngu-phap-n2.json (vi_du), public/data/tu-vung-n2.json (hiragana).
- * Output: public/audio/ngu-phap-n2/gp-{stt}-{idx}.mp3, public/audio/tu-vung-n2/v-{stt}.mp3
+ * Sources:
+ * - public/data/ngu-phap-n2.json (vi_du)
+ * - public/data/tu-vung-n2.json (hiragana)
+ * - public/data/reading-n2.json (vocabulary[].word)
+ * Output:
+ * - public/audio/ngu-phap-n2/gp-{stt}-{idx}.mp3
+ * - public/audio/tu-vung-n2/v-{stt}.mp3
+ * - public/audio/reading-n2/rd-{passageIdx}-{vocabIdx}.mp3
  *
  * Run from repo root: npx tsx scripts/generate-edge-tts-audio.ts
- * Options: --grammar-only | --vocab-only | --limit=N (cap total new synths) | --force (regenerate existing)
+ * Options:
+ * --grammar-only | --vocab-only | --reading-only
+ * --limit=N (cap total new synths) | --force (regenerate existing)
  */
 
 import { mkdirSync, existsSync, readFileSync } from 'fs';
@@ -14,8 +22,10 @@ import { EdgeTTS } from 'node-edge-tts';
 const ROOT = process.cwd();
 const DATA_GRAMMAR = join(ROOT, 'public/data/ngu-phap-n2.json');
 const DATA_VOCAB = join(ROOT, 'public/data/tu-vung-n2.json');
+const DATA_READING = join(ROOT, 'public/data/reading-n2.json');
 const OUT_GRAMMAR = join(ROOT, 'public/audio/ngu-phap-n2');
 const OUT_VOCAB = join(ROOT, 'public/audio/tu-vung-n2');
+const OUT_READING = join(ROOT, 'public/audio/reading-n2');
 
 const VOICE = 'ja-JP-NanamiNeural';
 const LANG = 'ja-JP';
@@ -29,19 +39,22 @@ function parseArgs() {
   const args = process.argv.slice(2);
   let grammarOnly = false;
   let vocabOnly = false;
+  let readingOnly = false;
   let limit: number | undefined;
   let force = false;
   for (const a of args) {
     if (a === '--grammar-only') grammarOnly = true;
     else if (a === '--vocab-only') vocabOnly = true;
+    else if (a === '--reading-only') readingOnly = true;
     else if (a === '--force') force = true;
     else if (a.startsWith('--limit=')) limit = Math.max(0, parseInt(a.slice('--limit='.length), 10));
   }
-  if (grammarOnly && vocabOnly) {
-    console.error('Use only one of --grammar-only or --vocab-only');
+  const onlyCount = [grammarOnly, vocabOnly, readingOnly].filter(Boolean).length;
+  if (onlyCount > 1) {
+    console.error('Use only one of --grammar-only, --vocab-only, --reading-only');
     process.exit(1);
   }
-  return { grammarOnly, vocabOnly, limit, force };
+  return { grammarOnly, vocabOnly, readingOnly, limit, force };
 }
 
 type GrammarJson = {
@@ -52,11 +65,16 @@ type VocabJson = {
   vocabulary: Array<{ stt: number; hiragana: string }>;
 };
 
+type ReadingJson = Array<{
+  vocabulary?: Array<{ word?: string }>;
+}>;
+
 async function main() {
-  const { grammarOnly, vocabOnly, limit, force } = parseArgs();
+  const { grammarOnly, vocabOnly, readingOnly, limit, force } = parseArgs();
 
   mkdirSync(OUT_GRAMMAR, { recursive: true });
   mkdirSync(OUT_VOCAB, { recursive: true });
+  mkdirSync(OUT_READING, { recursive: true });
 
   const tts = new EdgeTTS({
     voice: VOICE,
@@ -89,7 +107,7 @@ async function main() {
     await sleep(DELAY_MS);
   };
 
-  if (!vocabOnly) {
+  if (!vocabOnly && !readingOnly) {
     const raw = readFileSync(DATA_GRAMMAR, 'utf8');
     const data = JSON.parse(raw) as GrammarJson;
     for (const p of data.patterns) {
@@ -103,12 +121,27 @@ async function main() {
     }
   }
 
-  if (!grammarOnly) {
+  if (!grammarOnly && !readingOnly) {
     const raw = readFileSync(DATA_VOCAB, 'utf8');
     const data = JSON.parse(raw) as VocabJson;
     for (const v of data.vocabulary) {
       const name = `v-${String(v.stt).padStart(4, '0')}.mp3`;
       await trySynth(v.hiragana ?? '', join(OUT_VOCAB, name));
+      if (limit !== undefined && generated >= limit) break;
+    }
+  }
+
+  if (!grammarOnly && !vocabOnly) {
+    const raw = readFileSync(DATA_READING, 'utf8');
+    const data = JSON.parse(raw) as ReadingJson;
+    for (let p = 0; p < data.length; p++) {
+      const vocabRows = data[p]?.vocabulary ?? [];
+      for (let i = 0; i < vocabRows.length; i++) {
+        const text = vocabRows[i]?.word ?? '';
+        const name = `rd-${String(p + 1).padStart(3, '0')}-${String(i).padStart(3, '0')}.mp3`;
+        await trySynth(text, join(OUT_READING, name));
+        if (limit !== undefined && generated >= limit) break;
+      }
       if (limit !== undefined && generated >= limit) break;
     }
   }
