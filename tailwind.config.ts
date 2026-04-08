@@ -16,6 +16,31 @@ const config: Config = {
           '25%': { transform: 'rotate(20deg)' },
           '75%': { transform: 'rotate(-10deg)' },
         },
+        /** Japanese handbook FAB — gentle float + micro tilt */
+        handbookFabFloat: {
+          '0%, 100%': {
+            transform: 'translateY(0) rotate(0deg)',
+          },
+          '50%': {
+            transform: 'translateY(-7px) rotate(2.5deg)',
+          },
+        },
+        /** AI assistant hero — slow float + subtle horizontal drift */
+        harumiHeroFloat: {
+          '0%, 100%': {
+            transform: 'translateY(0) translateX(0) rotate(0deg)',
+          },
+          '33%': {
+            transform: 'translateY(-10px) translateX(5px) rotate(1.2deg)',
+          },
+          '66%': {
+            transform: 'translateY(-5px) translateX(-5px) rotate(-1deg)',
+          },
+        },
+      },
+      animation: {
+        handbookFabFloat: 'handbookFabFloat 3.2s ease-in-out infinite',
+        harumiHeroFloat: 'harumiHeroFloat 4.5s ease-in-out infinite',
       },
       fontFamily: {
         orbitron: ['var(--font-orbitron)', 'sans-serif'],

@@ -1,20 +1,24 @@
+import type {
+  MockTestListItem,
+  TestAttemptRecentItem,
+} from '@/lib/mock-test/prisma-query-types';
+import {
+  compareMockTestsByTitle,
+  userCanAccessPremiumMockTests,
+} from '@/lib/mock-test/mock-test-access';
 import { prisma } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Clock, FileText } from 'lucide-react';
-import { formatDuration } from '@/lib/utils';
+import { MockTestListClient } from '@/features/mock-test/mock-test-list-client';
 
 export default async function MockTestPage() {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id;
 
-  const [tests, recentAttempts] = await Promise.all([
+  const [testsRaw, recentAttempts, lastAttemptsRows] = (await Promise.all([
     prisma.mockTest.findMany({
       include: { sections: true },
-      orderBy: { createdAt: 'desc' },
     }),
     userId
       ? prisma.testAttempt.findMany({
@@ -23,8 +27,43 @@ export default async function MockTestPage() {
           orderBy: { completedAt: 'desc' },
           take: 5,
         })
-      : [],
-  ]);
+      : Promise.resolve([] as TestAttemptRecentItem[]),
+    userId
+      ? prisma.testAttempt.findMany({
+          where: { userId, completedAt: { not: null } },
+          orderBy: { completedAt: 'desc' },
+          select: { mockTestId: true, score: true, totalScore: true },
+        })
+      : Promise.resolve(
+          [] as Array<{ mockTestId: string; score: number | null; totalScore: number | null }>
+        ),
+  ])) as unknown as [
+    MockTestListItem[],
+    TestAttemptRecentItem[],
+    Array<{ mockTestId: string; score: number | null; totalScore: number | null }>,
+  ];
+
+  const tests = [...testsRaw].sort((a, b) => compareMockTestsByTitle(a.title, b.title));
+
+  const lastByMockId = new Map<string, { score: number; totalScore: number }>();
+  for (const row of lastAttemptsRows) {
+    if (lastByMockId.has(row.mockTestId)) continue;
+    lastByMockId.set(row.mockTestId, {
+      score: row.score ?? 0,
+      totalScore: row.totalScore ?? 0,
+    });
+  }
+
+  const canAccessFullTests = userCanAccessPremiumMockTests(
+    session?.user?.planTier,
+    session?.user?.planExpiresAt
+  );
+
+  const listRows = tests.map((test) => ({
+    id: test.id,
+    title: test.title,
+    lastAttempt: lastByMockId.get(test.id) ?? null,
+  }));
 
   return (
     <div className="space-y-8">
@@ -32,7 +71,7 @@ export default async function MockTestPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Available Tests</CardTitle>
+          <CardTitle>Test List</CardTitle>
           <p className="text-sm text-muted-foreground">
             Simulate the real JLPT N2 exam with timed sections
           </p>
@@ -43,24 +82,7 @@ export default async function MockTestPage() {
               No mock tests yet.
             </p>
           ) : (
-            <div className="space-y-4">
-              {tests.map((test) => (
-                <Link key={test.id} href={`/mock-test/${test.id}`}>
-                  <div className="flex items-center justify-between rounded-lg border p-4 transition hover:bg-muted/50">
-                    <div className="flex items-center gap-4">
-                      <FileText className="h-8 w-8 text-primary" />
-                      <div>
-                        <h3 className="font-semibold">{test.title}</h3>
-                        <p className="text-sm text-muted-foreground">
-                          {formatDuration(test.duration)} • Pass: {test.passScore}/180
-                        </p>
-                      </div>
-                    </div>
-                    <Button>Start</Button>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <MockTestListClient tests={listRows} canAccessFullTests={canAccessFullTests} />
           )}
         </CardContent>
       </Card>
@@ -80,7 +102,7 @@ export default async function MockTestPage() {
                   <div>
                     <p className="font-medium">{a.mockTest.title}</p>
                     <p className="text-sm text-muted-foreground">
-                      {a.completedAt?.toLocaleDateString()}
+                      {a.completedAt?.toLocaleString()}
                     </p>
                   </div>
                   <div className="text-right">

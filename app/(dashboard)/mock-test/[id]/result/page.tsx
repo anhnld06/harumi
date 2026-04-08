@@ -1,11 +1,20 @@
+import type { Prisma } from '@prisma/client';
 import { notFound } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/db';
-import Link from 'next/link';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { CheckCircle, XCircle } from 'lucide-react';
+import { getMockTestLeaderboard } from '@/server/services/mock-test-leaderboard.service';
+import { MockTestTopLearners } from '@/features/mock-test/mock-test-top-learners';
+import { MockTestResultInteractive } from '@/features/mock-test/mock-test-result-interactive';
+import {
+  computeJlptResultBreakdownFromSectionRows,
+  recomputeMockTestSectionScoreRows,
+  resolveJlptLevelLabel,
+} from '@/lib/mock-test/jlpt-result-breakdown';
+import type { AttemptWithQuestions } from '@/lib/mock-test/attempt-types';
+import { buildMockTestReviewPayload } from '@/lib/mock-test/build-mock-test-review-payload';
+import type { MockTestResultPageAttempt } from '@/lib/mock-test/prisma-query-types';
+import { userCanViewMockTestExplanations } from '@/lib/mock-test/mock-test-premium';
 
 export default async function MockTestResultPage({
   params,
@@ -16,84 +25,170 @@ export default async function MockTestResultPage({
 }) {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id;
+  const userName = session?.user?.name?.trim() || '—';
   const { id } = await params;
   const { attempt: attemptId } = await searchParams;
 
   if (!attemptId || !userId) notFound();
 
-  const attempt = await prisma.testAttempt.findFirst({
+  const attemptRaw = await prisma.testAttempt.findFirst({
     where: { id: attemptId, userId, mockTestId: id },
-    include: { mockTest: true, answers: true },
+    include: {
+      sectionResults: {
+        include: {
+          section: {
+            include: {
+              questions: { orderBy: { order: 'asc' } },
+            },
+          },
+        },
+      },
+      mockTest: {
+        include: {
+          sections: {
+            orderBy: { order: 'asc' },
+            include: {
+              questions: {
+                orderBy: { order: 'asc' },
+                include: {
+                  question: {
+                    include: {
+                      readingPassage: true,
+                      listeningPassage: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      answers: true,
+    },
+  } as Prisma.TestAttemptFindFirstArgs);
+
+  if (!attemptRaw || !attemptRaw.completedAt) notFound();
+
+  const attempt = attemptRaw as unknown as MockTestResultPageAttempt;
+
+  const userPlan = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { planTier: true, planExpiresAt: true },
   });
+  const canViewExplanations = userCanViewMockTestExplanations(
+    userPlan?.planTier,
+    userPlan?.planExpiresAt
+  );
 
-  if (!attempt || !attempt.completedAt) notFound();
+  const answersByQuestionId = new Map(
+    attempt.answers.map((a) => [a.questionId, { isCorrect: a.isCorrect }])
+  );
 
-  const correctCount = attempt.answers.filter((a) => a.isCorrect).length;
-  const totalCount = attempt.answers.length;
+  let sectionRows: Array<{
+    id: string;
+    name: string;
+    score: number;
+    max: number;
+    questionIds: string[];
+  }>;
+  let breakdown: ReturnType<typeof computeJlptResultBreakdownFromSectionRows>;
+
+  if (attempt.sectionResults.length > 0) {
+    const sorted = [...attempt.sectionResults].sort(
+      (a, b) => a.section.order - b.section.order
+    );
+    sectionRows = sorted.map((r) => ({
+      id: r.section.id,
+      name: r.section.name,
+      score: r.scaledScore,
+      max: r.scaledMax,
+      questionIds: r.section.questions.map((mq) => mq.questionId),
+    }));
+    breakdown = computeJlptResultBreakdownFromSectionRows(
+      sorted.map((r) => ({
+        name: r.section.name,
+        scaledScore: r.scaledScore,
+        scaledMax: r.scaledMax,
+      }))
+    );
+  } else {
+    const legacyRows = recomputeMockTestSectionScoreRows(
+      attempt.mockTest.sections.map((s) => ({
+        id: s.id,
+        name: s.name,
+        scaledMax: s.scaledMax,
+        questions: s.questions.map((mq) => ({ questionId: mq.questionId })),
+      })),
+      answersByQuestionId
+    );
+    sectionRows = legacyRows.map((r) => ({
+      id: r.id,
+      name: r.name,
+      score: r.score,
+      max: r.max,
+      questionIds: r.questionIds,
+    }));
+    breakdown = computeJlptResultBreakdownFromSectionRows(
+      legacyRows.map((r) => ({
+        name: r.name,
+        scaledScore: r.score,
+        scaledMax: r.max,
+      }))
+    );
+  }
+
+  const totalScore = attempt.score ?? 0;
+  const totalMax = attempt.totalScore ?? 0;
+  const level = resolveJlptLevelLabel(attempt.mockTest.title, attempt.mockTest.jlptLevel);
+
+  const review = buildMockTestReviewPayload(attempt as unknown as AttemptWithQuestions);
+
+  const [leaderboardAll, leaderboardWeek, leaderboardMonth] = await Promise.all([
+    getMockTestLeaderboard(id, {
+      currentUserId: userId,
+      limit: 5,
+      period: 'all',
+    }),
+    getMockTestLeaderboard(id, {
+      currentUserId: userId,
+      limit: 5,
+      period: 'week',
+    }),
+    getMockTestLeaderboard(id, {
+      currentUserId: userId,
+      limit: 5,
+      period: 'month',
+    }),
+  ]);
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Test Result</h1>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>{attempt.mockTest.title}</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Completed {attempt.completedAt.toLocaleString()}
-          </p>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              {attempt.passed ? (
-                <CheckCircle className="h-12 w-12 text-green-600" />
-              ) : (
-                <XCircle className="h-12 w-12 text-red-600" />
-              )}
-              <div>
-                <p className="text-3xl font-bold">
-                  {attempt.score}/{attempt.totalScore}
-                </p>
-                <p
-                  className={
-                    attempt.passed ? 'text-green-600 font-medium' : 'text-red-600 font-medium'
-                  }
-                >
-                  {attempt.passed ? 'Passed' : 'Failed'}
-                </p>
-              </div>
-            </div>
-            <div>
-              <p className="text-muted-foreground">Correct answers</p>
-              <p className="text-xl font-semibold">
-                {correctCount}/{totalCount}
-              </p>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <h3 className="font-medium">Answer Review</h3>
-            {attempt.answers.map((a, i) => (
-              <div
-                key={a.id}
-                className={`rounded p-2 ${a.isCorrect ? 'bg-green-50' : 'bg-red-50'}`}
-              >
-                <span className="font-mono">Q{i + 1}:</span>{' '}
-                {a.isCorrect ? '✓' : '✗'} Your answer: {a.userAnswer}
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      <div className="flex gap-4">
-        <Link href="/mock-test">
-          <Button variant="outline">Back to Tests</Button>
-        </Link>
-        <Link href={`/mock-test/${id}`}>
-          <Button>Retake Test</Button>
-        </Link>
-      </div>
+    <div className="pb-10">
+      <MockTestResultInteractive
+        mockTestId={id}
+        attemptId={attemptId}
+        userName={userName}
+        testTitle={attempt.mockTest.title}
+        completedAt={attempt.completedAt!}
+        level={level}
+        breakdown={breakdown}
+        totalScore={totalScore}
+        totalMax={totalMax}
+        passed={Boolean(attempt.passed)}
+        sectionRows={sectionRows}
+        review={review}
+        canViewExplanations={canViewExplanations}
+        topLearners={
+          <MockTestTopLearners
+            variant="compact"
+            boards={{
+              all: leaderboardAll,
+              week: leaderboardWeek,
+              month: leaderboardMonth,
+            }}
+            currentUserId={userId}
+          />
+        }
+      />
     </div>
   );
 }

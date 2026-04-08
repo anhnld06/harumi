@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import {
   Zap,
   Plus,
@@ -14,14 +16,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useLanguage } from '@/lib/i18n/language-context';
-import { toast } from '@/lib/toast-store';
+import { checkoutHref } from '@/lib/payment/checkout-path';
 
 export function AccountOverview() {
   const { t } = useLanguage();
-
-  const handleComingSoon = () => {
-    toast(t('common.comingSoon'));
-  };
+  const { data: session } = useSession();
+  const creditBalance = session?.user?.creditBalance ?? 0;
 
   return (
     <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
@@ -34,7 +34,11 @@ export function AccountOverview() {
               <Zap className="h-4 w-4 text-primary" />
               {t('account.currentPlan')}: {t('account.free')}
             </CardTitle>
-            <Button size="sm" onClick={handleComingSoon}>{t('account.upgrade')}</Button>
+            <Button size="sm" asChild>
+              <Link href="#plans">
+                {t('account.upgrade')}
+              </Link>
+            </Button>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -49,18 +53,24 @@ export function AccountOverview() {
             <div className="grid grid-cols-3 gap-3">
               <div className="flex flex-col items-center gap-1 rounded-lg border bg-muted/30 p-3">
                 <Clock className="h-5 w-5 text-muted-foreground" />
-                <span className="text-xs font-medium uppercase text-muted-foreground">Voice</span>
-                <span className="text-lg font-semibold">0</span>
+                <span className="text-center text-[10px] font-medium uppercase leading-tight text-muted-foreground">
+                  {t('account.statVocab')}
+                </span>
+                <span className="text-lg font-semibold">—</span>
               </div>
               <div className="flex flex-col items-center gap-1 rounded-lg border bg-muted/30 p-3">
                 <Sparkles className="h-5 w-5 text-muted-foreground" />
-                <span className="text-xs font-medium uppercase text-muted-foreground">AI</span>
-                <span className="text-lg font-semibold">0</span>
+                <span className="text-center text-[10px] font-medium uppercase leading-tight text-muted-foreground">
+                  {t('account.statCredits')}
+                </span>
+                <span className="text-lg font-semibold">{creditBalance.toLocaleString()}</span>
               </div>
               <div className="flex flex-col items-center gap-1 rounded-lg border bg-muted/30 p-3">
                 <Database className="h-5 w-5 text-muted-foreground" />
-                <span className="text-xs font-medium uppercase text-muted-foreground">Storage</span>
-                <span className="text-lg font-semibold">4</span>
+                <span className="text-center text-[10px] font-medium uppercase leading-tight text-muted-foreground">
+                  {t('account.statMocks')}
+                </span>
+                <span className="text-lg font-semibold">—</span>
               </div>
             </div>
           </CardContent>
@@ -85,13 +95,17 @@ export function AccountOverview() {
               <span className="text-2xl font-bold">29.000 VND</span>
             </div>
             <p className="text-sm text-green-600 font-medium">{t('account.saveAmount')} 20.000 VND</p>
-            <Button className="w-full" onClick={handleComingSoon}>{t('account.buyNow')}</Button>
+            <Button className="w-full" asChild>
+              <Link href={checkoutHref('credits')}>
+                {t('account.buyNow')}
+              </Link>
+            </Button>
           </CardContent>
         </Card>
       </div>
 
-      {/* Right Column - Block 3: Upgrade Plan */}
-      <div className="space-y-3">
+      {/* Right Column - Block 3: Upgrade Plan (anchor for /account#plans) */}
+      <div id="plans" className="scroll-mt-24 space-y-3">
         <Card className="overflow-hidden">
           <div className="rounded-t-lg bg-red-500 px-4 py-2 text-center text-sm font-semibold text-white">
             {t('account.specialOffer')}
@@ -127,9 +141,11 @@ export function AccountOverview() {
                   </li>
                 ))}
               </ul>
-              <Button className="w-full gap-1" onClick={handleComingSoon}>
-                {t('account.upgrade')}
-                <ChevronRight className="h-4 w-4" />
+              <Button className="w-full gap-1" asChild>
+                <Link href={checkoutHref('pro')} className="flex items-center justify-center gap-1">
+                  {t('account.upgrade')}
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
               </Button>
             </div>
 
@@ -139,10 +155,31 @@ export function AccountOverview() {
                 {t('account.advanced')}
               </span>
               <p className="font-semibold">Pro Max</p>
+              <div className="mb-2 mt-2 flex items-baseline gap-2">
+                <span className="text-muted-foreground line-through">399.000 VND</span>
+                <span className="text-xl font-bold">299.000 VND</span>
+              </div>
+              <p className="mb-3 text-sm text-green-600 font-medium">
+                {t('account.saveAmount')} 100.000 VND
+              </p>
               <p className="text-sm text-muted-foreground">{t('account.proMaxDesc')}</p>
-              <Button variant="outline" className="mt-3 w-full gap-1" onClick={handleComingSoon}>
-                {t('account.upgrade')}
-                <ChevronRight className="h-4 w-4" />
+              <ul className="mb-4 mt-3 space-y-1.5">
+                {[
+                  'account.proMaxFeature1',
+                  'account.proMaxFeature2',
+                  'account.proMaxFeature3',
+                ].map((key) => (
+                  <li key={key} className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Check className="h-3.5 w-3.5 shrink-0 text-green-600" />
+                    <span>{t(key)}</span>
+                  </li>
+                ))}
+              </ul>
+              <Button variant="outline" className="mt-1 w-full gap-1" asChild>
+                <Link href={checkoutHref('proMax')} className="flex items-center justify-center gap-1">
+                  {t('account.upgrade')}
+                  <ChevronRight className="h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </CardContent>

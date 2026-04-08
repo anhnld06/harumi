@@ -30,7 +30,21 @@ const nextConfig = {
         hostname: 'platform-lookaside.fbsbx.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.vietqr.io',
+        pathname: '/**',
+      },
     ],
+  },
+  /** Same-origin certificate assets with crossOrigin="anonymous" (PNG export / decode). */
+  async headers() {
+    return [
+      {
+        source: '/images/:path*',
+        headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }],
+      },
+    ];
   },
 };
 

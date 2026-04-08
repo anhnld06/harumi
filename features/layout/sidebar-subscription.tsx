@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useLanguage } from '@/lib/i18n/language-context';
 import { cn } from '@/lib/utils';
+import { accountPlansHref } from '@/lib/payment/checkout-path';
 
 interface SidebarSubscriptionProps {
   collapsed?: boolean;
@@ -27,7 +28,7 @@ export function SidebarSubscription({
   if (collapsed) {
     return (
       <Link
-        href="/account"
+        href={accountPlansHref}
         className={cn(
           'flex items-center justify-center transition-colors hover:bg-accent/50',
           embedded ? 'px-2 pb-2 pt-3' : 'border-t p-3'
@@ -65,7 +66,10 @@ export function SidebarSubscription({
           asChild
           className="mt-3 w-full rounded-full bg-foreground font-semibold text-background hover:bg-foreground/90"
         >
-          <Link href="/account" className="flex items-center justify-center gap-2">
+          <Link
+            href={accountPlansHref}
+            className="flex items-center justify-center gap-2"
+          >
             <Zap className="h-4 w-4" />
             {t('account.upgradePlan')}
           </Link>

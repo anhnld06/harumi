@@ -1,7 +1,33 @@
+import type { TestWithSections } from '@/lib/mock-test/test-types';
 import { prisma } from '@/lib/db';
+import {
+  evaluateJlptStylePass,
+  linearScaledScore,
+  sumScaledMax,
+  type SectionScoreComputation,
+} from '@/lib/mock-test/jlpt-scaled-scoring';
 
-export async function getMockTestWithQuestions(testId: string) {
-  return prisma.mockTest.findUnique({
+/**
+ * Explicit shape for submit scoring — avoids Prisma include payload / stale client mismatches
+ * (e.g. missing scaled fields or wrong mockTest scalars in inferred types).
+ */
+type MockTestForSubmit = {
+  passTotalScaled: number;
+  sections: Array<{
+    id: string;
+    name: string;
+    scaledMax: number;
+    minimumPassScaled: number;
+    questions: Array<{
+      question: { id: string; correctAnswer: unknown };
+    }>;
+  }>;
+};
+
+export async function getMockTestWithQuestions(
+  testId: string
+): Promise<TestWithSections | null> {
+  const test = await prisma.mockTest.findUnique({
     where: { id: testId },
     include: {
       sections: {
@@ -9,12 +35,20 @@ export async function getMockTestWithQuestions(testId: string) {
         include: {
           questions: {
             orderBy: { order: 'asc' },
-            include: { question: true },
+            include: {
+              question: {
+                include: {
+                  readingPassage: true,
+                  listeningPassage: true,
+                },
+              },
+            },
           },
         },
       },
     },
   });
+  return test as TestWithSections | null;
 }
 
 export async function submitMockTest(
@@ -24,80 +58,174 @@ export async function submitMockTest(
 ) {
   const attempt = await prisma.testAttempt.findUnique({
     where: { id: attemptId, userId },
-    include: { mockTest: true },
+    include: {
+      mockTest: {
+        include: {
+          sections: {
+            orderBy: { order: 'asc' },
+            include: {
+              questions: {
+                orderBy: { order: 'asc' },
+                include: { question: true },
+              },
+            },
+          },
+        },
+      },
+    },
   });
 
   if (!attempt || attempt.completedAt) {
     throw new Error('Invalid or already submitted attempt');
   }
 
+  const answerMap = new Map(
+    answers.map((a) => [a.questionId, String(a.userAnswer ?? '').trim()])
+  );
+  const timeMap = new Map(
+    answers.map((a) => [a.questionId, a.timeSpent ?? null] as const)
+  );
+
+  const sectionComputations: SectionScoreComputation[] = [];
   let totalCorrect = 0;
   let totalQuestions = 0;
 
-  for (const a of answers) {
-    const question = await prisma.question.findUnique({
-      where: { id: a.questionId },
-    });
-    if (!question) continue;
+  type AnswerRow = {
+    questionId: string;
+    userAnswer: string;
+    isCorrect: boolean;
+    timeSpent: number | null;
+  };
+  const pendingAnswers: AnswerRow[] = [];
 
-    const isCorrect = String(question.correctAnswer).trim() === String(a.userAnswer).trim();
-    totalQuestions++;
-    if (isCorrect) totalCorrect++;
+  const mockTest = attempt.mockTest as unknown as MockTestForSubmit;
 
-    await prisma.testAttemptAnswer.upsert({
-      where: {
-        attemptId_questionId: { attemptId, questionId: a.questionId },
-      },
-      create: {
-        attemptId,
-        questionId: a.questionId,
-        userAnswer: a.userAnswer,
+  for (const section of mockTest.sections) {
+    let rawCorrect = 0;
+    let rawTotal = 0;
+    for (const mq of section.questions) {
+      const question = mq.question;
+      const userAnswer = answerMap.get(question.id) ?? '';
+      const isCorrect =
+        userAnswer.length > 0 && String(question.correctAnswer).trim() === userAnswer;
+      rawTotal++;
+      totalQuestions++;
+      if (isCorrect) {
+        rawCorrect++;
+        totalCorrect++;
+      }
+
+      pendingAnswers.push({
+        questionId: question.id,
+        userAnswer,
         isCorrect,
-        timeSpent: a.timeSpent ?? null,
-      },
-      update: {
-        userAnswer: a.userAnswer,
-        isCorrect,
-        timeSpent: a.timeSpent ?? null,
-      },
+        timeSpent: timeMap.get(question.id) ?? null,
+      });
+    }
+
+    const scaledMax = section.scaledMax;
+    const minimumPassScaled = section.minimumPassScaled;
+    const scaledScore = linearScaledScore(rawCorrect, rawTotal, scaledMax);
+    const passedSection = scaledScore >= minimumPassScaled;
+
+    sectionComputations.push({
+      sectionId: section.id,
+      name: section.name,
+      rawCorrect,
+      rawTotal,
+      scaledScore,
+      scaledMax,
+      minimumPassScaled,
+      passedSection,
     });
   }
 
-  const totalScore = totalQuestions * 2; // Simplified: 2 points per question
-  const score = totalCorrect * 2;
-  const passed = score >= (attempt.mockTest.passScore ?? 90);
+  const totalScaled = sectionComputations.reduce((a, s) => a + s.scaledScore, 0);
+  const totalMax = sumScaledMax(mockTest.sections);
+  const passTotalScaled = mockTest.passTotalScaled;
+
+  const passed = evaluateJlptStylePass({
+    totalScaled,
+    passTotalScaled,
+    sections: sectionComputations.map((s) => ({
+      scaledScore: s.scaledScore,
+      minimumPassScaled: s.minimumPassScaled,
+    })),
+  });
 
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  await prisma.$transaction([
-    prisma.testAttempt.update({
-      where: { id: attemptId },
-      data: {
-        score,
-        totalScore,
-        passed,
-        completedAt: now,
-      },
-    }),
-    prisma.userProgress.upsert({
-      where: {
-        userId_date: { userId, date: today },
-      },
-      create: {
-        userId,
-        date: today,
-        quizzesTaken: 1,
-        correctAnswers: totalCorrect,
-        totalAnswers: totalQuestions,
-      },
-      update: {
-        quizzesTaken: { increment: 1 },
-        correctAnswers: { increment: totalCorrect },
-        totalAnswers: { increment: totalQuestions },
-      },
-    }),
-  ]);
+  const sectionRows = sectionComputations.map((s) => ({
+    attemptId,
+    sectionId: s.sectionId,
+    rawCorrect: s.rawCorrect,
+    rawTotal: s.rawTotal,
+    scaledScore: s.scaledScore,
+    scaledMax: s.scaledMax,
+    minimumPassScaled: s.minimumPassScaled,
+    passedSection: s.passedSection,
+  }));
 
-  return { score, totalScore, passed };
+  const answerRows = pendingAnswers.map((row) => ({
+    attemptId,
+    questionId: row.questionId,
+    userAnswer: row.userAnswer,
+    isCorrect: row.isCorrect,
+    timeSpent: row.timeSpent,
+  }));
+
+  await prisma.$transaction(
+    async (tx) => {
+      type SectionResultDelegate = {
+        deleteMany(args: { where: { attemptId: string } }): Promise<unknown>;
+        createMany(args: { data: typeof sectionRows }): Promise<unknown>;
+      };
+      const db = tx as typeof prisma & { testAttemptSectionResult: SectionResultDelegate };
+
+      await db.testAttemptAnswer.deleteMany({ where: { attemptId } });
+      if (answerRows.length > 0) {
+        await db.testAttemptAnswer.createMany({ data: answerRows });
+      }
+
+      await db.testAttemptSectionResult.deleteMany({ where: { attemptId } });
+      if (sectionRows.length > 0) {
+        await db.testAttemptSectionResult.createMany({ data: sectionRows });
+      }
+
+      await db.testAttempt.update({
+        where: { id: attemptId },
+        data: {
+          score: totalScaled,
+          totalScore: totalMax,
+          passed,
+          completedAt: now,
+        },
+      });
+
+      await db.userProgress.upsert({
+        where: {
+          userId_date: { userId, date: today },
+        },
+        create: {
+          userId,
+          date: today,
+          quizzesTaken: 1,
+          correctAnswers: totalCorrect,
+          totalAnswers: totalQuestions,
+        },
+        update: {
+          quizzesTaken: { increment: 1 },
+          correctAnswers: { increment: totalCorrect },
+          totalAnswers: { increment: totalQuestions },
+        },
+      });
+    },
+    {
+      maxWait: 10_000,
+      timeout: 60_000,
+    }
+  );
+
+  return { score: totalScaled, totalScore: totalMax, passed };
 }

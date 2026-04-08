@@ -20,8 +20,9 @@ export default async function ReadingPassagePage({
   });
 
   if (!passage) notFound();
+  if (!passage.libraryVisible) notFound();
   const orderedIds = await prisma.readingPassage.findMany({
-    where: { level: passage.level },
+    where: { level: passage.level, libraryVisible: true },
     orderBy: { createdAt: 'asc' },
     select: { id: true },
   });

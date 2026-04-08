@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Receipt, Star } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { AccountHeader } from '@/features/account/account-header';
@@ -30,7 +31,18 @@ export function AccountPageContent({
   userId,
 }: AccountPageContentProps) {
   const { t } = useLanguage();
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<AccountTab>('overview');
+
+  useEffect(() => {
+    if (pathname !== '/account' || typeof window === 'undefined') return;
+    if (window.location.hash !== '#plans') return;
+    setActiveTab('overview');
+    const timer = window.setTimeout(() => {
+      document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 120);
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
 
   return (
     <div className="-m-4 md:-m-8 min-h-screen">

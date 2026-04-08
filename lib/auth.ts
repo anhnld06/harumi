@@ -67,8 +67,15 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
+      if (session.user && token.id) {
         session.user.id = token.id as string;
+        const u = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          select: { creditBalance: true, planTier: true, planExpiresAt: true },
+        });
+        session.user.creditBalance = u?.creditBalance ?? 0;
+        session.user.planTier = u?.planTier ?? null;
+        session.user.planExpiresAt = u?.planExpiresAt?.toISOString() ?? null;
       }
       return session;
     },

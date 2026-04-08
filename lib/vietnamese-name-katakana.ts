@@ -1,0 +1,682 @@
+/**
+ * Vietnamese full name → Japanese katakana (passport-style approximations).
+ * Users should separate parts with spaces (e.g. Nguyễn Văn A).
+ */
+
+import { katakanaToRomaji } from './katakana-to-romaji';
+
+export type KatakanaVariant = {
+  katakana: string;
+  /** Hepburn romaji derived from katakana */
+  romaji: string;
+};
+
+function variantsFromKatakana(katakanaList: string[]): KatakanaVariant[] {
+  return katakanaList.map((katakana) => ({
+    katakana,
+    romaji: katakana === '—' ? '' : katakanaToRomaji(katakana),
+  }));
+}
+
+export type NameSegmentResult = {
+  /** Original segment from user input */
+  display: string;
+  /** Lowercase ASCII without diacritics */
+  normalized: string;
+  variants: KatakanaVariant[];
+};
+
+/** Syllables where Japanese spelling may vary — show all common variants */
+const AMBIGUOUS: Record<string, string[]> = {
+  anh: ['アン', 'アイン'],
+  gi: ['ザイ', 'ジ'],
+  huy: ['フイ', 'ヒュイ'],
+  do: ['ドー', 'ド'],
+  dang: ['ダン', 'ザン'],
+};
+
+/** Whole-token overrides (after normalize) — katakana only; romaji from katakana */
+const WHOLE_WORD: Record<string, string[]> = {
+  nguyen: ['グエン'],
+  nguyet: ['グエット'],
+  tran: ['チャン'],
+  trang: ['チャン'],
+  le: ['レ'],
+  ly: ['リー'],
+  pham: ['ファム'],
+  phan: ['ファン'],
+  phuong: ['フォン'],
+  bui: ['ブイ'],
+  hoang: ['ホアン'],
+  huynh: ['フイン'],
+  huong: ['フオン'],
+  duong: ['ズオン'],
+  vo: ['ヴォ'],
+  vu: ['ヴー'],
+  dao: ['ダオ'],
+  mai: ['マイ'],
+  lam: ['ラム'],
+  kim: ['キム'],
+  son: ['ソン'],
+  hoa: ['ホア'],
+  thuy: ['トゥイ'],
+  tuan: ['トゥアン'],
+  quang: ['クアン'],
+  quan: ['クアン'],
+  khanh: ['カイン'],
+  giang: ['ザン'],
+  hieu: ['ヒエウ'],
+  duc: ['ドゥック'],
+  dung: ['ズン'],
+  dat: ['ダット'],
+  hung: ['フン'],
+  ha: ['ハ'],
+  hanh: ['ハイン'],
+  hong: ['ホン'],
+  hao: ['ハオ'],
+  thao: ['タオ'],
+  thu: ['トゥ'],
+  thi: ['ティ'],
+  linh: ['リン'],
+  nam: ['ナム'],
+  minh: ['ミン'],
+  my: ['ミー'],
+  nhi: ['ニ'],
+  nhu: ['ニュ'],
+  nga: ['ガ'],
+  ngoc: ['ゴック'],
+  van: ['ヴァン'],
+  vinh: ['ヴィン'],
+  viet: ['ヴィエット'],
+  yen: ['イェン'],
+  buu: ['ブウ'],
+  bich: ['ビック'],
+  chau: ['チャウ'],
+  chien: ['チエン'],
+  chinh: ['チン'],
+  chuong: ['チュオン'],
+  cuong: ['クオン'],
+  diem: ['ジエム'],
+  dien: ['ジエン'],
+  diep: ['ジエップ'],
+  dieu: ['ジエウ'],
+  doan: ['ドアン'],
+  dong: ['ドン'],
+  du: ['ズ'],
+  duyen: ['ズイェン'],
+  giau: ['ザウ'],
+  hai: ['ハイ'],
+  hang: ['ハン'],
+  hien: ['ヒエン'],
+  hoai: ['ホアイ'],
+  hoan: ['ホアン'],
+  hue: ['フエ'],
+  huu: ['フウ'],
+  khai: ['カイ'],
+  khoa: ['コア'],
+  khoi: ['コイ'],
+  kien: ['キエン'],
+  lien: ['リエン'],
+  loan: ['ロアン'],
+  long: ['ロン'],
+  luong: ['ルオン'],
+  ngan: ['ガン'],
+  nghe: ['ゲ'],
+  nghia: ['ギア'],
+  nghiep: ['ギエップ'],
+  nguy: ['グイ'],
+  nhan: ['ニャン'],
+  nhat: ['ニャット'],
+  nhung: ['ニュン'],
+  oanh: ['オアイン'],
+  phong: ['フォン'],
+  phuc: ['フック'],
+  quoc: ['クオック'],
+  quynh: ['クイン'],
+  sang: ['サン'],
+  tai: ['タイ'],
+  tam: ['タム'],
+  thang: ['タン'],
+  thien: ['チエン'],
+  tho: ['ト'],
+  tien: ['チエン'],
+  tinh: ['ティン'],
+  toan: ['トアン'],
+  trinh: ['チン'],
+  truc: ['チュック'],
+  truong: ['チュオン'],
+  tung: ['トゥン'],
+  uyen: ['イェン'],
+  vi: ['ヴィ'],
+  vuong: ['ヴォン'],
+  doanh: ['ドアイン'],
+  phi: ['フィ'],
+  thanh: ['タイン'],
+  trung: ['チュン'],
+  xuan: ['スアン'],
+  quyen: ['クエン'],
+  vy: ['ヴィー'],
+  loc: ['ロック'],
+  luan: ['ルアン'],
+  khue: ['クエ'],
+  phat: ['ファット'],
+  tin: ['ティン'],
+  binh: ['ビン'],
+  dinh: ['ディン'],
+  khang: ['カン'],
+  han: ['ハン'],
+  tuyen: ['トゥイェン'],
+  sung: ['スン'],
+  toai: ['トアイ'],
+  dai: ['ダイ'],
+  dep: ['デップ'],
+  giap: ['ザップ'],
+  thinh: ['ティン'],
+  thach: ['タック'],
+  thai: ['タイ'],
+  thuan: ['トゥアン'],
+  nhuan: ['ヌアン'],
+  phu: ['フ'],
+  tri: ['チ'],
+  tu: ['トゥ'],
+  uy: ['ウィ'],
+  nganh: ['ガイン'],
+  luyen: ['ルイェン'],
+  bao: ['バオ'],
+  chi: ['チ'],
+  dan: ['ダン'],
+  luc: ['ルック'],
+  luu: ['ルー'],
+  man: ['マン'],
+  quy: ['クイ'],
+  tan: ['タン'],
+  thuc: ['トック'],
+  ton: ['トン'],
+  gam: ['ガム'],
+  hau: ['ハウ'],
+  huan: ['フアン'],
+  kha: ['カ'],
+  kho: ['コ'],
+  lac: ['ラック'],
+  lan: ['ラン'],
+  lap: ['ラップ'],
+  nghi: ['ギ'],
+  phap: ['ファップ'],
+};
+
+const SYLLABLE_TO_KATAKANA: Record<string, string> = {
+  // Common rimes / syllables (toneless ASCII)
+  a: 'ア',
+  i: 'イ',
+  u: 'ウ',
+  e: 'エ',
+  o: 'オ',
+  y: 'イ',
+  ai: 'アイ',
+  ao: 'アオ',
+  au: 'アウ',
+  ay: 'アイ',
+  am: 'アム',
+  an: 'アン',
+  ang: 'アン',
+  ap: 'アップ',
+  at: 'アット',
+  ac: 'アック',
+  em: 'エム',
+  en: 'エン',
+  eng: 'エン',
+  ep: 'エップ',
+  et: 'エット',
+  ec: 'エック',
+  im: 'イム',
+  in: 'イン',
+  inh: 'イン',
+  ing: 'イン',
+  ip: 'イップ',
+  it: 'イット',
+  ic: 'イック',
+  om: 'オム',
+  on: 'オン',
+  ong: 'オン',
+  op: 'オップ',
+  ot: 'オット',
+  oc: 'オック',
+  um: 'ウム',
+  un: 'ウン',
+  ung: 'ウン',
+  up: 'ウップ',
+  ut: 'ウット',
+  uc: 'ウック',
+  oi: 'オイ',
+  ua: 'ウア',
+  uan: 'ウアン',
+  uat: 'ウアット',
+  uay: 'ウアイ',
+  uy: 'ウイ',
+  uu: 'ウー',
+  uong: 'ウオン',
+  uoc: 'ウオック',
+  uoi: 'ウオイ',
+  uom: 'ウオム',
+  uon: 'ウオン',
+  uop: 'ウオップ',
+  uot: 'ウオット',
+  yeu: 'イエウ',
+  ieu: 'イエウ',
+  iem: 'イエム',
+  ien: 'イエン',
+  iec: 'イエック',
+  iet: 'イエット',
+  ieng: 'イエン',
+  oai: 'オアイ',
+  oan: 'オアン',
+  oang: 'オアン',
+  oat: 'オアット',
+  oac: 'オアック',
+  oe: 'オエ',
+  oeo: 'オエオ',
+  uyen: 'イェン',
+  uye: 'イエ',
+  uynh: 'イン',
+  uyn: 'イン',
+  oanh: 'オアイン',
+  uanh: 'ウアイン',
+  ich: 'イック',
+  ech: 'エック',
+  ach: 'アック',
+  nhon: 'ニョン',
+  nhan: 'ニャン',
+  nhat: 'ニャット',
+  nghia: 'ギア',
+  nghiep: 'ギエップ',
+  gia: 'ザ',
+  gie: 'ジエ',
+  gio: 'ゾ',
+  giu: 'ジュ',
+  gieo: 'ジエオ',
+  du: 'ズ',
+  de: 'ゼ',
+  di: 'ジ',
+  do: 'ド',
+  da: 'ダ',
+  duy: 'ズイ',
+  dai: 'ダイ',
+  dau: 'ダウ',
+  day: 'ザイ',
+  dem: 'デム',
+  den: 'デン',
+  dep: 'デップ',
+  det: 'デット',
+  die: 'ジエ',
+  dieu: 'ジエウ',
+  diem: 'ジエム',
+  dien: 'ジエン',
+  dinh: 'ディン',
+  duong: 'ズオン',
+  duc: 'ドゥック',
+  dung: 'ズン',
+  bao: 'バオ',
+  bay: 'バイ',
+  ban: 'バン',
+  bang: 'バン',
+  bam: 'バム',
+  ben: 'ベン',
+  beng: 'ベン',
+  bi: 'ビ',
+  binh: 'ビン',
+  bo: 'ボ',
+  bu: 'ブ',
+  ba: 'バ',
+  be: 'ベ',
+  bui: 'ブイ',
+  ca: 'カ',
+  cam: 'カム',
+  can: 'カン',
+  canh: 'カイン',
+  co: 'コ',
+  con: 'コン',
+  cong: 'コン',
+  cu: 'ク',
+  cy: 'シ',
+  cha: 'チャ',
+  che: 'チェ',
+  chi: 'チ',
+  cho: 'チョ',
+  chu: 'チュ',
+  chinh: 'チン',
+  cuong: 'クオン',
+  ke: 'ケ',
+  ki: 'キ',
+  ky: 'キ',
+  la: 'ラ',
+  lan: 'ラン',
+  lang: 'ラン',
+  lo: 'ロ',
+  lon: 'ロン',
+  long: 'ロン',
+  lu: 'ル',
+  luu: 'ルー',
+  ly: 'リー',
+  ma: 'マ',
+  man: 'マン',
+  mang: 'マン',
+  me: 'メ',
+  mi: 'ミ',
+  minh: 'ミン',
+  mo: 'モ',
+  mu: 'ム',
+  my: 'ミー',
+  na: 'ナ',
+  nan: 'ナン',
+  ne: 'ネ',
+  ni: 'ニ',
+  no: 'ノ',
+  nu: 'ヌ',
+  ngo: 'ゴ',
+  nguyen: 'グエン',
+  nguyet: 'グエット',
+  ngoc: 'ゴック',
+  nga: 'ガ',
+  nghi: 'ギ',
+  nghe: 'ゲ',
+  nha: 'ニャ',
+  nhi: 'ニ',
+  nhu: 'ニュ',
+  nho: 'ニョ',
+  pha: 'ファ',
+  phu: 'フ',
+  pho: 'フォ',
+  phuong: 'フォン',
+  phan: 'ファン',
+  pham: 'ファム',
+  qua: 'クア',
+  que: 'クエ',
+  qui: 'クイ',
+  quy: 'クイ',
+  quan: 'クアン',
+  quang: 'クアン',
+  quoc: 'クオック',
+  sa: 'サ',
+  se: 'セ',
+  si: 'シ',
+  so: 'ソ',
+  su: 'ス',
+  ta: 'タ',
+  te: 'テ',
+  ti: 'ティ',
+  to: 'ト',
+  tu: 'トゥ',
+  ty: 'ティ',
+  tha: 'タ',
+  the: 'テ',
+  thi: 'ティ',
+  tho: 'ト',
+  thu: 'トゥ',
+  thuy: 'トゥイ',
+  than: 'タン',
+  thinh: 'ティン',
+  thang: 'タン',
+  thuan: 'トゥアン',
+  thao: 'タオ',
+  tra: 'チャ',
+  tre: 'チェ',
+  tri: 'チ',
+  tro: 'チョ',
+  tru: 'チュ',
+  trung: 'チュン',
+  trang: 'チャン',
+  tran: 'チャン',
+  tuan: 'トゥアン',
+  van: 'ヴァン',
+  vinh: 'ヴィン',
+  viet: 'ヴィエット',
+  vu: 'ヴー',
+  vo: 'ヴォ',
+  xa: 'サ',
+  xe: 'セ',
+  xi: 'シ',
+  xu: 'ス',
+  yen: 'イェン',
+  ye: 'イエ',
+  za: 'ザ',
+  zo: 'ゾ',
+  zu: 'ズ',
+};
+
+const SORTED_SYLLABLE_KEYS = Object.keys(SYLLABLE_TO_KATAKANA).sort(
+  (a, b) => b.length - a.length
+);
+
+const VI_CHAR_MAP: Record<string, string> = {
+  à: 'a',
+  á: 'a',
+  ả: 'a',
+  ã: 'a',
+  ạ: 'a',
+  ă: 'a',
+  ằ: 'a',
+  ắ: 'a',
+  ẳ: 'a',
+  ẵ: 'a',
+  ặ: 'a',
+  â: 'a',
+  ầ: 'a',
+  ấ: 'a',
+  ẩ: 'a',
+  ẫ: 'a',
+  ậ: 'a',
+  è: 'e',
+  é: 'e',
+  ẻ: 'e',
+  ẽ: 'e',
+  ẹ: 'e',
+  ê: 'e',
+  ề: 'e',
+  ế: 'e',
+  ể: 'e',
+  ễ: 'e',
+  ệ: 'e',
+  ì: 'i',
+  í: 'i',
+  ỉ: 'i',
+  ĩ: 'i',
+  ị: 'i',
+  ò: 'o',
+  ó: 'o',
+  ỏ: 'o',
+  õ: 'o',
+  ọ: 'o',
+  ô: 'o',
+  ồ: 'o',
+  ố: 'o',
+  ổ: 'o',
+  ỗ: 'o',
+  ộ: 'o',
+  ơ: 'o',
+  ờ: 'o',
+  ớ: 'o',
+  ở: 'o',
+  ỡ: 'o',
+  ợ: 'o',
+  ù: 'u',
+  ú: 'u',
+  ủ: 'u',
+  ũ: 'u',
+  ụ: 'u',
+  ư: 'u',
+  ừ: 'u',
+  ứ: 'u',
+  ử: 'u',
+  ữ: 'u',
+  ự: 'u',
+  ỳ: 'y',
+  ý: 'y',
+  ỷ: 'y',
+  ỹ: 'y',
+  ỵ: 'y',
+  đ: 'd',
+  À: 'A',
+  Á: 'A',
+  Ả: 'A',
+  Ã: 'A',
+  Ạ: 'A',
+  Ă: 'A',
+  Ằ: 'A',
+  Ắ: 'A',
+  Ẳ: 'A',
+  Ẵ: 'A',
+  Ặ: 'A',
+  Â: 'A',
+  Ầ: 'A',
+  Ấ: 'A',
+  Ẩ: 'A',
+  Ẫ: 'A',
+  Ậ: 'A',
+  È: 'E',
+  É: 'E',
+  Ẻ: 'E',
+  Ẽ: 'E',
+  Ẹ: 'E',
+  Ê: 'E',
+  Ề: 'E',
+  Ế: 'E',
+  Ể: 'E',
+  Ễ: 'E',
+  Ệ: 'E',
+  Ì: 'I',
+  Í: 'I',
+  Ỉ: 'I',
+  Ĩ: 'I',
+  Ị: 'I',
+  Ò: 'O',
+  Ó: 'O',
+  Ỏ: 'O',
+  Õ: 'O',
+  Ọ: 'O',
+  Ô: 'O',
+  Ồ: 'O',
+  Ố: 'O',
+  Ổ: 'O',
+  Ỗ: 'O',
+  Ộ: 'O',
+  Ơ: 'O',
+  Ờ: 'O',
+  Ớ: 'O',
+  Ở: 'O',
+  Ỡ: 'O',
+  Ợ: 'O',
+  Ù: 'U',
+  Ú: 'U',
+  Ủ: 'U',
+  Ũ: 'U',
+  Ụ: 'U',
+  Ư: 'U',
+  Ừ: 'U',
+  Ứ: 'U',
+  Ử: 'U',
+  Ữ: 'U',
+  Ự: 'U',
+  Ỳ: 'Y',
+  Ý: 'Y',
+  Ỷ: 'Y',
+  Ỹ: 'Y',
+  Ỵ: 'Y',
+  Đ: 'D',
+};
+
+export function stripVietnameseDiacritics(str: string): string {
+  const n = str.normalize('NFC');
+  return n
+    .split('')
+    .map((c) => VI_CHAR_MAP[c] ?? c)
+    .join('')
+    .toLowerCase();
+}
+
+/** NBSP / ideographic space → U+0020 so split(/\s+/) separates họ và tên đúng */
+export function normalizeNameInput(str: string): string {
+  return str
+    .normalize('NFC')
+    .replace(/\u200B/g, ' ')
+    .replace(/[\u00A0\u1680\u2000-\u200A\u202F\u205F\u3000\uFEFF]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function greedySyllablesToKatakana(norm: string): string | null {
+  let rest = norm;
+  const parts: string[] = [];
+  while (rest.length > 0) {
+    let matched = false;
+    for (const key of SORTED_SYLLABLE_KEYS) {
+      if (rest.startsWith(key)) {
+        parts.push(SYLLABLE_TO_KATAKANA[key]!);
+        rest = rest.slice(key.length);
+        matched = true;
+        break;
+      }
+    }
+    if (!matched) return null;
+  }
+  return parts.join('');
+}
+
+function segmentToVariants(display: string, norm: string): NameSegmentResult {
+  const n = norm.trim().toLowerCase();
+  if (!n) {
+    return { display, normalized: n, variants: [{ katakana: '', romaji: '' }] };
+  }
+
+  if (AMBIGUOUS[n]) {
+    return { display, normalized: n, variants: variantsFromKatakana(AMBIGUOUS[n]!) };
+  }
+
+  if (WHOLE_WORD[n]) {
+    return { display, normalized: n, variants: variantsFromKatakana(WHOLE_WORD[n]!) };
+  }
+
+  const combined = greedySyllablesToKatakana(n);
+  if (combined) {
+    return {
+      display,
+      normalized: n,
+      variants: variantsFromKatakana([combined]),
+    };
+  }
+
+  return {
+    display,
+    normalized: n,
+    variants: variantsFromKatakana(['—']),
+  };
+}
+
+export type ConvertNameResult = {
+  segments: NameSegmentResult[];
+  /** Primary katakana with middle dot between parts */
+  fullKatakana: string;
+  /** Hepburn romaji for full katakana (spaces between parts) */
+  fullRomaji: string;
+};
+
+export function convertVietnameseNameToKatakana(raw: string): ConvertNameResult {
+  const trimmed = normalizeNameInput(raw);
+  if (!trimmed) {
+    return { segments: [], fullKatakana: '', fullRomaji: '' };
+  }
+
+  const parts = trimmed.split(/\s+/).filter(Boolean);
+  const segments: NameSegmentResult[] = parts.map((p) => {
+    const norm = stripVietnameseDiacritics(p);
+    return segmentToVariants(p, norm);
+  });
+
+  const fullKatakana = segments
+    .map((s) => s.variants[0]?.katakana ?? '')
+    .filter(Boolean)
+    .join('・');
+
+  const fullRomaji = fullKatakana ? katakanaToRomaji(fullKatakana) : '';
+
+  return { segments, fullKatakana, fullRomaji };
+}

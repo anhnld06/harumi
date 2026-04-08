@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Logo } from '@/components/logo';
+import { SiteFooter } from '@/components/site-footer';
 
 export default function HomePage() {
   /* Explicit light palette: global theme can be dark (system) but this page stays a light landing. */
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-white to-fuchsia-50 text-slate-900">
+    <div className="flex min-h-screen flex-col bg-gradient-to-br from-violet-50 via-white to-fuchsia-50 text-slate-900">
       <nav className="border-b border-slate-200/80 bg-white/80 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
           <Logo href="/" height={30} width={120} priority />
@@ -25,7 +26,7 @@ export default function HomePage() {
         </div>
       </nav>
 
-      <main className="mx-auto max-w-7xl px-4 py-24">
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-24">
         <div className="text-center">
           <h1 className="text-5xl font-bold tracking-tight text-slate-900 md:text-6xl">
             Master Japanese.
@@ -71,6 +72,8 @@ export default function HomePage() {
           ))}
         </div>
       </main>
+
+      <SiteFooter className="mt-auto" />
     </div>
   );
 }

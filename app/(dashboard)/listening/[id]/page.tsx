@@ -17,6 +17,7 @@ export default async function ListeningPassagePage({
   });
 
   if (!passage) notFound();
+  if (!passage.libraryVisible) notFound();
 
   return (
     <div className="space-y-6">

@@ -10,9 +10,11 @@ import {
   FileText,
   Headphones,
   ClipboardList,
+  Award,
   User,
   MessageSquare,
   Sparkles,
+  CaseSensitive,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/lib/i18n/language-context';
@@ -25,6 +27,8 @@ const mainNavItems = [
   { href: '/reading', labelKey: 'nav.reading', icon: FileText },
   { href: '/listening', labelKey: 'nav.listening', icon: Headphones },
   { href: '/mock-test', labelKey: 'nav.mockTest', icon: ClipboardList },
+  { href: '/certificate', labelKey: 'nav.certificate', icon: Award },
+  { href: '/name-converter', labelKey: 'nav.nameConverter', icon: CaseSensitive },
 ];
 
 const aiNavItems = [

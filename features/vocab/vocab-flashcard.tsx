@@ -60,7 +60,7 @@ export function VocabFlashcard({ userId, page = 1, search }: VocabFlashcardProps
       <Card>
         <CardContent className="flex min-h-[200px] items-center justify-center py-12">
           <p className="text-muted-foreground">
-            No vocabulary available. Run database seed first.
+            No vocabulary available.
           </p>
         </CardContent>
       </Card>

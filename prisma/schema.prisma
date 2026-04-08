@@ -20,6 +20,12 @@ model User {
   password      String?   // hashed with bcrypt (null for OAuth users)
   image         String?
 
+  // AI / add-on credits (fulfilled via SePay IPN)
+  creditBalance Int       @default(0)
+  // Subscription tier after payment: pro | pro_max
+  planTier      String?
+  planExpiresAt DateTime?
+
   accounts     Account[]
   sessions     Session[]
 
@@ -30,11 +36,47 @@ model User {
   testAttempts   TestAttempt[]
   srsReviews     SRSReview[]
   feedbacks      Feedback[]
+  paymentOrders   PaymentOrder[]
+  certificates    UserCertificate[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([email])
+}
+
+enum PaymentOrderStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum CheckoutProductCode {
+  CREDITS_PACK
+  PLAN_PRO
+  PLAN_PRO_MAX
+}
+
+model PaymentOrder {
+  id                   String              @id @default(cuid())
+  userId               String
+  orderInvoiceNumber   String              @unique
+  // Value sent to SePay as order_id (transfer memo), e.g. PAY…
+  clientOrderId        String              @unique
+  amountVnd            Int
+  productCode          CheckoutProductCode
+  description          String              @db.Text
+  status               PaymentOrderStatus  @default(PENDING)
+  sepayOrderUuid       String?
+  paidAt               DateTime?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
 }
 
 model Account {
@@ -217,12 +259,15 @@ model ReadingPassage {
   grammarInPassage Json?
   vocabulary       Json?
 
+  // false = mock-test-only; hidden from Reading module
+  libraryVisible Boolean @default(true)
+
   questions Question[] @relation("ReadingQuestions")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([level])
+  @@index([level, libraryVisible])
 }
 
 // ============ LISTENING ============
@@ -235,12 +280,15 @@ model ListeningPassage {
   duration    Int?     // seconds
   level       String   @default("N2")
 
+  // false = mock-test-only; hidden from Listening module
+  libraryVisible Boolean @default(true)
+
   questions Question[] @relation("ListeningQuestions")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([level])
+  @@index([level, libraryVisible])
 }
 
 // ============ QUESTION (Unified) ============
@@ -296,16 +344,28 @@ model Question {
   @@index([listeningPassageId])
 }
 
-// ============ MOCK TEST ============
+// ============ MOCK TEST (JLPT-style scaled scoring) ============
+
+enum JlptLevel {
+  N5
+  N4
+  N3
+  N2
+  N1
+}
 
 model MockTest {
   id        String   @id @default(cuid())
   title     String
-  duration  Int      // total minutes
-  passScore Int      @default(90) // 90/180 or similar
+  duration  Int      // total minutes (single timer for whole test in UI)
+  // Minimum total scaled score to pass (e.g. 90 on 180-scale — set per test).
+  passTotalScaled Int @default(90)
+  // JLPT level for UI / certificates (optional).
+  jlptLevel  JlptLevel?
 
   sections  MockTestSection[]
   attempts  TestAttempt[]
+  certificates UserCertificate[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -318,11 +378,16 @@ model MockTestSection {
   mockTestId String
   name       String   // "Vocabulary", "Grammar", "Reading", "Listening"
   order      Int
-  duration   Int      // section minutes
+  duration   Int      // section minutes (shown in UI; optional per-block timers later)
   questionCount Int
+  // Max scaled points for this section (JLPT-style cap per area, e.g. 60).
+  scaledMax         Int @default(60)
+  // Sectional minimum scaled score (e.g. 19).
+  minimumPassScaled Int @default(19)
 
   mockTest MockTest @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
   questions MockTestQuestion[]
+  attemptSectionResults TestAttemptSectionResult[]
 
   @@index([mockTestId])
 }
@@ -343,11 +408,42 @@ model MockTestQuestion {
 
 // ============ TEST ATTEMPTS ============
 
+enum CertificateTemplate {
+  HERITAGE
+  SAKURA
+  MIDNIGHT
+}
+
+model UserCertificate {
+  id              String              @id @default(cuid())
+  userId          String
+  mockTestId      String
+  attemptId       String              @unique
+  template        CertificateTemplate
+  recipientName   String
+  courseTitle     String
+  scoreText       String
+  certificateNo   String              @unique
+  issuedAt        DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mockTest MockTest @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
+  attempt  TestAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mockTestId])
+  @@index([userId])
+  @@index([mockTestId])
+  @@index([attemptId])
+}
+
 model TestAttempt {
   id         String   @id @default(cuid())
   userId     String
   mockTestId String
+  // Sum of section scaled scores (linear JLPT-style approximation).
   score      Int?
+  // Max total scaled score (sum of section scaledMax).
   totalScore Int?
   passed     Boolean?
   startedAt  DateTime @default(now())
@@ -356,11 +452,33 @@ model TestAttempt {
   user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   mockTest MockTest @relation(fields: [mockTestId], references: [id], onDelete: Cascade)
   answers  TestAttemptAnswer[]
+  sectionResults TestAttemptSectionResult[]
+  certificate UserCertificate?
 
   @@index([userId])
   @@index([mockTestId])
   @@index([userId, mockTestId])
   @@index([completedAt])
+}
+
+// Per-section scaled results at submit (JLPT-style pass rule).
+model TestAttemptSectionResult {
+  id                String @id @default(cuid())
+  attemptId         String
+  sectionId         String
+  rawCorrect        Int
+  rawTotal          Int
+  scaledScore       Int
+  scaledMax         Int
+  minimumPassScaled Int
+  passedSection     Boolean
+
+  attempt TestAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  section MockTestSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+
+  @@unique([attemptId, sectionId])
+  @@index([attemptId])
+  @@index([sectionId])
 }
 
 model TestAttemptAnswer {

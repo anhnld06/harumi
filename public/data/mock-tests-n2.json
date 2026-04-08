@@ -1,0 +1,991 @@
+{
+  "version": 1,
+  "tests": [
+    {
+      "title": "JLPT N2 模擬試験 第1回",
+      "duration": 155,
+      "passTotalScaled": 90,
+      "jlptLevel": "N2",
+      "sections": [
+        {
+          "kind": "INLINE",
+          "name": "語彙",
+          "order": 1,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "questions": [
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "次の文の（　）に入れるのに最もよいものを、1・2・3・4から一つ選びなさい。\n\n契約を（　　）する前に、必ず内容を確認しなさい。",
+              "options": {
+                "A": "締結",
+                "B": "実施",
+                "C": "維持",
+                "D": "遂行"
+              },
+              "correctAnswer": "A",
+              "explanation": "「契約を締結する」は固定のコロケーションです。",
+              "contentVi": "Chọn từ thích hợp nhất cho chỗ trống.\n\nTrước khi (　　) hợp đồng, hãy chắc chắn kiểm tra nội dung.",
+              "explanationVi": "「締結する」đi với「契約」— ký kết hợp đồng."
+            },
+            {
+              "type": "VOCAB_MEANING",
+              "content": "「著書」の意味として最も適切なのはどれか。",
+              "options": {
+                "A": "著者が書いた本",
+                "B": "図書館の蔵書一覧",
+                "C": "雑誌のバックナンバー",
+                "D": "新聞の一面記事"
+              },
+              "correctAnswer": "A",
+              "explanation": "「著書」＝著者の書いた本。",
+              "contentVi": "「著書」nghĩa đúng nhất là gì?"
+            },
+            {
+              "type": "VOCAB_MEANING",
+              "content": "「概ね」の使い方として適切な文はどれか。",
+              "options": {
+                "A": "概ねの人が反対した。",
+                "B": "概ね賛成の意見だった。",
+                "C": "概ねに雨が降った。",
+                "D": "概ねを歩いて帰った。"
+              },
+              "correctAnswer": "B",
+              "explanation": "「概ね」は副詞として「おおむね／ほぼ」の意で述語にかかります。",
+              "contentVi": "Câu nào dùng「概ね」đúng?"
+            },
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "（　　）な証拠がそろったため、被告は有罪とされた。\n\n1 明白　2 明瞭　3 明確　4 明るい",
+              "options": {
+                "A": "明白",
+                "B": "明瞭",
+                "C": "明確",
+                "D": "明るい"
+              },
+              "correctAnswer": "A",
+              "explanation": "「明白な証拠」はよく使う連語です。",
+              "contentVi": "Đã có đủ chứng cứ (　　) nên bị cáo bị kết án có tội."
+            },
+            {
+              "type": "VOCAB_MEANING",
+              "content": "「兼ねる」の意味として最も近いものはどれか。",
+              "options": {
+                "A": "〜しがたい／〜かねる（できない）",
+                "B": "〜を足す",
+                "C": "〜を除く",
+                "D": "〜を忘れる"
+              },
+              "correctAnswer": "A",
+              "explanation": "N2では「〜かねる」（〜しがたい）が頻出です。",
+              "contentVi": "Nghĩa gần nhất với「兼ねる」trong ngữ cảnh「〜かねる」là gì?"
+            }
+          ]
+        },
+        {
+          "kind": "INLINE",
+          "name": "文法",
+          "order": 2,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "questions": [
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "彼は忙しい（　　）、依頼を断れなかった。\n\n1 くせに　2 のに　3 ものの　4 わりに",
+              "options": {
+                "A": "くせに",
+                "B": "のに",
+                "C": "ものの",
+                "D": "わりに"
+              },
+              "correctAnswer": "B",
+              "explanation": "逆接の「のに」：忙しいのに断れなかった。",
+              "contentVi": "Anh ấy bận (　　) nhưng không từ chối được yêu cầu."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "説明書（　　）、機械を組み立てた。\n\n1 に従って　2 に対して　3 にわたって　4 に比べて",
+              "options": {
+                "A": "に従って",
+                "B": "に対して",
+                "C": "にわたって",
+                "D": "に比べて"
+              },
+              "correctAnswer": "A",
+              "explanation": "「説明書に従って」＝ theo hướng dẫn.",
+              "contentVi": "(　　) sách hướng dẫn, đã lắp máy."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "この問題は、初心者（　　）難しすぎるだろう。\n\n1 にとって　2 について　3 にしたら　4 にかけては",
+              "options": {
+                "A": "にとって",
+                "B": "について",
+                "C": "にしたら",
+                "D": "にかけては"
+              },
+              "correctAnswer": "A",
+              "explanation": "「Nにとって」＝ đối với ai.",
+              "contentVi": "Câu hỏi này (　　) người mới thì khó quá."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "彼女は来る（　　）来ないかわからない。\n\n1 か　2 やら　3 とも　4 かどうか",
+              "options": {
+                "A": "か",
+                "B": "やら",
+                "C": "とも",
+                "D": "かどうか"
+              },
+              "correctAnswer": "D",
+              "explanation": "「来るかどうかわからない」＝ không biết có đến hay không.",
+              "contentVi": "Không biết cô ấy có đến (　　)."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "早く着く（　　）、前の電車に乗った。\n\n1 べく　2 ために　3 ように　4 つもりで",
+              "options": {
+                "A": "べく",
+                "B": "ために",
+                "C": "ように",
+                "D": "つもりで"
+              },
+              "correctAnswer": "C",
+              "explanation": "「早く着くように」目的・努力の様子。",
+              "contentVi": "Để đến sớm (　　), đã lên tàu trước."
+            }
+          ]
+        },
+        {
+          "kind": "READING",
+          "name": "読解",
+          "order": 3,
+          "duration": 50,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "passage": {
+            "title": "リモートワークと生産性",
+            "contentJp": "　近年、多くの企業がリモートワークを導入している。通勤時間の削減や柔軟な働き方が期待される一方で、コミュニケーション不足や評価の難しさといった課題も指摘されている。\n\n　ある調査では、在宅勤務の経験者の約四割が「対面より生産性が上がった」と回答した。しかし、業種や職種によって結果は大きく異なり、一律の結論は得られない。重要なのは、自社の業務内容に合わせた制度設計と、従業員への十分なサポートである。\n\n　また、リモートワークが定着するには、デジタルツールの整備だけでなく、心理的安全性を確保する組織文化づくりも欠かせない。",
+            "contentVi": "Gần đây nhiều công ty áp dụng làm việc từ xa. Mong đợi giảm thời gian đi lại và linh hoạt, nhưng cũng có vấn đề như thiếu giao tiếp và khó đánh giá.\n\nMột khảo sát: khoảng 40% người có kinh nghiệm làm ở nhà trả lời năng suất cao hơn so với gặp trực tiếp. Nhưng kết quả khác nhau theo ngành và chức danh, không có kết luận chung. Quan trọng là thiết kế chế độ phù hợp công việc và hỗ trợ nhân viên.\n\nĐể làm việc từ xa bền vững, cần không chỉ công cụ số mà còn văn hóa tổ chức đảm bảo an toàn tâm lý.",
+            "wordCount": 320,
+            "questions": [
+              {
+                "type": "READING",
+                "content": "筆者が最も強調していることは何か。",
+                "options": {
+                  "A": "リモートワークはすべての企業に適している。",
+                  "B": "業種や職種に応じた制度設計と支援が重要である。",
+                  "C": "在宅勤務は生産性を必ず低下させる。",
+                  "D": "デジタルツールさえあれば問題はない。"
+                },
+                "correctAnswer": "B",
+                "explanation": "第2段落で「重要なのは〜制度設計と〜サポート」と述べている。",
+                "contentVi": "Tác giả nhấn mạnh điều gì nhất?"
+              },
+              {
+                "type": "READING",
+                "content": "調査結果について、本文と合っているものはどれか。",
+                "options": {
+                  "A": "全員が生産性の向上を実感している。",
+                  "B": "約四割が対面より生産性が上がったと答えた。",
+                  "C": "誰も生産性の変化を感じていない。",
+                  "D": "在宅勤務は法律で義務付けられている。"
+                },
+                "correctAnswer": "B",
+                "explanation": "「約四割が『対面より生産性が上がった』と回答」とある。",
+                "contentVi": "Kết quả khảo sát nào khớp bài?"
+              },
+              {
+                "type": "READING",
+                "content": "リモートワークの定着に必要なものとして、本文で述べられているのはどれか。",
+                "options": {
+                  "A": "オフィスの拡張のみ",
+                  "B": "通勤手当の廃止のみ",
+                  "C": "デジタルツールと心理的安全性の確保",
+                  "D": "海外への転勤制度"
+                },
+                "correctAnswer": "C",
+                "explanation": "最終段落でツール整備と心理的安全性の両方に言及。",
+                "contentVi": "Để làm việc từ xa bền vững cần gì theo bài?"
+              },
+              {
+                "type": "READING",
+                "content": "本文の内容と合わないものはどれか。",
+                "options": {
+                  "A": "リモートワークには課題もある。",
+                  "B": "業種によって効果は異なる場合がある。",
+                  "C": "コミュニケーション不足が指摘されることがある。",
+                  "D": "すべての企業で同じ結果が得られている。"
+                },
+                "correctAnswer": "D",
+                "explanation": "「一律の結論は得られない」とあり、Dは誤り。",
+                "contentVi": "Ý nào không khớp bài?"
+              },
+              {
+                "type": "READING",
+                "content": "「心理的安全性」とは、本文の文脈で最も近い意味はどれか。",
+                "options": {
+                  "A": "心療内科に通うこと",
+                  "B": "意見を言いやすい雰囲気づくり",
+                  "C": "メンタル疾患の治療",
+                  "D": "残業を禁止すること"
+                },
+                "correctAnswer": "B",
+                "explanation": "組織文化としての「安心して発言できる環境」というニュアンス。",
+                "contentVi": "「心理的安全性」trong bài gần nghĩa nào nhất?"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "LISTENING",
+          "name": "聴解",
+          "order": 4,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "passages": [
+            {
+              "title": "聴解 問題１（会話）",
+              "transcript": "女：すみません、この電車は新宿に止まりますか。\n男：はい、急行なので主要駅のみですが、新宿には止まりますよ。\n女：ありがとうございます。何番線ですか。\n男：５番線です。ホームの表示をご覧ください。\n（※音声は模擬データです。スクリプトを読んで解答してください。）",
+              "duration": 90,
+              "questions": [
+                {
+                  "type": "LISTENING",
+                  "content": "女の人が最終的に確認したいことは何か。\n\n※会話のスクリプトは画面上に表示されています。",
+                  "options": {
+                    "A": "新宿に停まるかどうか",
+                    "B": "急行かどうか",
+                    "C": "料金",
+                    "D": "始発時刻"
+                  },
+                  "correctAnswer": "A",
+                  "explanation": "最初の発話で新宿に停まるかを尋ねている。",
+                  "contentVi": "Người phụ nữ muốn xác nhận điều gì?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "男の人は何と言っているか。新宿について。",
+                  "options": {
+                    "A": "停まらない",
+                    "B": "停まる",
+                    "C": "わからない",
+                    "D": "乗り換えが必要"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「新宿には止まりますよ」。",
+                  "contentVi": "Về Shinjuku, người đàn ông nói gì?"
+                }
+              ]
+            },
+            {
+              "title": "聴解 問題２（アナウンス）",
+              "transcript": "アナウンス：お客様にお知らせいたします。ただいま強風のため、一部区間で徐行運転を行っております。このため、最大十分程度の遅れが見込まれます。ご理解のほどお願いいたします。\n（※模擬）",
+              "duration": 60,
+              "questions": [
+                {
+                  "type": "LISTENING",
+                  "content": "このアナウンスで伝えられている主な内容は何か。",
+                  "options": {
+                    "A": "運転見合わせ",
+                    "B": "遅れが出る可能性",
+                    "C": "路線の廃止",
+                    "D": "料金の値上げ"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「最大十分程度の遅れが見込まれます」。",
+                  "contentVi": "Nội dung chính của thông báo?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "遅れの原因は何と言っているか。",
+                  "options": {
+                    "A": "大雪",
+                    "B": "強風",
+                    "C": "地震",
+                    "D": "工事"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「強風のため」。",
+                  "contentVi": "Nguyên nhân chậm trễ được nêu là gì?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "アナウンスの目的として最も適切なものはどれか。",
+                  "options": {
+                    "A": "謝罪と状況説明",
+                    "B": "新商品の紹介",
+                    "C": "求人の案内",
+                    "D": "天気予報"
+                  },
+                  "correctAnswer": "A",
+                  "explanation": "遅延の理由と謝意のニュアンス。",
+                  "contentVi": "Mục đích thông báo phù hợp nhất?"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "JLPT N2 模擬試験 第2回",
+      "duration": 155,
+      "passTotalScaled": 90,
+      "jlptLevel": "N2",
+      "sections": [
+        {
+          "kind": "INLINE",
+          "name": "語彙",
+          "order": 1,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "questions": [
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "会社は新規事業の（　　）を発表した。\n\n1 着手　2 着手先　3 着手料　4 着手金",
+              "options": {
+                "A": "着手",
+                "B": "着手先",
+                "C": "着手料",
+                "D": "着手金"
+              },
+              "correctAnswer": "A",
+              "explanation": "「事業に着手する」→ 名詞化して「新規事業の着手」。",
+              "contentVi": "Công ty đã công bố (　　) kinh doanh mới."
+            },
+            {
+              "type": "VOCAB_MEANING",
+              "content": "「軽率」の意味に最も近い語はどれか。",
+              "options": {
+                "A": "慎重",
+                "B": "思慮深い",
+                "C": "軽率",
+                "D": "丁寧"
+              },
+              "correctAnswer": "C",
+              "explanation": "語義の確認（模擬設問）。",
+              "contentVi": "Từ gần nghĩa nhất với「軽率」?"
+            },
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "彼の発言は会議の（　　）を乱した。\n\n1 秩序　2 序列　3 順序　4 席順",
+              "options": {
+                "A": "秩序",
+                "B": "序列",
+                "C": "順序",
+                "D": "席順"
+              },
+              "correctAnswer": "A",
+              "explanation": "「秩序を乱す」は固定表現。",
+              "contentVi": "Phát biểu của anh ấy đã làm rối (　　) cuộc họp."
+            },
+            {
+              "type": "VOCAB_MEANING",
+              "content": "「〜に即して」の意味として適切なのはどれか。",
+              "options": {
+                "A": "〜に遅れて",
+                "B": "〜に応じて／〜にのっとって",
+                "C": "〜に反して",
+                "D": "〜に先立って"
+              },
+              "correctAnswer": "B",
+              "explanation": "「即して」＝に沿って、に即して。",
+              "contentVi": "Nghĩa đúng của「〜に即して」?"
+            },
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "手続きの詳細は、ホームページに（　　）されている。\n\n1 記載　2 記述　3 登録　4 掲示",
+              "options": {
+                "A": "記載",
+                "B": "記述",
+                "C": "登録",
+                "D": "掲示"
+              },
+              "correctAnswer": "A",
+              "explanation": "「ホームページに記載されている」はよく使う書き言葉。",
+              "contentVi": "Chi tiết thủ tục được (　　) trên trang chủ.",
+              "explanationVi": "「記載」— ghi, đăng nội dung (văn phong hành chính)."
+            }
+          ]
+        },
+        {
+          "kind": "INLINE",
+          "name": "文法",
+          "order": 2,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "questions": [
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "雨が降ってい（　　）、イベントは予定どおり開催された。\n\n1 ても　2 のに　3 から　4 ので",
+              "options": {
+                "A": "ても",
+                "B": "のに",
+                "C": "から",
+                "D": "ので"
+              },
+              "correctAnswer": "A",
+              "explanation": "「降っていても」＝ dù trời đang mưa.",
+              "contentVi": "Dù trời đang mưa (　　), sự kiện vẫn diễn ra đúng kế hoạch."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "結果が出る（　　）、もう少し待ちましょう。\n\n1 までに　2 うちに　3 末に　4 まで",
+              "options": {
+                "A": "までに",
+                "B": "うちに",
+                "C": "末に",
+                "D": "まで"
+              },
+              "correctAnswer": "D",
+              "explanation": "「出るまで待つ」。",
+              "contentVi": "Hãy đợi thêm cho đến khi có kết quả (　　)."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "この欄（　　）、ここに署名してください。\n\n1 に　2 を　3 で　4 から",
+              "options": {
+                "A": "に",
+                "B": "を",
+                "C": "で",
+                "D": "から"
+              },
+              "correctAnswer": "A",
+              "explanation": "「この欄に署名する」＝ ký vào ô này.",
+              "contentVi": "(　　) ô này, hãy ký tên vào đây."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "宿題が多い（　　）、どうしても間に合わなかった。\n\n1 ので　2 から　3 のに　4 くせに",
+              "options": {
+                "A": "ので",
+                "B": "から",
+                "C": "のに",
+                "D": "くせに"
+              },
+              "correctAnswer": "A",
+              "explanation": "「宿題が多いので」理由を述べる。",
+              "contentVi": "Vì bài tập nhiều (　　), không thể kịp dù thế nào."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "彼は来る（　　）来ないか、まだ連絡がない。\n\n1 やら　2 か　3 とも　4 かどうか",
+              "options": {
+                "A": "やら",
+                "B": "か",
+                "C": "とも",
+                "D": "かどうか"
+              },
+              "correctAnswer": "D",
+              "explanation": "「来るかどうか」＝ có đến hay không.",
+              "contentVi": "Chưa có liên lạc liệu anh ấy có đến (　　)."
+            }
+          ]
+        },
+        {
+          "kind": "READING",
+          "name": "読解",
+          "order": 3,
+          "duration": 50,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "passage": {
+            "title": "紙の本と電子書籍",
+            "contentJp": "　電子書籍の普及により、紙の本の売上は長期間にわたり減少傾向にある。しかし、紙の本は「所有の実感」や「書斎の雰囲気」といった価値を持ち、一定の需要が続いている。\n\n　出版業界では、紙と電子のハイブリッド戦略が主流になりつつある。初版のみ紙で出し、増刷や文庫化で電子版を拡販する例も多い。読者層やジャンルごとに最適な媒体を選ぶことが、売上の鍵だとされる。\n\n　筆者は、媒体の対立ではなく、補完関係を築くことが重要だと述べている。",
+            "contentVi": "Sách điện tử phổ biến làm doanh thu sách giấy giảm lâu dài. Nhưng sách giấy vẫn có giá trị như cảm giác sở hữu, không khí phòng sách, nên vẫn có cầu.\n\nNgành xuất bản đang theo chiến lược kết hợp giấy và điện tử. Nhiều trường hợp chỉ bản đầu in giấy, tái bản hoặc bản văn khối thì mở rộng ebook. Chọn phương tiện phù hợp theo độc giả và thể loại là chìa khóa doanh thu.\n\nTác giả cho rằng quan trọng là xây dựng quan hệ bổ sung, không phải đối lập giữa các phương tiện.",
+            "wordCount": 280,
+            "questions": [
+              {
+                "type": "READING",
+                "content": "紙の本について、本文が述べていることとして適切なのはどれか。",
+                "options": {
+                  "A": "完全に需要がなくなった。",
+                  "B": "一定の需要が残っている。",
+                  "C": "電子書籍より安価である。",
+                  "D": "図書館のみで販売される。"
+                },
+                "correctAnswer": "B",
+                "explanation": "「一定の需要が続いている」。",
+                "contentVi": "Điều nào đúng về sách giấy theo bài?"
+              },
+              {
+                "type": "READING",
+                "content": "ハイブリッド戦略の例として本文に挙げられているのはどれか。",
+                "options": {
+                  "A": "紙のみで完結する",
+                  "B": "初版のみ紙で、その後電子版を拡販する場合がある",
+                  "C": "電子のみを初版にする",
+                  "D": "海外のみで販売する"
+                },
+                "correctAnswer": "B",
+                "explanation": "第2段落に具体例。",
+                "contentVi": "Ví dụ chiến lược hybrid trong bài?"
+              },
+              {
+                "type": "READING",
+                "content": "筆者が最も重視している考え方はどれか。",
+                "options": {
+                  "A": "紙を廃止すべき",
+                  "B": "電子のみを推進すべき",
+                  "C": "媒体の補完関係",
+                  "D": "価格競争のみ"
+                },
+                "correctAnswer": "C",
+                "explanation": "最終文「補完関係を築く」。",
+                "contentVi": "Tác giả coi trọng nhất quan điểm nào?"
+              },
+              {
+                "type": "READING",
+                "content": "「売上の鍵」とあるが、本文においてそれは何を指すか。",
+                "options": {
+                  "A": "広告費の削減",
+                  "B": "読者層やジャンルに合わせた媒体選択",
+                  "C": "店舗数の増加",
+                  "D": "著者の知名度のみ"
+                },
+                "correctAnswer": "B",
+                "explanation": "「読者層やジャンルごとに最適な媒体を選ぶこと」。",
+                "contentVi": "「Chìa khóa doanh thu」trong bài chỉ gì?"
+              },
+              {
+                "type": "READING",
+                "content": "本文の内容と一致しないものはどれか。",
+                "options": {
+                  "A": "電子書籍の普及が紙の売上に影響した。",
+                  "B": "紙の本には紙ならではの価値がある。",
+                  "C": "業界はハイブリッド戦略を取りつつある。",
+                  "D": "紙の本はもう誰も買わない。"
+                },
+                "correctAnswer": "D",
+                "explanation": "Dは本文と矛盾。",
+                "contentVi": "Ý nào không khớp bài?"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "LISTENING",
+          "name": "聴解",
+          "order": 4,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "passages": [
+            {
+              "title": "聴解 店舗でのやりとり",
+              "transcript": "店員：いらっしゃいませ。お探しのものはございますか。\n客：このコートのＭサイズはありますか。\n店員：申し訳ございません。人気商品のため、本日は在庫がございません。来週の火曜日に再入荷予定です。\n客：わかりました。では取り寄せをお願いできますか。\n店員：かしこまりました。お名前とお電話番号をこちらに。\n（※模擬）",
+              "duration": 100,
+              "questions": [
+                {
+                  "type": "LISTENING",
+                  "content": "客が最初に尋ねていることは何か。",
+                  "options": {
+                    "A": "値段",
+                    "B": "サイズの在庫",
+                    "C": "色の種類",
+                    "D": "支払い方法"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「Ｍサイズはありますか」。",
+                  "contentVi": "Khách hỏi gì đầu tiên?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "店員の説明として正しいものはどれか。",
+                  "options": {
+                    "A": "本日在庫がある",
+                    "B": "本日は在庫がない",
+                    "C": "取り寄せはできない",
+                    "D": "商品は廃盤だ"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「本日は在庫がございません」。",
+                  "contentVi": "Nhân viên giải thích đúng là gì?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "再入荷はいつ頃か。",
+                  "options": {
+                    "A": "明日",
+                    "B": "来週火曜",
+                    "C": "来月",
+                    "D": "未定"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「来週の火曜日に再入荷予定」。",
+                  "contentVi": "Hàng nhập lại khi nào?"
+                }
+              ]
+            },
+            {
+              "title": "聴解 電話の予約",
+              "transcript": "女：もしもし、レストラン・はるみです。\n男：あのう、今週金曜の夜７時から４名なんですが、予約できますか。\n女：少々お待ちください。…はい、７時から大丈夫です。お名前とお電話番号をお願いします。\n男：山田です。電話は０９０の…\n（※模擬）",
+              "duration": 80,
+              "questions": [
+                {
+                  "type": "LISTENING",
+                  "content": "男の人が希望しているのはどれか。",
+                  "options": {
+                    "A": "ランチ　２名",
+                    "B": "金曜夜７時　４名",
+                    "C": "土曜の昼",
+                    "D": "当日ウォークインのみ"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「今週金曜の夜７時から４名」。",
+                  "contentVi": "Người đàn ông muốn đặt chỗ như thế nào?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "店の返答はどれか。",
+                  "options": {
+                    "A": "満席で断る",
+                    "B": "７時から予約可能と言う",
+                    "C": "７時は不可",
+                    "D": "４名は不可"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「７時から大丈夫です」。",
+                  "contentVi": "Nhà hàng trả lời thế nào?"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "JLPT N2 模擬試験 第3回",
+      "duration": 155,
+      "passTotalScaled": 90,
+      "jlptLevel": "N2",
+      "sections": [
+        {
+          "kind": "INLINE",
+          "name": "語彙",
+          "order": 1,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "questions": [
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "国際会議では各国の（　　）が交わされた。\n\n1 意見　2 意向　3 意図　4 意志",
+              "options": {
+                "A": "意見",
+                "B": "意向",
+                "C": "意図",
+                "D": "意志"
+              },
+              "correctAnswer": "A",
+              "explanation": "「意見が交わされる」はよく使う表現。",
+              "contentVi": "Tại hội nghị quốc tế, (　　) các nước được trao đổi."
+            },
+            {
+              "type": "VOCAB_MEANING",
+              "content": "「淡々と」の使い方として適切な文はどれか。",
+              "options": {
+                "A": "淡々としたカレーを食べた。",
+                "B": "淡々と事実だけを述べた。",
+                "C": "淡々と走ってゴールした。",
+                "D": "淡々と大声で叫んだ。"
+              },
+              "correctAnswer": "B",
+              "explanation": "「淡々と」は感情を抑えた様子に。",
+              "contentVi": "Câu nào dùng「淡々と」đúng?"
+            },
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "この地域は（　　）が緩く、地震の際に液状化の恐れがある。\n\n1 地盤　2 地面　3 地層　4 地図",
+              "options": {
+                "A": "地盤",
+                "B": "地面",
+                "C": "地層",
+                "D": "地図"
+              },
+              "correctAnswer": "A",
+              "explanation": "「地盤が緩い」＝ nền đất yếu.",
+              "contentVi": "Vùng này (　　) yếu, có nguy cơ hóa lỏng khi động đất."
+            },
+            {
+              "type": "VOCAB_MEANING",
+              "content": "「赴任」の意味として最も適切なものはどれか。",
+              "options": {
+                "A": "会社を辞めること",
+                "B": "新しい勤務地に行くこと",
+                "C": "出張で一時的に行くこと",
+                "D": "休暇を取ること"
+              },
+              "correctAnswer": "B",
+              "explanation": "「赴任」＝ nhận chức ở nơi mới.",
+              "contentVi": "「赴任」nghĩa phù hợp nhất?"
+            },
+            {
+              "type": "VOCAB_FILL_BLANK",
+              "content": "首相は記者団の（　　）に、一つひとつ丁寧に答えた。\n\n1 質問　2 質疑　3 問答　4 問い合わせ",
+              "options": {
+                "A": "質問",
+                "B": "質疑",
+                "C": "問答",
+                "D": "問い合わせ"
+              },
+              "correctAnswer": "B",
+              "explanation": "「記者団の質疑」は公式の場でよく使う表現。",
+              "contentVi": "Thủ tướng trả lời từng (　　) của đoàn phóng viên một cách cẩn thận."
+            }
+          ]
+        },
+        {
+          "kind": "INLINE",
+          "name": "文法",
+          "order": 2,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "questions": [
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "彼は天才（　　）、努力家でもある。\n\n1 にしては　2 にあっては　3 であるとともに　4 にわたって",
+              "options": {
+                "A": "にしては",
+                "B": "にあっては",
+                "C": "であるとともに",
+                "D": "にわたって"
+              },
+              "correctAnswer": "C",
+              "explanation": "「天才であるとともに努力家」＝ vừa… vừa.",
+              "contentVi": "Anh ấy vừa là thiên tài (　　) còn là người chăm chỉ."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "この件（　　）、後日改めてご連絡いたします。\n\n1 に際して　2 については　3 にあたり　4 に即して",
+              "options": {
+                "A": "に際して",
+                "B": "については",
+                "C": "にあたり",
+                "D": "に即して"
+              },
+              "correctAnswer": "B",
+              "explanation": "「この件については」＝ về việc này.",
+              "contentVi": "Về việc này (　　), sau sẽ liên hệ lại."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "子ども（　　）わかるような説明をしてください。\n\n1 にも　2 だって　3 でも　4 にもかかわらず",
+              "options": {
+                "A": "にも",
+                "B": "だって",
+                "C": "でも",
+                "D": "にもかかわらず"
+              },
+              "correctAnswer": "C",
+              "explanation": "「子どもでもわかる」＝ ngay cả trẻ em cũng hiểu.",
+              "contentVi": "Hãy giải thích sao cho (　　) trẻ em cũng hiểu."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "会議は三時（　　）始まります。\n\n1 から　2 まで　3 に　4 で",
+              "options": {
+                "A": "から",
+                "B": "まで",
+                "C": "に",
+                "D": "で"
+              },
+              "correctAnswer": "A",
+              "explanation": "「三時から始まる」時の起点。",
+              "contentVi": "Cuộc họp bắt đầu (　　) ba giờ."
+            },
+            {
+              "type": "GRAMMAR_MULTIPLE",
+              "content": "彼は来る（　　）来ないか、はっきりしなかった。\n\n1 か　2 のか　3 やら　4 かどうか",
+              "options": {
+                "A": "か",
+                "B": "のか",
+                "C": "やら",
+                "D": "かどうか"
+              },
+              "correctAnswer": "D",
+              "explanation": "「来るかどうか」が最も自然。",
+              "contentVi": "Không rõ anh ấy có đến (　　)."
+            }
+          ]
+        },
+        {
+          "kind": "READING",
+          "name": "読解",
+          "order": 3,
+          "duration": 50,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "passage": {
+            "title": "睡眠と記憶",
+            "contentJp": "　睡眠は体の休息だけでなく、記憶の固定にも関わることが研究で示されている。特にレム睡眠と非レム睡眠の役割の違いが注目されている。\n\n　学習直後に短時間でも睡眠を取ると、想起しやすくなるという報告もある。逆に徹夜で学習を続けると、同じ時間をかけても定着が悪くなる傾向がある。\n\n　筆者は、効率を求めるあまり睡眠を削るのは得策ではないと結論づけている。",
+            "contentVi": "Nghi cứu cho thấy giấc ngủ không chỉ nghỉ ngơi mà còn liên quan củng cố trí nhớ. Vai trò khác nhau của REM và NREM được chú ý.\n\nBáo cáo: ngay sau học, ngủ dù ngắn cũng giúp nhớ lại dễ hơn. Ngược lại, thức khuya học dù cùng thời gian thì ghi nhớ kém hơn.\n\nTác giả kết luận: cắt giấc ngủ vì cầu hiệu quả không phải cách hay.",
+            "wordCount": 240,
+            "questions": [
+              {
+                "type": "READING",
+                "content": "本文で述べられている睡眠の役割として適切でないものはどれか。",
+                "options": {
+                  "A": "体の休息",
+                  "B": "記憶の固定に関わる",
+                  "C": "学習内容の想起を助ける場合がある",
+                  "D": "徹夜を推奨する"
+                },
+                "correctAnswer": "D",
+                "explanation": "徹夜は定着が悪いとあり、推奨していない。",
+                "contentVi": "Vai trò giấc ngủ nào KHÔNG phù hợp bài?"
+              },
+              {
+                "type": "READING",
+                "content": "徹夜で学習を続けた場合、本文はどう述べているか。",
+                "options": {
+                  "A": "最も効果が高い",
+                  "B": "定着が悪くなる傾向がある",
+                  "C": "レム睡眠が増える",
+                  "D": "記憶に影響しない"
+                },
+                "correctAnswer": "B",
+                "explanation": "「定着が悪くなる傾向がある」。",
+                "contentVi": "Học thức đêm thì sao theo bài?"
+              },
+              {
+                "type": "READING",
+                "content": "筆者の結論に最も近いものはどれか。",
+                "options": {
+                  "A": "睡眠は無駄な時間である",
+                  "B": "睡眠を削るのは得策ではない",
+                  "C": "徹夜は誰にでも有効である",
+                  "D": "レム睡眠だけが重要である"
+                },
+                "correctAnswer": "B",
+                "explanation": "最終段落。",
+                "contentVi": "Kết luận của tác giả gần ý nào nhất?"
+              },
+              {
+                "type": "READING",
+                "content": "「レム睡眠と非レム睡眠」について本文は何と言っているか。",
+                "options": {
+                  "A": "どちらも同じ役割である",
+                  "B": "役割の違いが注目されている",
+                  "C": "非レムのみが記憶に関係する",
+                  "D": "本文では触れていない"
+                },
+                "correctAnswer": "B",
+                "explanation": "第1段落後半。",
+                "contentVi": "Bài nói gì về REM và NREM?"
+              },
+              {
+                "type": "READING",
+                "content": "学習直後に短時間睡眠を取ることについて、本文の述べ方として正しいものはどれか。",
+                "options": {
+                  "A": "有害だと断じている",
+                  "B": "想起しやすくなるという報告がある",
+                  "C": "効果はないとしている",
+                  "D": "三時間以上必要だとしている"
+                },
+                "correctAnswer": "B",
+                "explanation": "第2段落。",
+                "contentVi": "Ngủ ngắn ngay sau học — bài nói thế nào?"
+              }
+            ]
+          }
+        },
+        {
+          "kind": "LISTENING",
+          "name": "聴解",
+          "order": 4,
+          "duration": 35,
+          "scaledMax": 45,
+          "minimumPassScaled": 14,
+          "passages": [
+            {
+              "title": "聴解 会社の打ち合わせ",
+              "transcript": "男１：来週のプレゼン、資料の構成はこれでいいかな。\n男２：いいと思うけど、グラフの凡例が小さすぎるよ。投影したとき見えない。\n男１：了解。凡例を大きくして、色も濃くしよう。\n男２：あと、結論は最初に一言まとめておいた方がいい。\n（※模擬）",
+              "duration": 85,
+              "questions": [
+                {
+                  "type": "LISTENING",
+                  "content": "男２が指摘している問題は何か。",
+                  "options": {
+                    "A": "ページ数が多すぎる",
+                    "B": "グラフの凡例が小さすぎる",
+                    "C": "スライドが少なすぎる",
+                    "D": "字体が大きすぎる"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「凡例が小さすぎる」。",
+                  "contentVi": "Người thứ hai chỉ ra vấn đề gì?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "男１は何をするつもりか。",
+                  "options": {
+                    "A": "プレゼンを中止する",
+                    "B": "凡例を大きくし色を濃くする",
+                    "C": "資料を破棄する",
+                    "D": "グラフを削除する"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「凡例を大きくして、色も濃くしよう」。",
+                  "contentVi": "Người thứ nhất định làm gì?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "男２の提案として述べられているものはどれか。",
+                  "options": {
+                    "A": "結論を最後だけに書く",
+                    "B": "結論を最初に一言まとめる",
+                    "C": "結論を書かない",
+                    "D": "結論を口頭のみにする"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「結論は最初に一言まとめて」。",
+                  "contentVi": "Đề xuất thứ hai về kết luận?"
+                }
+              ]
+            },
+            {
+              "title": "聴解 駅の案内",
+              "transcript": "アナウンス：３番線到着の快速、扉が閉まります。ご注意ください。次は終点です。お忘れ物のないようご確認ください。\n（※模擬）",
+              "duration": 40,
+              "questions": [
+                {
+                  "type": "LISTENING",
+                  "content": "この電車の次の停車駅について、正しいものはどれか。",
+                  "options": {
+                    "A": "次は終点である",
+                    "B": "次は始発駅である",
+                    "C": "次は乗り換えのみ",
+                    "D": "次は通過する"
+                  },
+                  "correctAnswer": "A",
+                  "explanation": "「次は終点です」。",
+                  "contentVi": "Ga tiếp theo đúng là gì?"
+                },
+                {
+                  "type": "LISTENING",
+                  "content": "アナウンスで乗客に求めていることは何か。",
+                  "options": {
+                    "A": "席を譲ること",
+                    "B": "お忘れ物の確認",
+                    "C": "静かにすること",
+                    "D": "次の駅で降りること"
+                  },
+                  "correctAnswer": "B",
+                  "explanation": "「お忘れ物のないようご確認」。",
+                  "contentVi": "Thông báo yêu cầu hành khách điều gì?"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

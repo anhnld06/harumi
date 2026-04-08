@@ -5,7 +5,7 @@ import { NoData } from '@/components/ui/no-data';
 
 export default async function ListeningPage() {
   const passages = await prisma.listeningPassage.findMany({
-    where: { level: 'N2' },
+    where: { level: 'N2', libraryVisible: true },
     orderBy: { createdAt: 'desc' },
     take: 20,
   });
@@ -23,7 +23,7 @@ export default async function ListeningPage() {
         <CardContent>
           {passages.length === 0 ? (
             <NoData
-              description="Run database seed to add listening passages"
+              description="No listening passages found"
             />
           ) : (
             <div className="space-y-4">

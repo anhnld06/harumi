@@ -7,6 +7,9 @@ declare module 'next-auth' {
       email?: string | null;
       name?: string | null;
       image?: string | null;
+      creditBalance: number;
+      planTier: string | null;
+      planExpiresAt: string | null;
     };
   }
 }

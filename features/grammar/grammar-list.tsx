@@ -45,8 +45,8 @@ export function GrammarList({
         <CardContent>
           {items.length === 0 ? (
             <NoData
-              message={search ? 'Không tìm thấy ngữ pháp phù hợp' : 'Chưa có dữ liệu'}
-              description={search ? `Thử từ khóa khác cho "${search}"` : 'Chạy database seed để thêm ngữ pháp'}
+              message={'No data found'}
+              description={search ? `Try a different keyword for "${search}"` : 'No grammar found'}
             />
           ) : (
             <div className="flex flex-col gap-4">

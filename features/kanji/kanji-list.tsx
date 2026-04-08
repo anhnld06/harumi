@@ -45,7 +45,7 @@ export function KanjiList({
         <CardContent>
           {items.length === 0 ? (
             <NoData
-              description={search ? `Try a different keyword for "${search}"` : 'Run database seed to add kanji'}
+              description={search ? `Try a different keyword for "${search}"` : 'No kanji found'}
             />
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

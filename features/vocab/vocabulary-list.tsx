@@ -85,7 +85,7 @@ export function VocabularyList({
           {items.length === 0 ? (
             <NoData
               message={'No data found'}
-              description={search ? `Try a different keyword for "${search}"` : 'Run database seed to add vocabulary'}
+              description={search ? `Try a different keyword for "${search}"` : 'No vocabulary found'}
             />
           ) : (
             <div className="space-y-2">

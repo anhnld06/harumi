@@ -1,6 +1,10 @@
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import {
+  isFreePublicMockTestTitle,
+  userCanAccessPremiumMockTests,
+} from '@/lib/mock-test/mock-test-access';
 import { getMockTestWithQuestions } from '@/server/services/mock-test.service';
 import { prisma } from '@/lib/db';
 import { MockTestRunner } from '@/features/mock-test/mock-test-runner';
@@ -16,6 +20,13 @@ export default async function MockTestTakePage({
 
   const test = await getMockTestWithQuestions(id);
   if (!test) notFound();
+
+  if (
+    !isFreePublicMockTestTitle(test.title) &&
+    !userCanAccessPremiumMockTests(session?.user?.planTier, session?.user?.planExpiresAt)
+  ) {
+    redirect('/mock-test');
+  }
 
   let attempt = userId
     ? await prisma.testAttempt.findFirst({
@@ -34,13 +45,8 @@ export default async function MockTestTakePage({
   }
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">{test.title}</h1>
-      <MockTestRunner
-        test={test}
-        attemptId={attempt?.id ?? ''}
-        userId={userId ?? ''}
-      />
+    <div className="space-y-6 pb-10">
+      <MockTestRunner test={test} attemptId={attempt?.id ?? ''} />
     </div>
   );
 }

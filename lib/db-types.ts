@@ -3,6 +3,22 @@
  * Use these for component props when @prisma/client types aren't resolving.
  */
 
+import type { CertificateTemplate } from '@/lib/certificate/constants';
+
+export type UserCertificate = {
+  id: string;
+  userId: string;
+  mockTestId: string;
+  attemptId: string;
+  template: CertificateTemplate;
+  recipientName: string;
+  courseTitle: string;
+  scoreText: string;
+  certificateNo: string;
+  issuedAt: Date;
+  updatedAt: Date;
+};
+
 export type Kanji = {
   id: string;
   character: string;
@@ -50,6 +66,8 @@ export type ReadingPassage = {
   title: string;
   content: string;
   level: string;
+  /** false when passage is mock-test-only (not shown in Reading module) */
+  libraryVisible: boolean;
   wordCount: number | null;
   contentVi: string | null;
   footnotes: unknown | null;
@@ -83,7 +101,8 @@ export type MockTest = {
   id: string;
   title: string;
   duration: number;
-  passScore: number;
+  passTotalScaled: number;
+  jlptLevel: string | null;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -95,6 +114,8 @@ export type MockTestSection = {
   order: number;
   duration: number;
   questionCount: number;
+  scaledMax: number;
+  minimumPassScaled: number;
 };
 
 export type QuestionType =
