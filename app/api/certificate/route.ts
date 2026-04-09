@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 import { authOptions } from '@/lib/auth';
-import { prisma } from '@/lib/db';
 import { issueOrUpdateCertificate, listUserCertificates } from '@/server/services/certificate.service';
+import { getCertificateRecipientName } from '@/server/services/user.service';
 
 const postSchema = z.object({
   attemptId: z.string().min(1),
@@ -34,14 +34,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { name: true, email: true },
-    });
-    const recipientName =
-      user?.name?.trim() ||
-      user?.email?.split('@')[0] ||
-      'Student';
+    const recipientName = await getCertificateRecipientName(userId);
 
     const certificate = await issueOrUpdateCertificate({
       userId,

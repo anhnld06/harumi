@@ -323,7 +323,7 @@ export function HarumiChat() {
             className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-5 md:px-6"
           >
             {messages.length === 0 && !streaming && !loading && (
-              <div className="flex flex-col items-center gap-5 py-4">
+              <div className="flex flex-col items-center gap-5">
                 <div className="grid w-full max-w-lg grid-cols-1 gap-3 sm:grid-cols-2">
                   {suggestions.map((s) => (
                     <button

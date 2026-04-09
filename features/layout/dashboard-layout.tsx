@@ -59,8 +59,8 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <SidebarUser collapsed={sidebarCollapsed} />
       </aside>
 
-      <main className="min-h-0 flex-1 overflow-auto">
-        <header className="sticky top-0 z-10 flex h-16 items-center border-b bg-background/95 backdrop-blur px-4 md:hidden">
+      <main className="relative flex min-h-0 flex-1 flex-col overflow-auto">
+        <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center border-b bg-background/95 backdrop-blur px-4 md:hidden">
           <Button variant="ghost" size="icon">
             <Menu className="h-6 w-6" />
           </Button>
@@ -68,10 +68,10 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             <Logo href="/dashboard" height={36} width={120} className="max-h-full" />
           </div>
         </header>
-        <div className="fixed top-4 right-4 z-50">
+        <div className="absolute right-4 top-4 z-50">
           <ThemeSwitch />
         </div>
-        <div className="p-4 md:p-8">{children}</div>
+        <div className="flex min-h-0 flex-1 flex-col p-4 md:p-8">{children}</div>
       </main>
       <SendFeedbackModal open={feedbackOpen} onOpenChange={setFeedbackOpen} />
     </div>

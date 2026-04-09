@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { prisma } from '@/lib/db';
 import { verifyEmailWithCode } from '@/server/services/email-verification.service';
 import { createPostVerifyHandoff } from '@/server/services/post-verify-handoff.service';
+import { getUserIdByEmail } from '@/server/services/user.service';
 
 const bodySchema = z.object({
   email: z.string().email('Invalid email'),
@@ -32,11 +32,8 @@ export async function POST(request: Request) {
     const result = await verifyEmailWithCode(email, raw);
 
     if (result === 'ok') {
-      const u = await prisma.user.findUnique({
-        where: { email },
-        select: { id: true },
-      });
-      const handoffToken = u ? await createPostVerifyHandoff(u.id) : null;
+      const userId = await getUserIdByEmail(email);
+      const handoffToken = userId ? await createPostVerifyHandoff(userId) : null;
       return NextResponse.json({ ok: true, handoffToken });
     }
     if (result === 'expired') {

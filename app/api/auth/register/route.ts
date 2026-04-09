@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
-import { prisma } from '@/lib/db';
 import { issueAndSendEmailVerification } from '@/server/services/email-verification.service';
+import { createUserWithCredentials, findUserByEmail } from '@/server/services/user.service';
 
 const registerSchema = z.object({
   email: z.string().email('Invalid email'),
@@ -24,9 +24,7 @@ export async function POST(request: Request) {
 
     const { email, password, name } = parsed.data;
 
-    const existing = await prisma.user.findUnique({
-      where: { email },
-    });
+    const existing = await findUserByEmail(email);
 
     if (existing) {
       return NextResponse.json(
@@ -37,17 +35,10 @@ export async function POST(request: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const user = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        name: name ?? null,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-      },
+    const user = await createUserWithCredentials({
+      email,
+      hashedPassword,
+      name: name ?? null,
     });
 
     const verificationSent = (await issueAndSendEmailVerification(email)) === 'sent';

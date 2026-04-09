@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { toggleBookmark } from '@/server/services/vocabulary.service';
-import { prisma } from '@/lib/db';
+import { userExistsById } from '@/server/services/user.service';
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -13,11 +13,8 @@ export async function POST(request: Request) {
   const userId = session.user.id;
 
   // Verify user exists (handles stale JWT after DB reset or OAuth ID mismatch)
-  const userExists = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { id: true },
-  });
-  if (!userExists) {
+  const exists = await userExistsById(userId);
+  if (!exists) {
     return NextResponse.json(
       { error: 'Session expired. Please sign in again.' },
       { status: 401 }

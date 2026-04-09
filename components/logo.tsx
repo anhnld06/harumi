@@ -39,7 +39,7 @@ export function Logo({
       <Link
         href={href}
         className={cn(
-          'inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded',
+          'inline-flex items-center justify-center focus:outline-none',
           className
         )}
       >

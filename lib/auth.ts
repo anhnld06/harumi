@@ -5,6 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import { prisma } from '@/lib/db';
 import bcrypt from 'bcryptjs';
+import { getSessionPlanFields } from '@/server/services/user.service';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -60,22 +61,39 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
+    async jwt({ token, user, trigger }) {
+      const userId = (user?.id ?? token.id) as string | undefined;
+      if (!userId) return token;
+
+      token.id = userId;
+
+      const shouldRefreshPlan =
+        user != null ||
+        trigger === 'update' ||
+        token.creditBalance === undefined;
+
+      if (shouldRefreshPlan) {
+        const plan = await getSessionPlanFields(userId);
+        token.creditBalance = plan.creditBalance;
+        token.planTier = plan.planTier;
+        token.planExpiresAt = plan.planExpiresAt;
       }
+
       return token;
     },
     async session({ session, token }) {
       if (session.user && token.id) {
         session.user.id = token.id as string;
-        const u = await prisma.user.findUnique({
-          where: { id: token.id as string },
-          select: { creditBalance: true, planTier: true, planExpiresAt: true },
-        });
-        session.user.creditBalance = u?.creditBalance ?? 0;
-        session.user.planTier = u?.planTier ?? null;
-        session.user.planExpiresAt = u?.planExpiresAt?.toISOString() ?? null;
+        session.user.creditBalance =
+          typeof token.creditBalance === 'number' ? token.creditBalance : 0;
+        session.user.planTier =
+          typeof token.planTier === 'string' || token.planTier === null
+            ? token.planTier
+            : null;
+        session.user.planExpiresAt =
+          typeof token.planExpiresAt === 'string' || token.planExpiresAt === null
+            ? token.planExpiresAt
+            : null;
       }
       return session;
     },

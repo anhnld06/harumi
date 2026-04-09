@@ -10,7 +10,7 @@ import {
   CERTIFICATE_TEMPLATES,
   type CertificateTemplateId,
 } from '@/lib/certificate/constants';
-import { Check } from 'lucide-react';
+import { Check, Loader2 } from 'lucide-react';
 
 export function CertificateSelectClient({
   attemptId,
@@ -88,8 +88,15 @@ export function CertificateSelectClient({
       {error && <p className="text-sm text-destructive">{error}</p>}
 
       <div className="flex flex-wrap gap-3">
-        <Button type="button" size="lg" disabled={busy} onClick={onContinue}>
-          {busy ? '…' : t('certificate.continue')}
+        <Button type="button" size="lg" disabled={busy} onClick={onContinue} className="gap-2">
+          {busy ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
+              {t('certificate.issuing')}
+            </>
+          ) : (
+            t('certificate.continue')
+          )}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.back()}>
           {t('certificate.back')}

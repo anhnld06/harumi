@@ -3,9 +3,8 @@ import { z } from 'zod';
 import { sendPasswordResetEmail } from '@/lib/mail';
 import {
   createPasswordResetToken,
-  passwordResetIdentifier,
+  deletePasswordResetTokensForEmail,
 } from '@/server/services/password-reset.service';
-import { prisma } from '@/lib/db';
 
 const bodySchema = z.object({
   email: z.string().email('Invalid email'),
@@ -38,9 +37,7 @@ export async function POST(request: Request) {
 
     const mail = await sendPasswordResetEmail(email, resetUrl);
     if (!mail.ok) {
-      await prisma.verificationToken.deleteMany({
-        where: { identifier: passwordResetIdentifier(email) },
-      });
+      await deletePasswordResetTokensForEmail(email);
       console.error('[forgot-password] email delivery failed:', mail.error);
     }
 

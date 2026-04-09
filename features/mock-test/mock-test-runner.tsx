@@ -2,7 +2,7 @@
 
 import { Fragment, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { AlertCircle, BookOpen, Clock, Headphones, Save } from 'lucide-react';
+import { AlertCircle, BookOpen, Clock, Headphones, Loader2, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -100,6 +100,7 @@ export function MockTestRunner({ test, attemptId }: MockTestRunnerProps) {
   const [submitted, setSubmitted] = useState(false);
   const [showTop, setShowTop] = useState(false);
   const [confirmSubmitOpen, setConfirmSubmitOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const submittingRef = useRef(false);
   const submitRef = useRef<(opts?: { timeUp?: boolean }) => Promise<void>>();
 
@@ -165,6 +166,7 @@ export function MockTestRunner({ test, attemptId }: MockTestRunnerProps) {
       submittingRef.current = true;
       if (timeUp) toast(t('mockTest.timesUp'));
       setSubmitted(true);
+      setIsSubmitting(true);
 
       const answerList = Object.entries(answers).map(([questionId, userAnswer]) => ({
         questionId,
@@ -182,6 +184,7 @@ export function MockTestRunner({ test, attemptId }: MockTestRunnerProps) {
           console.error('Submit failed:', payload.error ?? res.status);
           toast(t('mockTest.submitFailed'));
           setSubmitted(false);
+          setIsSubmitting(false);
           return;
         }
         if (draftKey && typeof window !== 'undefined') {
@@ -194,6 +197,7 @@ export function MockTestRunner({ test, attemptId }: MockTestRunnerProps) {
         router.push(`/mock-test/${test.id}/result?attempt=${attemptId}`);
       } catch {
         setSubmitted(false);
+        setIsSubmitting(false);
         toast(t('mockTest.submitFailed'));
       } finally {
         submittingRef.current = false;
@@ -417,16 +421,23 @@ export function MockTestRunner({ test, attemptId }: MockTestRunnerProps) {
               <Button
                 type="button"
                 className="h-11 w-full rounded-xl bg-rose-600 text-base font-semibold text-white shadow-md hover:bg-rose-700"
-                disabled={submitted || !attemptId}
+                disabled={submitted || !attemptId || isSubmitting}
                 onClick={openSubmitConfirm}
               >
-                {t('mockTest.submit')}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden />
+                    {t('mockTest.submitting')}
+                  </>
+                ) : (
+                  t('mockTest.submit')
+                )}
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 className="h-11 w-full rounded-xl border-slate-300 font-semibold"
-                disabled={submitted || !attemptId}
+                disabled={submitted || !attemptId || isSubmitting}
                 onClick={saveDraft}
               >
                 <Save className="mr-2 h-4 w-4" aria-hidden />
@@ -511,6 +522,22 @@ export function MockTestRunner({ test, attemptId }: MockTestRunnerProps) {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {isSubmitting && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm"
+          role="status"
+          aria-live="polite"
+          aria-labelledby="mock-submit-loading-title"
+        >
+          <div className="mx-4 flex max-w-sm flex-col items-center gap-4 rounded-2xl border bg-card px-8 py-8 text-center shadow-xl">
+            <Loader2 className="h-10 w-10 animate-spin text-primary" aria-hidden />
+            <p id="mock-submit-loading-title" className="text-base font-semibold text-foreground">
+              {t('mockTest.submitting')}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

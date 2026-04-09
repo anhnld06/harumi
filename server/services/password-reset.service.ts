@@ -38,6 +38,12 @@ export async function createPasswordResetToken(email: string): Promise<string | 
   return token;
 }
 
+/** Remove pending reset tokens after failed email delivery (same identifier as create). */
+export async function deletePasswordResetTokensForEmail(email: string): Promise<void> {
+  const identifier = passwordResetIdentifier(email);
+  await prisma.verificationToken.deleteMany({ where: { identifier } });
+}
+
 /** Validates token and returns email, or null if invalid/expired. Does not delete the token. */
 export async function peekPasswordResetEmail(
   token: string

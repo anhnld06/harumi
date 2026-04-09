@@ -8,10 +8,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AuthLayout } from '@/components/auth/auth-layout';
-import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, Loader2 } from 'lucide-react';
 import { FcGoogle } from 'react-icons/fc';
+import { useLanguage } from '@/lib/i18n/language-context';
 
 export default function RegisterPage() {
+  const { t } = useLanguage();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +22,7 @@ export default function RegisterPage() {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [oauthLoading, setOauthLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -72,11 +75,19 @@ export default function RegisterPage() {
         <Button
           type="button"
           variant="outline"
-          className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-          onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+          className="flex h-12 w-full items-center justify-center gap-2 rounded-full border-white/40 bg-white/5 text-white hover:bg-white/10 hover:text-white disabled:opacity-70"
+          disabled={oauthLoading || loading}
+          onClick={() => {
+            setOauthLoading(true);
+            void signIn('google', { callbackUrl: '/dashboard' }).catch(() => setOauthLoading(false));
+          }}
         >
-          <FcGoogle className="h-5 w-5 shrink-0" />
-          Continue with Google
+          {oauthLoading ? (
+            <Loader2 className="h-5 w-5 shrink-0 animate-spin" aria-hidden />
+          ) : (
+            <FcGoogle className="h-5 w-5 shrink-0" />
+          )}
+          {oauthLoading ? t('auth.oauthRedirecting') : 'Continue with Google'}
         </Button>
 
         <div className="flex items-center gap-3 py-1">

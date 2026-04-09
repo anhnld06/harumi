@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { BookOpen, ChevronLeft, ChevronRight, Search, Star } from 'lucide-react';
+import { BookOpen, ChevronLeft, ChevronRight, Loader2, Search, Star } from 'lucide-react';
 import { NoData } from '@/components/ui/no-data';
 import { SpeakButton } from '@/components/speak-button';
 import { Button } from '@/components/ui/button';
@@ -135,9 +135,11 @@ function VocabRow({
   initialBookmarked?: boolean;
 }) {
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
+  const [bookmarkSaving, setBookmarkSaving] = useState(false);
 
   async function handleBookmark() {
-    if (!userId) return;
+    if (!userId || bookmarkSaving) return;
+    setBookmarkSaving(true);
     try {
       const res = await fetch('/api/vocab/bookmark', {
         method: 'POST',
@@ -148,6 +150,8 @@ function VocabRow({
       if (res.ok) setBookmarked(data.bookmarked);
     } catch {
       // ignore
+    } finally {
+      setBookmarkSaving(false);
     }
   }
 
@@ -182,8 +186,19 @@ function VocabRow({
           variant="ghost"
           size="icon"
         />
-        <Button variant="ghost" size="icon" onClick={handleBookmark}>
-          <Star className={`h-5 w-5 ${bookmarked ? 'fill-yellow-400 text-yellow-500' : ''}`} />
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => void handleBookmark()}
+          disabled={bookmarkSaving}
+          aria-busy={bookmarkSaving}
+          title={bookmarked ? 'Remove bookmark' : 'Bookmark'}
+        >
+          {bookmarkSaving ? (
+            <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" aria-hidden />
+          ) : (
+            <Star className={`h-5 w-5 ${bookmarked ? 'fill-yellow-400 text-yellow-500' : ''}`} />
+          )}
         </Button>
       </div>
     </div>

@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { encode } from 'next-auth/jwt';
 import type { User } from 'next-auth';
-import { prisma } from '@/lib/db';
 import { authOptions } from '@/lib/auth';
 import {
   deletePostVerifyHandoff,
   resolvePostVerifyHandoff,
 } from '@/server/services/post-verify-handoff.service';
+import { getVerifiedUserProfileForSession } from '@/server/services/user.service';
 
 export async function POST(request: Request) {
   try {
@@ -25,16 +25,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        image: true,
-        emailVerified: true,
-      },
-    });
+    const user = await getVerifiedUserProfileForSession(userId);
 
     if (!user?.email || !user.emailVerified) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });

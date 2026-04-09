@@ -37,10 +37,37 @@ const config: Config = {
             transform: 'translateY(-5px) translateX(-5px) rotate(-1deg)',
           },
         },
+        /** Home landing — abstract “3D” blobs */
+        landingBlobA: {
+          '0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+          '50%': { transform: 'translate(6%, -8%) scale(1.08)' },
+        },
+        landingBlobB: {
+          '0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+          '50%': { transform: 'translate(-10%, 6%) scale(1.06)' },
+        },
+        landingRibbon: {
+          '0%, 100%': { transform: 'rotate(-8deg) translateY(0)' },
+          '50%': { transform: 'rotate(-5deg) translateY(-14px)' },
+        },
+        landingCardStack: {
+          '0%, 100%': { transform: 'translateY(0) rotateY(-12deg) rotateX(4deg)' },
+          '50%': { transform: 'translateY(-10px) rotateY(-8deg) rotateX(6deg)' },
+        },
+        /** Hero sakura — gentle drift (transform on inner wrapper only) */
+        landingSakuraFloat: {
+          '0%, 100%': { transform: 'translateY(0) translateX(0)' },
+          '50%': { transform: 'translateY(-8px) translateX(4px)' },
+        },
       },
       animation: {
         handbookFabFloat: 'handbookFabFloat 3.2s ease-in-out infinite',
         harumiHeroFloat: 'harumiHeroFloat 4.5s ease-in-out infinite',
+        landingBlobA: 'landingBlobA 14s ease-in-out infinite',
+        landingBlobB: 'landingBlobB 18s ease-in-out -3s infinite',
+        landingRibbon: 'landingRibbon 6s ease-in-out infinite',
+        landingCardStack: 'landingCardStack 7s ease-in-out infinite',
+        landingSakuraFloat: 'landingSakuraFloat 7s ease-in-out infinite',
       },
       fontFamily: {
         orbitron: ['var(--font-orbitron)', 'sans-serif'],

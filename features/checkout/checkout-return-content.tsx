@@ -1,10 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { useLanguage } from '@/lib/i18n/language-context';
 
 export function CheckoutReturnContent({ outcome }: { outcome: 'success' | 'error' | 'unknown' }) {
   const { t } = useLanguage();
+  const { update } = useSession();
+
+  useEffect(() => {
+    if (outcome === 'success') void update();
+  }, [outcome, update]);
 
   const message =
     outcome === 'success'

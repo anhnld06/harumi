@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
 import { getSePayCheckoutConfig, verifySepayIpnSecret } from '@/lib/payment/sepay-checkout';
 import {
-  fulfillPaidOrder,
+  fulfillPaymentFromSepayInvoice,
   ipnAmountMatchesOrder,
   parseIpnAmount,
   shouldFulfillFromIpn,
@@ -68,14 +68,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Currency mismatch' }, { status: 400 });
   }
 
-  if (body.order?.id) {
-    await prisma.paymentOrder.update({
-      where: { id: order.id },
-      data: { sepayOrderUuid: body.order.id },
-    });
-  }
-
-  await fulfillPaidOrder(order.id);
+  await fulfillPaymentFromSepayInvoice(invoice, body.order?.id);
 
   return NextResponse.json({ success: true }, { status: 200 });
 }

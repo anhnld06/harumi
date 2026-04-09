@@ -5,8 +5,9 @@ import type { RefObject } from 'react';
 import { toBlob } from 'html-to-image';
 import type { CertificateTemplate } from '@/lib/certificate/constants';
 import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
+import { Download, Loader2 } from 'lucide-react';
 import { toast } from '@/lib/toast-store';
+import { useLanguage } from '@/lib/i18n/language-context';
 import { certificateCaptureBackground } from './certificate-artwork';
 
 async function waitForImages(root: HTMLElement): Promise<void> {
@@ -48,6 +49,7 @@ export function CertificateDownloadButton({
   fileBase: string;
   label: string;
 }) {
+  const { t } = useLanguage();
   const [busy, setBusy] = useState(false);
 
   const onDownload = useCallback(async () => {
@@ -95,9 +97,13 @@ export function CertificateDownloadButton({
   }, [targetRef, template, fileBase]);
 
   return (
-    <Button type="button" variant="secondary" disabled={busy} onClick={onDownload}>
-      <Download className="mr-2 h-4 w-4" />
-      {busy ? '…' : label}
+    <Button type="button" variant="secondary" disabled={busy} onClick={onDownload} className="gap-2">
+      {busy ? (
+        <Loader2 className="h-4 w-4 shrink-0 animate-spin" aria-hidden />
+      ) : (
+        <Download className="h-4 w-4 shrink-0" aria-hidden />
+      )}
+      {busy ? t('certificate.issuing') : label}
     </Button>
   );
 }

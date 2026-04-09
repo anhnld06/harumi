@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { BookOpen, Star } from 'lucide-react';
+import { BookOpen, Loader2, Star } from 'lucide-react';
 import { NoData } from '@/components/ui/no-data';
 import { SpeakButton } from '@/components/speak-button';
 import { Button } from '@/components/ui/button';
@@ -55,7 +55,7 @@ export function AccountBookmarks({ userId }: AccountBookmarksProps) {
     return (
       <Card>
         <CardContent className="py-12">
-          <p className="text-center text-sm text-muted-foreground">Loading...</p>
+          <p className="text-center text-sm text-muted-foreground">{t('common.loading')}</p>
         </CardContent>
       </Card>
     );
@@ -120,8 +120,11 @@ function BookmarkVocabRow({
   userId: string;
   onUnbookmark: () => void;
 }) {
+  const [bookmarkSaving, setBookmarkSaving] = useState(false);
+
   async function handleBookmark() {
-    if (!userId) return;
+    if (!userId || bookmarkSaving) return;
+    setBookmarkSaving(true);
     try {
       const res = await fetch('/api/vocab/bookmark', {
         method: 'POST',
@@ -132,6 +135,8 @@ function BookmarkVocabRow({
       if (res.ok && !data.bookmarked) onUnbookmark();
     } catch {
       // ignore
+    } finally {
+      setBookmarkSaving(false);
     }
   }
 
@@ -166,8 +171,19 @@ function BookmarkVocabRow({
           variant="ghost"
           size="icon"
         />
-        <Button variant="ghost" size="icon" onClick={handleBookmark} title="Remove bookmark">
-          <Star className="h-5 w-5 fill-yellow-400 text-yellow-500" />
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => void handleBookmark()}
+          disabled={bookmarkSaving}
+          aria-busy={bookmarkSaving}
+          title="Remove bookmark"
+        >
+          {bookmarkSaving ? (
+            <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" aria-hidden />
+          ) : (
+            <Star className="h-5 w-5 fill-yellow-400 text-yellow-500" />
+          )}
         </Button>
       </div>
     </div>

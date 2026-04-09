@@ -97,3 +97,30 @@ export function shouldFulfillFromIpn(body: SepayIpnPayload): boolean {
   const status = body.order?.order_status?.toUpperCase();
   return status === 'CAPTURED' || status === 'COMPLETED';
 }
+
+/**
+ * Load order by SePay invoice number, validate pending state, optionally store SePay UUID, then fulfill.
+ * Caller must validate amount/currency against IPN before calling.
+ */
+export async function fulfillPaymentFromSepayInvoice(
+  invoiceNumber: string,
+  sepayOrderUuid?: string | null
+): Promise<'fulfilled' | 'ignored' | 'already_paid'> {
+  const order = await prisma.paymentOrder.findUnique({
+    where: { orderInvoiceNumber: invoiceNumber },
+  });
+
+  if (!order) return 'ignored';
+  if (order.status === 'PAID') return 'already_paid';
+  if (order.status !== 'PENDING') return 'ignored';
+
+  if (sepayOrderUuid) {
+    await prisma.paymentOrder.update({
+      where: { id: order.id },
+      data: { sepayOrderUuid },
+    });
+  }
+
+  await fulfillPaidOrder(order.id);
+  return 'fulfilled';
+}
