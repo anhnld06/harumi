@@ -11,3 +11,11 @@ export function userCanViewMockTestExplanations(
   if (planExpiresAt == null) return true;
   return planExpiresAt.getTime() > Date.now();
 }
+
+/** Course certificates after passing mock tests use the same plan gate as explanations. */
+export function userCanIssueCourseCertificate(
+  planTier: string | null | undefined,
+  planExpiresAt: Date | null | undefined
+): boolean {
+  return userCanViewMockTestExplanations(planTier, planExpiresAt);
+}

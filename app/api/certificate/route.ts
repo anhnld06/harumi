@@ -2,8 +2,9 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { z } from 'zod';
 import { authOptions } from '@/lib/auth';
+import { userCanIssueCourseCertificate } from '@/lib/mock-test/mock-test-premium';
 import { issueOrUpdateCertificate, listUserCertificates } from '@/server/services/certificate.service';
-import { getCertificateRecipientName } from '@/server/services/user.service';
+import { getCertificateRecipientName, getUserPlanSnapshot } from '@/server/services/user.service';
 
 const postSchema = z.object({
   attemptId: z.string().min(1),
@@ -34,7 +35,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 
-    const recipientName = await getCertificateRecipientName(userId);
+    const [recipientName, plan] = await Promise.all([
+      getCertificateRecipientName(userId),
+      getUserPlanSnapshot(userId),
+    ]);
+    if (
+      !userCanIssueCourseCertificate(plan?.planTier ?? null, plan?.planExpiresAt ?? null)
+    ) {
+      return NextResponse.json({ error: 'Certificate requires an active Pro plan' }, { status: 403 });
+    }
 
     const certificate = await issueOrUpdateCertificate({
       userId,

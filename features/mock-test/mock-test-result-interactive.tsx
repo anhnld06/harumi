@@ -21,6 +21,8 @@ type Props = {
   review: MockTestReviewPayload;
   /** Pro / Pro Max — show DB explanations in answer review */
   canViewExplanations?: boolean;
+  /** Pro / Pro Max — open certificate flow (otherwise upgrade dialog) */
+  canIssueCertificate?: boolean;
   topLearners?: ReactNode;
 };
 
@@ -38,6 +40,7 @@ export function MockTestResultInteractive({
   sectionRows,
   review,
   canViewExplanations = false,
+  canIssueCertificate = false,
   topLearners,
 }: Props) {
   const [reviewOpen, setReviewOpen] = useState(false);
@@ -65,6 +68,7 @@ export function MockTestResultInteractive({
         onViewAnswers={() => openReview()}
         onSectionNavigate={(questionId) => openReview(questionId)}
         asideFooter={topLearners}
+        canIssueCertificate={canIssueCertificate}
       />
 
       <MockTestAnswerReviewModal

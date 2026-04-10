@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import type { TestWithSections } from '@/lib/mock-test/test-types';
 import { prisma } from '@/lib/db';
 import {
@@ -51,6 +52,14 @@ export async function getMockTestWithQuestions(
   return test as TestWithSections | null;
 }
 
+/** Thrown when the attempt is missing, not owned by user, or already completed. */
+export class SubmitConflictError extends Error {
+  constructor() {
+    super('Invalid or already submitted attempt');
+    this.name = 'SubmitConflictError';
+  }
+}
+
 export async function submitMockTest(
   userId: string,
   attemptId: string,
@@ -76,7 +85,7 @@ export async function submitMockTest(
   });
 
   if (!attempt || attempt.completedAt) {
-    throw new Error('Invalid or already submitted attempt');
+    throw new SubmitConflictError();
   }
 
   const answerMap = new Map(
@@ -177,6 +186,18 @@ export async function submitMockTest(
 
   await prisma.$transaction(
     async (tx) => {
+      await tx.$queryRaw(Prisma.sql`
+        SELECT id FROM "TestAttempt" WHERE id = ${attemptId} AND "userId" = ${userId} FOR UPDATE
+      `);
+
+      const locked = await tx.testAttempt.findUnique({
+        where: { id: attemptId },
+        select: { completedAt: true },
+      });
+      if (!locked || locked.completedAt) {
+        throw new SubmitConflictError();
+      }
+
       type SectionResultDelegate = {
         deleteMany(args: { where: { attemptId: string } }): Promise<unknown>;
         createMany(args: { data: typeof sectionRows }): Promise<unknown>;

@@ -104,6 +104,9 @@ export const enMessages: LocaleMessages = {
       'mockTest.result.answerReview': 'Answer review',
       'mockTest.result.backToTests': 'Back to tests',
       'mockTest.result.getCertificate': 'Get certificate',
+      'mockTest.result.certificateLockedTitle': 'Course certificate',
+      'mockTest.result.certificateLockedBody':
+        'Upgrade to Pro or Pro Max to issue and download your certificate after you pass a mock test.',
       'mockTest.result.viewResultsTitle': 'View test results',
       'mockTest.result.scoreLineLabel': 'Test result',
       'mockTest.result.pointsSuffix': 'pts',

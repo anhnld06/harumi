@@ -79,6 +79,8 @@ export const viMessages: LocaleMessages = {
       'mockTest.timeRemaining': 'Thời gian làm bài',
       'mockTest.submit': 'Nộp bài',
       'mockTest.submitFailed': 'Không nộp được bài. Vui lòng thử lại.',
+      'mockTest.submitConflict':
+        'Bài làm này đã được nộp. Hãy mở trang kết quả hoặc làm bài mới.',
       'mockTest.save': 'Lưu bài',
       'mockTest.questionMap': 'Danh sách câu',
       'mockTest.passageHeading': 'Bài đọc',
@@ -104,6 +106,9 @@ export const viMessages: LocaleMessages = {
       'mockTest.result.answerReview': 'Đáp án chi tiết',
       'mockTest.result.backToTests': 'Về danh sách đề',
       'mockTest.result.getCertificate': 'Lấy chứng chỉ',
+      'mockTest.result.certificateLockedTitle': 'Chứng chỉ khóa học',
+      'mockTest.result.certificateLockedBody':
+        'Nâng cấp Pro hoặc Pro Max để cấp và tải chứng chỉ sau khi đạt bài thi thử.',
       'mockTest.result.viewResultsTitle': 'Xem kết quả bài thi',
       'mockTest.result.scoreLineLabel': 'Kết quả thi:',
       'mockTest.result.pointsSuffix': 'điểm',

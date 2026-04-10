@@ -100,6 +100,9 @@ export const jaMessages: LocaleMessages = {
       'mockTest.result.answerReview': '解答一覧',
       'mockTest.result.backToTests': '模擬試験一覧へ',
       'mockTest.result.getCertificate': '認定証を取得',
+      'mockTest.result.certificateLockedTitle': 'コース認定証',
+      'mockTest.result.certificateLockedBody':
+        '模擬試験に合格後、認定証の発行・ダウンロードには Pro または Pro Max へのアップグレードが必要です。',
       'mockTest.result.viewResultsTitle': '試験結果の表示',
       'mockTest.result.scoreLineLabel': '合計得点',
       'mockTest.result.pointsSuffix': '点',

@@ -14,7 +14,10 @@ import {
 import type { AttemptWithQuestions } from '@/lib/mock-test/attempt-types';
 import { buildMockTestReviewPayload } from '@/lib/mock-test/build-mock-test-review-payload';
 import type { MockTestResultPageAttempt } from '@/lib/mock-test/prisma-query-types';
-import { userCanViewMockTestExplanations } from '@/lib/mock-test/mock-test-premium';
+import {
+  userCanIssueCourseCertificate,
+  userCanViewMockTestExplanations,
+} from '@/lib/mock-test/mock-test-premium';
 
 export default async function MockTestResultPage({
   params,
@@ -31,30 +34,32 @@ export default async function MockTestResultPage({
 
   if (!attemptId || !userId) notFound();
 
-  const attemptRaw = await prisma.testAttempt.findFirst({
-    where: { id: attemptId, userId, mockTestId: id },
-    include: {
-      sectionResults: {
-        include: {
-          section: {
-            include: {
-              questions: { orderBy: { order: 'asc' } },
+  const [attemptRaw, userPlan] = await Promise.all([
+    prisma.testAttempt.findFirst({
+      where: { id: attemptId, userId, mockTestId: id },
+      include: {
+        sectionResults: {
+          include: {
+            section: {
+              include: {
+                questions: { orderBy: { order: 'asc' } },
+              },
             },
           },
         },
-      },
-      mockTest: {
-        include: {
-          sections: {
-            orderBy: { order: 'asc' },
-            include: {
-              questions: {
-                orderBy: { order: 'asc' },
-                include: {
-                  question: {
-                    include: {
-                      readingPassage: true,
-                      listeningPassage: true,
+        mockTest: {
+          include: {
+            sections: {
+              orderBy: { order: 'asc' },
+              include: {
+                questions: {
+                  orderBy: { order: 'asc' },
+                  include: {
+                    question: {
+                      include: {
+                        readingPassage: true,
+                        listeningPassage: true,
+                      },
                     },
                   },
                 },
@@ -62,20 +67,23 @@ export default async function MockTestResultPage({
             },
           },
         },
+        answers: true,
       },
-      answers: true,
-    },
-  } as Prisma.TestAttemptFindFirstArgs);
+    } as Prisma.TestAttemptFindFirstArgs),
+    prisma.user.findUnique({
+      where: { id: userId },
+      select: { planTier: true, planExpiresAt: true },
+    }),
+  ]);
 
   if (!attemptRaw || !attemptRaw.completedAt) notFound();
 
   const attempt = attemptRaw as unknown as MockTestResultPageAttempt;
-
-  const userPlan = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { planTier: true, planExpiresAt: true },
-  });
   const canViewExplanations = userCanViewMockTestExplanations(
+    userPlan?.planTier,
+    userPlan?.planExpiresAt
+  );
+  const canIssueCertificate = userCanIssueCourseCertificate(
     userPlan?.planTier,
     userPlan?.planExpiresAt
   );
@@ -177,6 +185,7 @@ export default async function MockTestResultPage({
         sectionRows={sectionRows}
         review={review}
         canViewExplanations={canViewExplanations}
+        canIssueCertificate={canIssueCertificate}
         topLearners={
           <MockTestTopLearners
             variant="compact"

@@ -3,9 +3,19 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState } from 'react';
 import { Award, BookOpen, ChevronRight, FileText, Headphones } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { useLanguage } from '@/lib/i18n/language-context';
+import { accountPlansHref } from '@/lib/payment/checkout-path';
 import {
   formatTestDateEn,
   formatTestDateJa,
@@ -90,6 +100,8 @@ export type JlptMockTestResultViewProps = {
   onSectionNavigate?: (firstQuestionId: string) => void;
   /** Right column content (e.g. Top learners leaderboard). */
   asideFooter?: ReactNode;
+  /** Pro / Pro Max with active subscription — can open certificate flow */
+  canIssueCertificate?: boolean;
 };
 
 export function JlptMockTestResultView({
@@ -107,8 +119,10 @@ export function JlptMockTestResultView({
   onViewAnswers,
   onSectionNavigate,
   asideFooter,
+  canIssueCertificate = false,
 }: JlptMockTestResultViewProps) {
   const { t } = useLanguage();
+  const [certificateUpgradeOpen, setCertificateUpgradeOpen] = useState(false);
   const percent = totalMax > 0 ? (totalScore / totalMax) * 100 : 0;
   const dateJa = formatTestDateJa(completedAt);
   const dateEn = formatTestDateEn(completedAt);
@@ -312,12 +326,25 @@ export function JlptMockTestResultView({
               )}
             >
               {passed ? (
-                <Button asChild variant="outline" size="sm" className="h-9 w-full shrink-0 rounded-lg sm:w-[10.5rem]">
-                  <Link href={`/certificate/select?attempt=${attemptId}`} className="gap-1.5">
+                canIssueCertificate ? (
+                  <Button asChild variant="outline" size="sm" className="h-9 w-full shrink-0 rounded-lg sm:w-[10.5rem]">
+                    <Link href={`/certificate/select?attempt=${attemptId}`} className="gap-1.5">
+                      <Award className="h-3.5 w-3.5" />
+                      {t('mockTest.result.getCertificate')}
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="h-9 w-full shrink-0 rounded-lg sm:w-[10.5rem]"
+                    onClick={() => setCertificateUpgradeOpen(true)}
+                  >
                     <Award className="h-3.5 w-3.5" />
                     {t('mockTest.result.getCertificate')}
-                  </Link>
-                </Button>
+                  </Button>
+                )
               ) : null}
               <Button
                 asChild
@@ -354,6 +381,22 @@ export function JlptMockTestResultView({
           {asideFooter ? <div className="min-h-0 w-full flex-1">{asideFooter}</div> : null}
         </aside>
       </div>
+
+      <Dialog open={certificateUpgradeOpen} onOpenChange={setCertificateUpgradeOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t('mockTest.result.certificateLockedTitle')}</DialogTitle>
+            <DialogDescription>{t('mockTest.result.certificateLockedBody')}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button asChild>
+              <Link href={accountPlansHref} onClick={() => setCertificateUpgradeOpen(false)}>
+                {t('mockTest.result.upgradeNow')}
+              </Link>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import type { Prisma } from '@prisma/client';
+import { unstable_cache } from 'next/cache';
+import { Prisma } from '@prisma/client';
 import { prisma } from '@/lib/db';
 
 export type LeaderboardPeriod = 'all' | 'week' | 'month';
@@ -23,77 +24,115 @@ type BestRow = {
   user: { id: string; name: string | null; image: string | null };
 };
 
-function completedAtWhere(period: LeaderboardPeriod): Prisma.DateTimeNullableFilter {
-  if (period === 'all') {
-    return { not: null };
-  }
-  const now = new Date();
-  const start = new Date(now);
+/** One best attempt per user from DISTINCT ON (see getMockTestLeaderboardSorted). */
+type LeaderboardSqlRow = {
+  userId: string;
+  score: number;
+  totalScore: number;
+  completedAt: Date;
+  name: string | null;
+  image: string | null;
+};
+
+function periodBounds(period: LeaderboardPeriod): { start: Date; end: Date } | null {
+  if (period === 'all') return null;
+  const end = new Date();
+  const start = new Date(end);
   if (period === 'week') {
     start.setDate(start.getDate() - 7);
   } else {
     start.setMonth(start.getMonth() - 1);
   }
-  return { gte: start, lte: now };
-}
-
-function pickBetter(a: BestRow, b: BestRow): BestRow {
-  if (b.pct > a.pct) return b;
-  if (b.pct < a.pct) return a;
-  if (b.score > a.score) return b;
-  if (b.score < a.score) return a;
-  return a.completedAt.getTime() <= b.completedAt.getTime() ? a : b;
+  return { start, end };
 }
 
 /**
  * Best percentage per user for a mock test (completed attempts only).
  * Tie-break: higher pct → higher raw score → earlier completedAt (first to reach the tie).
+ * Uses PostgreSQL DISTINCT ON so each user is returned once (no full attempt fan-out).
+ */
+async function loadLeaderboardSortedFromDb(
+  mockTestId: string,
+  period: LeaderboardPeriod
+): Promise<BestRow[]> {
+  const bounds = periodBounds(period);
+
+  const rows =
+    bounds === null
+      ? await prisma.$queryRaw<LeaderboardSqlRow[]>(Prisma.sql`
+          SELECT DISTINCT ON (ta."userId")
+            ta."userId",
+            ta.score,
+            ta."totalScore",
+            ta."completedAt",
+            u.name,
+            u.image
+          FROM "TestAttempt" ta
+          INNER JOIN "User" u ON u.id = ta."userId"
+          WHERE ta."mockTestId" = ${mockTestId}
+            AND ta."completedAt" IS NOT NULL
+            AND ta."totalScore" > 0
+            AND ta.score IS NOT NULL
+          ORDER BY ta."userId",
+            (ta.score::double precision / NULLIF(ta."totalScore", 0)) DESC,
+            ta.score DESC,
+            ta."completedAt" ASC
+        `)
+      : await prisma.$queryRaw<LeaderboardSqlRow[]>(Prisma.sql`
+          SELECT DISTINCT ON (ta."userId")
+            ta."userId",
+            ta.score,
+            ta."totalScore",
+            ta."completedAt",
+            u.name,
+            u.image
+          FROM "TestAttempt" ta
+          INNER JOIN "User" u ON u.id = ta."userId"
+          WHERE ta."mockTestId" = ${mockTestId}
+            AND ta."completedAt" >= ${bounds.start}
+            AND ta."completedAt" <= ${bounds.end}
+            AND ta."totalScore" > 0
+            AND ta.score IS NOT NULL
+          ORDER BY ta."userId",
+            (ta.score::double precision / NULLIF(ta."totalScore", 0)) DESC,
+            ta.score DESC,
+            ta."completedAt" ASC
+        `);
+
+  const bestRows: BestRow[] = rows.map((a) => ({
+    userId: a.userId,
+    pct: a.score / a.totalScore,
+    score: a.score,
+    totalScore: a.totalScore,
+    completedAt: a.completedAt,
+    user: { id: a.userId, name: a.name, image: a.image },
+  }));
+
+  return bestRows.sort((x, y) => {
+    if (y.pct !== x.pct) return y.pct - x.pct;
+    if (y.score !== x.score) return y.score - x.score;
+    return x.completedAt.getTime() - y.completedAt.getTime();
+  });
+}
+
+const getCachedAllTimeLeaderboard = unstable_cache(
+  async (mockTestId: string) => loadLeaderboardSortedFromDb(mockTestId, 'all'),
+  ['mock-test-leaderboard-all'],
+  { revalidate: 45 }
+);
+
+/**
+ * `period: 'all'` is cached briefly to cut DB load on result pages; week/month stay uncached
+ * because their date windows move with real time.
  */
 export async function getMockTestLeaderboardSorted(
   mockTestId: string,
   period: LeaderboardPeriod = 'all'
 ): Promise<BestRow[]> {
-  const attempts = await prisma.testAttempt.findMany({
-    where: {
-      mockTestId,
-      completedAt: completedAtWhere(period),
-      totalScore: { gt: 0 },
-      score: { not: null },
-    },
-    select: {
-      userId: true,
-      score: true,
-      totalScore: true,
-      completedAt: true,
-      user: { select: { id: true, name: true, image: true } },
-    },
-  });
-
-  const byUser = new Map<string, BestRow>();
-
-  for (const a of attempts) {
-    const pct = a.score! / a.totalScore!;
-    const row: BestRow = {
-      userId: a.userId,
-      pct,
-      score: a.score!,
-      totalScore: a.totalScore!,
-      completedAt: a.completedAt!,
-      user: a.user,
-    };
-    const prev = byUser.get(a.userId);
-    if (!prev) {
-      byUser.set(a.userId, row);
-    } else {
-      byUser.set(a.userId, pickBetter(prev, row));
-    }
+  if (period === 'all') {
+    return getCachedAllTimeLeaderboard(mockTestId);
   }
-
-  return Array.from(byUser.values()).sort((x, y) => {
-    if (y.pct !== x.pct) return y.pct - x.pct;
-    if (y.score !== x.score) return y.score - x.score;
-    return x.completedAt.getTime() - y.completedAt.getTime();
-  });
+  return loadLeaderboardSortedFromDb(mockTestId, period);
 }
 
 export async function getMockTestLeaderboard(

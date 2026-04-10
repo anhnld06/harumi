@@ -25,7 +25,11 @@ export default async function DashboardPage() {
     prisma.testAttempt.findFirst({
       where: { userId, completedAt: { not: null } },
       orderBy: { completedAt: 'desc' },
-      include: { answers: true },
+      select: {
+        score: true,
+        totalScore: true,
+        passed: true,
+      },
     }),
     prisma.userProgress.aggregate({
       where: { userId },

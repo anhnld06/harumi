@@ -1,3 +1,4 @@
+import type { MockTest } from '@/lib/db-types';
 import type {
   MockTestListItem,
   TestAttemptRecentItem,
@@ -12,47 +13,73 @@ import { authOptions } from '@/lib/auth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { MockTestListClient } from '@/features/mock-test/mock-test-list-client';
 
+type AttemptSlim = {
+  id: string;
+  mockTestId: string;
+  score: number | null;
+  totalScore: number | null;
+  completedAt: Date | null;
+  passed: boolean | null;
+};
+
 export default async function MockTestPage() {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id;
 
-  const [testsRaw, recentAttempts, lastAttemptsRows] = (await Promise.all([
+  const [testsRaw, attemptRows] = (await Promise.all([
     prisma.mockTest.findMany({
       include: { sections: true },
     }),
     userId
       ? prisma.testAttempt.findMany({
           where: { userId, completedAt: { not: null } },
-          include: { mockTest: true },
           orderBy: { completedAt: 'desc' },
-          take: 5,
+          select: {
+            id: true,
+            mockTestId: true,
+            score: true,
+            totalScore: true,
+            completedAt: true,
+            passed: true,
+          },
         })
-      : Promise.resolve([] as TestAttemptRecentItem[]),
-    userId
-      ? prisma.testAttempt.findMany({
-          where: { userId, completedAt: { not: null } },
-          orderBy: { completedAt: 'desc' },
-          select: { mockTestId: true, score: true, totalScore: true },
-        })
-      : Promise.resolve(
-          [] as Array<{ mockTestId: string; score: number | null; totalScore: number | null }>
-        ),
-  ])) as unknown as [
-    MockTestListItem[],
-    TestAttemptRecentItem[],
-    Array<{ mockTestId: string; score: number | null; totalScore: number | null }>,
-  ];
-
-  const tests = [...testsRaw].sort((a, b) => compareMockTestsByTitle(a.title, b.title));
+      : Promise.resolve([] as AttemptSlim[]),
+  ])) as unknown as [MockTestListItem[], AttemptSlim[]];
 
   const lastByMockId = new Map<string, { score: number; totalScore: number }>();
-  for (const row of lastAttemptsRows) {
+  for (const row of attemptRows) {
     if (lastByMockId.has(row.mockTestId)) continue;
     lastByMockId.set(row.mockTestId, {
       score: row.score ?? 0,
       totalScore: row.totalScore ?? 0,
     });
   }
+
+  const topSlice = attemptRows.slice(0, 5);
+  const topMockIds = Array.from(new Set(topSlice.map((a) => a.mockTestId)));
+  const titleRows =
+    topMockIds.length > 0
+      ? await prisma.mockTest.findMany({
+          where: { id: { in: topMockIds } },
+        })
+      : [];
+  const titleById = new Map(titleRows.map((t) => [t.id, t]));
+
+  const recentAttempts: TestAttemptRecentItem[] = [];
+  for (const a of topSlice) {
+    const mockTest = titleById.get(a.mockTestId);
+    if (!mockTest) continue;
+    recentAttempts.push({
+      id: a.id,
+      completedAt: a.completedAt,
+      score: a.score,
+      totalScore: a.totalScore,
+      passed: a.passed,
+      mockTest: mockTest as unknown as MockTest,
+    });
+  }
+
+  const tests = [...testsRaw].sort((a, b) => compareMockTestsByTitle(a.title, b.title));
 
   const canAccessFullTests = userCanAccessPremiumMockTests(
     session?.user?.planTier,

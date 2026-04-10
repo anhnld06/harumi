@@ -1,10 +1,23 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import OpenAI from 'openai';
 import { z } from 'zod';
 import { authOptions } from '@/lib/auth';
-import { HARUMI_SYSTEM_PROMPT } from '@/lib/ai/harumi-system-prompt';
+import {
+  createHarumiLlmStream,
+  llmConfigured,
+  resolveLlmProvider,
+} from '@/lib/ai/harumi-llm-stream';
 import { userCanAccessPremiumMockTests } from '@/lib/mock-test/mock-test-access';
+import { takeRateLimitToken } from '@/lib/rate-limit';
+
+function envPositiveInt(name: string, fallback: number): number {
+  const n = Number(process.env[name]);
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : fallback;
+}
+
+/** Per-user cap (sliding window); tune via env in production if needed. */
+const AI_CHAT_MAX = envPositiveInt('AI_CHAT_RATE_LIMIT_MAX', 24);
+const AI_CHAT_WINDOW_MS = envPositiveInt('AI_CHAT_RATE_LIMIT_WINDOW_MS', 60_000);
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -32,8 +45,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Premium required' }, { status: 403 });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey?.trim()) {
+  if (
+    !takeRateLimitToken(`ai-chat:${session.user.id}`, AI_CHAT_MAX, AI_CHAT_WINDOW_MS)
+  ) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please wait a moment and try again.' },
+      { status: 429 }
+    );
+  }
+
+  const provider = resolveLlmProvider();
+  if (!llmConfigured(provider)) {
     return NextResponse.json({ error: 'AI not configured' }, { status: 503 });
   }
 
@@ -51,37 +73,8 @@ export async function POST(request: Request) {
 
   const { messages } = parsed.data;
 
-  const openai = new OpenAI({ apiKey });
-
   try {
-    const stream = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: HARUMI_SYSTEM_PROMPT },
-        ...messages.map((m) => ({ role: m.role, content: m.content })),
-      ],
-      stream: true,
-      temperature: 0.65,
-      max_tokens: 2048,
-    });
-
-    const encoder = new TextEncoder();
-    const readable = new ReadableStream({
-      async start(controller) {
-        try {
-          for await (const chunk of stream) {
-            const text = chunk.choices[0]?.delta?.content ?? '';
-            if (text) controller.enqueue(encoder.encode(text));
-          }
-        } catch (err) {
-          console.error('Harumi stream error:', err);
-          controller.error(err);
-          return;
-        }
-        controller.close();
-      },
-    });
-
+    const readable = await createHarumiLlmStream(provider, messages);
     return new Response(readable, {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
@@ -89,7 +82,7 @@ export async function POST(request: Request) {
       },
     });
   } catch (err) {
-    console.error('OpenAI chat error:', err);
+    console.error('Harumi LLM error:', err);
     return NextResponse.json({ error: 'AI request failed' }, { status: 502 });
   }
 }

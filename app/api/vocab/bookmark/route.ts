@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
+import { z } from 'zod';
 import { authOptions } from '@/lib/auth';
 import { toggleBookmark } from '@/server/services/vocabulary.service';
 import { userExistsById } from '@/server/services/user.service';
+
+const bookmarkBodySchema = z.object({
+  vocabularyId: z.string().min(1).max(128),
+});
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -22,12 +27,18 @@ export async function POST(request: Request) {
   }
 
   try {
-    const { vocabularyId } = await request.json();
-    if (!vocabularyId) {
+    let json: unknown;
+    try {
+      json = await request.json();
+    } catch {
+      return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+    }
+    const parsed = bookmarkBodySchema.safeParse(json);
+    if (!parsed.success) {
       return NextResponse.json({ error: 'vocabularyId required' }, { status: 400 });
     }
 
-    const result = await toggleBookmark(userId, vocabularyId);
+    const result = await toggleBookmark(userId, parsed.data.vocabularyId);
     return NextResponse.json(result);
   } catch (error) {
     console.error('Bookmark error:', error);
