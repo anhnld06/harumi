@@ -60,6 +60,13 @@ export const viMessages: LocaleMessages = {
       'nav.grammar': 'Ngữ pháp',
       'nav.reading': 'Đọc',
       'nav.listening': 'Nghe',
+      'nav.conversation': 'Hội thoại',
+      'conversation.pageTitle': 'Luyện hội thoại',
+      'conversation.pageDescription':
+        'Các tình huống hội thoại ngắn. Trong lúc Harumi chưa có video riêng, chọn thẻ sẽ mở trang bài học bên ngoài để xem. Ảnh thẻ dùng ảnh xem trước chính thức của từng bài.',
+      'conversation.disclaimer':
+        'Đây là mục hội thoại của Harumi — chưa tự host video nên tạm mở trang bài của NHK WORLD-JAPAN. Ảnh lấy từ ảnh OG của trang đó chỉ để hiển thị. Đây không phải sản phẩm hay quảng bá chính thức của NHK.',
+      'conversation.openVideo': 'Mở video bài (trang ngoài)',
       'nav.mockTest': 'Thi thử',
       'mockTest.list.start': 'Bắt đầu',
       'mockTest.list.fullLockedTitle': 'Đề thi full',

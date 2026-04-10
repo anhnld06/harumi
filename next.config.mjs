@@ -35,6 +35,11 @@ const nextConfig = {
         hostname: 'img.vietqr.io',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www3.nhk.or.jp',
+        pathname: '/nhkworld/lesson/**',
+      },
     ],
   },
   /** Same-origin certificate assets with crossOrigin="anonymous" (PNG export / decode). */

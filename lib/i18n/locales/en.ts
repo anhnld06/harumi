@@ -60,6 +60,13 @@ export const enMessages: LocaleMessages = {
       'nav.grammar': 'Grammar',
       'nav.reading': 'Reading',
       'nav.listening': 'Listening',
+      'nav.conversation': 'Conversation',
+      'conversation.pageTitle': 'Conversation practice',
+      'conversation.pageDescription':
+        'Short situational dialogues. Until Harumi publishes its own lessons, tapping a card opens an external lesson page to watch the video. Thumbnails use each lesson’s official preview image.',
+      'conversation.disclaimer':
+        'This is Harumi’s conversation section: we don’t host video yet, so links temporarily open NHK WORLD-JAPAN lesson pages. Preview images load from those pages for display only. Not an NHK product or endorsement.',
+      'conversation.openVideo': 'Open lesson video (external site)',
       'nav.mockTest': 'Mock Test',
       'mockTest.list.start': 'Start',
       'mockTest.list.fullLockedTitle': 'Full mock test',

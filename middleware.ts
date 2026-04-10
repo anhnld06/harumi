@@ -15,6 +15,7 @@ export const config = {
     '/grammar/:path*',
     '/reading/:path*',
     '/listening/:path*',
+    '/conversation/:path*',
     '/mock-test/:path*',
     '/ai-assistant/:path*',
     '/account/:path*',

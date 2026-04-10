@@ -60,6 +60,13 @@ export const jaMessages: LocaleMessages = {
       'nav.grammar': '文法',
       'nav.reading': 'リーディング',
       'nav.listening': 'リスニング',
+      'nav.conversation': '会話',
+      'conversation.pageTitle': '会話練習',
+      'conversation.pageDescription':
+        '短い場面の会話です。Harumi 独自の動画は今後追加予定のため、現時点ではカードから外部のレッスンページを開いて視聴します。サムネイルは各レッスンの公式プレビュー画像を表示します。',
+      'conversation.disclaimer':
+        'Harumi の会話コーナーです（動画は未ホストのため、当面 NHK WORLD-JAPAN のレッスンページへリンクします）。サムネイルは同ページのプレビュー画像の利用です。NHK の公式提供・提携を意味しません。',
+      'conversation.openVideo': 'レッスン動画を開く（外部サイト）',
       'nav.mockTest': '模擬試験',
       'mockTest.leaderboardTitle': 'トップ学習者',
       'mockTest.leaderboardHeading': 'ランキング',

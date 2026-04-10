@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Bot,
   Loader2,
   MessageCircleHeart,
   Mic,
@@ -12,15 +11,43 @@ import {
   Send,
   SlidersHorizontal,
   Sparkles,
-  User,
 } from 'lucide-react';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/lib/i18n/language-context';
 import type { Locale } from '@/lib/i18n/translations';
 import { cn } from '@/lib/utils';
 
 type ChatMessage = { role: 'user' | 'assistant'; content: string };
+
+const AVATAR_COLORS = [
+  'bg-blue-500',
+  'bg-emerald-500',
+  'bg-violet-500',
+  'bg-amber-500',
+  'bg-rose-500',
+  'bg-cyan-500',
+];
+
+function getAvatarColor(name: string): string {
+  const index = name ? name.charCodeAt(0) % AVATAR_COLORS.length : 0;
+  return AVATAR_COLORS[index];
+}
+
+function getInitials(name: string | null | undefined, email: string | null | undefined): string {
+  if (name?.trim()) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    return name[0].toUpperCase();
+  }
+  if (email?.trim()) {
+    return email[0].toUpperCase();
+  }
+  return '?';
+}
 
 function speechLang(locale: Locale): string {
   if (locale === 'ja') return 'ja-JP';
@@ -101,6 +128,7 @@ function HarumiHero({ alt }: { alt: string }) {
 }
 
 export function HarumiChat() {
+  const { data: session } = useSession();
   const { t, locale } = useLanguage();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -362,16 +390,40 @@ export function HarumiChat() {
               >
                 <div
                   className={cn(
-                    'flex h-9 w-9 shrink-0 items-center justify-center rounded-xl shadow-sm',
+                    'relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl shadow-sm',
                     m.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-gradient-to-br from-primary/25 to-violet-500/25 text-primary'
+                      ? session?.user?.image
+                        ? 'ring-1 ring-primary/25'
+                        : cn(
+                            getAvatarColor(session?.user?.name ?? session?.user?.email ?? ''),
+                            'text-white'
+                          )
+                      : 'bg-gradient-to-br from-primary/25 to-violet-500/25'
                   )}
                 >
                   {m.role === 'user' ? (
-                    <User className="h-4 w-4" />
+                    session?.user?.image ? (
+                      <Image
+                        src={session.user.image}
+                        alt={session.user.name ?? 'User'}
+                        fill
+                        className="object-cover"
+                        sizes="36px"
+                      />
+                    ) : (
+                      <span className="flex h-full w-full items-center justify-center text-xs font-semibold">
+                        {getInitials(session?.user?.name, session?.user?.email)}
+                      </span>
+                    )
                   ) : (
-                    <Bot className="h-4 w-4" />
+                    <Image
+                      src="/images/AI.png"
+                      alt={t('ai.harumiName')}
+                      width={36}
+                      height={36}
+                      className="h-full w-full object-cover"
+                      sizes="36px"
+                    />
                   )}
                 </div>
                 <div
@@ -389,8 +441,15 @@ export function HarumiChat() {
 
             {(streaming || (loading && messages[messages.length - 1]?.role === 'user')) && (
               <div className="flex gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/25 to-violet-500/25 text-primary shadow-sm">
-                  <Bot className="h-4 w-4" />
+                <div className="relative flex h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-primary/25 to-violet-500/25 shadow-sm">
+                  <Image
+                    src="/images/AI.png"
+                    alt={t('ai.harumiName')}
+                    width={36}
+                    height={36}
+                    className="h-full w-full object-cover"
+                    sizes="36px"
+                  />
                 </div>
                 <div className="max-w-[85%] rounded-2xl rounded-bl-md bg-white/90 px-4 py-3 shadow-[0_2px_12px_-2px_rgba(15,23,42,0.08)] dark:bg-slate-800/90">
                   {streaming ? (
